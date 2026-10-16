@@ -44,6 +44,11 @@
           "description": "Number of trials"
         },
         {
+          "name": "exactness",
+          "type": "string",
+          "description": "'exact' or 'sampled' (see schema)"
+        },
+        {
           "name": "citation_count",
           "type": "integer",
           "description": "Distinct trials supporting this row"
@@ -58,13 +63,19 @@
         "sort": "natural",
         "stacked": false,
         "value_format": "integer",
-        "y_zero_based": true
+        "y_zero_based": true,
+        "groupby_semantics": "partition",
+        "bucket_sum": 3140,
+        "distinct_trials": 3140,
+        "unclassified_count": 0,
+        "hidden_count": 0
       },
       "data": [
         {
           "phase": "Early Phase 1",
           "phase_code": "EARLY_PHASE1",
           "trial_count": 66,
+          "exactness": "exact",
           "citation_count": 66,
           "citations": [
             {
@@ -148,6 +159,7 @@
           "phase": "Phase 1",
           "phase_code": "PHASE1",
           "trial_count": 871,
+          "exactness": "exact",
           "citation_count": 871,
           "citations": [
             {
@@ -231,6 +243,7 @@
           "phase": "Phase 1/Phase 2",
           "phase_code": "PHASE1|PHASE2",
           "trial_count": 480,
+          "exactness": "exact",
           "citation_count": 480,
           "citations": [
             {
@@ -314,6 +327,7 @@
           "phase": "Phase 2",
           "phase_code": "PHASE2",
           "trial_count": 1042,
+          "exactness": "exact",
           "citation_count": 1042,
           "citations": [
             {
@@ -397,6 +411,7 @@
           "phase": "Phase 2/Phase 3",
           "phase_code": "PHASE2|PHASE3",
           "trial_count": 25,
+          "exactness": "exact",
           "citation_count": 25,
           "citations": [
             {
@@ -480,6 +495,7 @@
           "phase": "Phase 3",
           "phase_code": "PHASE3",
           "trial_count": 196,
+          "exactness": "exact",
           "citation_count": 196,
           "citations": [
             {
@@ -563,6 +579,7 @@
           "phase": "Phase 4",
           "phase_code": "PHASE4",
           "trial_count": 37,
+          "exactness": "exact",
           "citation_count": 37,
           "citations": [
             {
@@ -646,6 +663,7 @@
           "phase": "Not Applicable",
           "phase_code": "NA",
           "trial_count": 423,
+          "exactness": "exact",
           "citation_count": 423,
           "citations": [
             {
@@ -824,47 +842,60 @@
           "total_matching": 3140,
           "fetched": 2000,
           "truncated": true,
+          "coverage": 0.6369,
+          "fetch_policy": "sample",
           "sample_order": "StartDate:desc",
-          "count_method": "exact_server_counts"
+          "count_method": "exact_server_counts",
+          "drug_match": null
         }
       ],
+      "series_overlap": [],
+      "verification": {
+        "method": "Every row, node, and edge was re-derived from the fetched trial records by a second pass that shares only the field definitions with the aggregation code; every citation was checked for membership in its datum and every cited field value against the record. Registry counts cannot be re-derived locally and are checked for internal consistency instead.",
+        "checks": [
+          {
+            "name": "structure",
+            "status": "passed",
+            "detail": "8 rows match the documented columns"
+          },
+          {
+            "name": "citations_match_records",
+            "status": "passed",
+            "detail": "40 citations point at fetched records and quote values present in them"
+          },
+          {
+            "name": "values_recounted",
+            "status": "passed",
+            "detail": "0 rows re-derived from 2000 records; 8 registry-count rows checked for internal consistency"
+          },
+          {
+            "name": "partition_sum",
+            "status": "passed",
+            "detail": "registry counts sum to 3140"
+          }
+        ]
+      },
       "source": {
         "name": "ClinicalTrials.gov",
         "api_base": "https://clinicaltrials.gov/api/v2",
-        "retrieved_at": "2026-10-16T02:25:15+00:00"
+        "retrieved_at": "2026-10-16T04:01:35+00:00"
       },
       "api_calls": [
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
           "status": 200,
-          "elapsed_ms": 810,
+          "elapsed_ms": 714,
           "cached": false,
           "studies_returned": 1000,
           "total_count": 3140
         },
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true&pageToken=ZVNj7o2Elu8o3lpzBdv-p-numpOQJJxuYPmj3vUdmj6SuP08FCfCFfDQ9NFP0SI",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true&pageToken=ZVNj7o2Elu8o3lpzBdv-p-numpOQJJxuYPmj3vUdmj6SuP08FCfCFfDQ9NFP0SI",
           "status": 200,
-          "elapsed_ms": 764,
+          "elapsed_ms": 871,
           "cached": false,
           "studies_returned": 1000,
           "total_count": null
-        },
-        {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DPHASE1+AND+NOT+AREA%5BPhase%5DPHASE2&fields=NCTId&countTotal=true",
-          "status": 200,
-          "elapsed_ms": 108,
-          "cached": false,
-          "studies_returned": 1,
-          "total_count": 871
-        },
-        {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DPHASE2+AND+NOT+AREA%5BPhase%5DPHASE1+AND+NOT+AREA%5BPhase%5DPHASE3&fields=NCTId&countTotal=true",
-          "status": 200,
-          "elapsed_ms": 109,
-          "cached": false,
-          "studies_returned": 1,
-          "total_count": 1042
         },
         {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DEARLY_PHASE1&fields=NCTId&countTotal=true",
@@ -875,41 +906,57 @@
           "total_count": 66
         },
         {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DPHASE1+AND+NOT+AREA%5BPhase%5DPHASE2&fields=NCTId&countTotal=true",
+          "status": 200,
+          "elapsed_ms": 178,
+          "cached": false,
+          "studies_returned": 1,
+          "total_count": 871
+        },
+        {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DPHASE1+AND+AREA%5BPhase%5DPHASE2&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 112,
+          "elapsed_ms": 186,
           "cached": false,
           "studies_returned": 1,
           "total_count": 480
         },
         {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DPHASE2+AND+NOT+AREA%5BPhase%5DPHASE1+AND+NOT+AREA%5BPhase%5DPHASE3&fields=NCTId&countTotal=true",
+          "status": 200,
+          "elapsed_ms": 192,
+          "cached": false,
+          "studies_returned": 1,
+          "total_count": 1042
+        },
+        {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DPHASE2+AND+AREA%5BPhase%5DPHASE3&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 216,
+          "elapsed_ms": 220,
           "cached": false,
           "studies_returned": 1,
           "total_count": 25
         },
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DPHASE4&fields=NCTId&countTotal=true",
-          "status": 200,
-          "elapsed_ms": 219,
-          "cached": false,
-          "studies_returned": 1,
-          "total_count": 37
-        },
-        {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DPHASE3+AND+NOT+AREA%5BPhase%5DPHASE2&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 219,
+          "elapsed_ms": 285,
           "cached": false,
           "studies_returned": 1,
           "total_count": 196
         },
         {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DPHASE4&fields=NCTId&countTotal=true",
+          "status": 200,
+          "elapsed_ms": 296,
+          "cached": false,
+          "studies_returned": 1,
+          "total_count": 37
+        },
+        {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.cond=melanoma&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BPhase%5DNA&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 220,
+          "elapsed_ms": 297,
           "cached": false,
           "studies_returned": 1,
           "total_count": 423
@@ -922,10 +969,10 @@
         "fallback_reason": null
       },
       "timing": {
-        "interpret_ms": 1658,
-        "retrieve_ms": 1876,
-        "aggregate_ms": 24,
-        "total_ms": 3559
+        "interpret_ms": 3522,
+        "retrieve_ms": 1990,
+        "aggregate_ms": 17,
+        "total_ms": 5530
       }
     }
   }

@@ -5,7 +5,9 @@ request. Run `python tests/fixtures/make_fixture.py` to regenerate.
 The records are synthetic but modeled on real registry entries, and they
 deliberately cover the awkward cases: combined phases, observational studies
 with no phase, missing start dates, brand/code names that fold to one MeSH
-term, placebo arms, multi-country trials, and collaborators.
+term, placebo arms, multi-country trials, collaborators, arm groups that
+separate combinations from comparators, a trial with no arm data, and a
+trial that matches a drug search without listing the drug as an intervention.
 """
 
 import json
@@ -29,6 +31,7 @@ def study(
     countries=(),
     intervention_mesh=(),
     condition_mesh=(),
+    arms=(),
 ):
     protocol = {
         "identificationModule": {"nctId": nct_id, "briefTitle": title},
@@ -49,10 +52,18 @@ def study(
         protocol["sponsorCollaboratorsModule"]["leadSponsor"] = {"name": sponsor, "class": sponsor_class}
     if collaborators:
         protocol["sponsorCollaboratorsModule"]["collaborators"] = [{"name": c, "class": "INDUSTRY"} for c in collaborators]
+    if interventions or arms:
+        protocol["armsInterventionsModule"] = {}
+    if arms:
+        # (label, type, intervention names as the registry lists them, description)
+        protocol["armsInterventionsModule"]["armGroups"] = [
+            {"label": label, "type": kind, "description": desc, "interventionNames": list(names)}
+            for (label, kind, names, desc) in arms
+        ]
     if interventions:
-        protocol["armsInterventionsModule"] = {
-            "interventions": [{"type": t, "name": n, **({"otherNames": list(o)} if o else {})} for (t, n, o) in interventions]
-        }
+        protocol["armsInterventionsModule"]["interventions"] = [
+            {"type": t, "name": n, **({"otherNames": list(o)} if o else {})} for (t, n, o) in interventions
+        ]
     if countries:
         protocol["contactsLocationsModule"] = {"locations": [{"country": c} for c in countries]}
     derived = {}
@@ -84,6 +95,10 @@ STUDIES = [
         countries=["United States", "United States", "France", "Germany", "Japan"],
         intervention_mesh=["Pembrolizumab", "Lenvatinib"],
         condition_mesh=["Melanoma"],
+        arms=[
+            ("Pembrolizumab + Lenvatinib", "EXPERIMENTAL", ["Biological: Pembrolizumab", "Drug: Lenvatinib"], "Combination arm"),
+            ("Pembrolizumab", "ACTIVE_COMPARATOR", ["Biological: Pembrolizumab"], "Monotherapy arm"),
+        ],
     ),
     study(
         "NCT05000002",
@@ -100,6 +115,10 @@ STUDIES = [
         countries=["United States", "Canada"],
         intervention_mesh=["Pembrolizumab"],
         condition_mesh=["Melanoma"],
+        arms=[
+            ("MK-3475", "EXPERIMENTAL", ["Biological: MK-3475"], "200 mg every 3 weeks"),
+            ("Placebo", "PLACEBO_COMPARATOR", ["Drug: Placebo"], "Saline every 3 weeks"),
+        ],
     ),
     study(
         "NCT05000003",
@@ -116,6 +135,7 @@ STUDIES = [
         countries=["United States", "Australia"],
         intervention_mesh=["Nivolumab", "Ipilimumab"],
         condition_mesh=["Melanoma"],
+        arms=[("Nivolumab + Ipilimumab", "EXPERIMENTAL", ["Biological: Nivolumab", "Biological: Ipilimumab"], "Both drugs")],
     ),
     study(
         "NCT05000004",
@@ -133,6 +153,10 @@ STUDIES = [
         countries=["United States", "United States", "United States", "Canada"],
         intervention_mesh=["Nivolumab"],
         condition_mesh=["Melanoma"],
+        arms=[
+            ("Nivolumab", "EXPERIMENTAL", ["Biological: Nivolumab"], "Adjuvant nivolumab"),
+            ("Observation", "NO_INTERVENTION", ["Other: Observation"], "Observation only"),
+        ],
     ),
     study(
         "NCT05000005",
@@ -149,6 +173,7 @@ STUDIES = [
         countries=["United States", "United Kingdom", "Germany", "Italy", "Spain"],
         intervention_mesh=["Dabrafenib", "Trametinib"],
         condition_mesh=["Melanoma"],
+        arms=[("Dabrafenib + Trametinib", "EXPERIMENTAL", ["Drug: Dabrafenib 150 mg", "Drug: Trametinib 2 mg"], "Doublet")],
     ),
     study(
         "NCT05000006",
@@ -181,6 +206,14 @@ STUDIES = [
         countries=["United States"],
         intervention_mesh=["Pembrolizumab"],
         condition_mesh=["Melanoma", "Brain Neoplasms"],
+        arms=[
+            (
+                "Pembrolizumab + SRS",
+                "EXPERIMENTAL",
+                ["Biological: Pembrolizumab 200 mg IV", "Radiation: Stereotactic radiosurgery"],
+                "Radiosurgery within 7 days of the first dose",
+            )
+        ],
     ),
     study(
         "NCT05000008",
@@ -197,6 +230,7 @@ STUDIES = [
         countries=["France"],
         intervention_mesh=["Ipilimumab"],
         condition_mesh=["Melanoma"],
+        arms=[("Ipilimumab", "EXPERIMENTAL", ["Biological: Ipilimumab"], "Re-induction")],
     ),
     study(
         "NCT05000009",
@@ -213,6 +247,10 @@ STUDIES = [
         countries=["United States", "China", "Japan", "Korea, Republic of"],
         intervention_mesh=["Pembrolizumab", "Docetaxel"],
         condition_mesh=["Carcinoma, Non-Small-Cell Lung"],
+        arms=[
+            ("Pembrolizumab", "EXPERIMENTAL", ["Biological: Pembrolizumab"], "200 mg every 3 weeks"),
+            ("Docetaxel", "ACTIVE_COMPARATOR", ["Drug: Docetaxel"], "75 mg/m2 every 3 weeks"),
+        ],
     ),
     study(
         "NCT05000010",
@@ -229,6 +267,14 @@ STUDIES = [
         countries=["United States", "Germany"],
         intervention_mesh=["Pembrolizumab", "Carboplatin", "Pemetrexed"],
         condition_mesh=["Carcinoma, Non-Small-Cell Lung"],
+        arms=[
+            (
+                "Pembrolizumab + chemotherapy",
+                "EXPERIMENTAL",
+                ["Biological: Pembrolizumab", "Drug: Carboplatin", "Drug: Pemetrexed"],
+                "Triplet",
+            )
+        ],
     ),
     study(
         "NCT05000011",
@@ -244,6 +290,7 @@ STUDIES = [
         interventions=[("DEVICE", "AI dermoscopy decision support", [])],
         countries=["United States"],
         condition_mesh=["Melanoma"],
+        arms=[("Decision support", "EXPERIMENTAL", ["Device: AI dermoscopy decision support"], "Dermoscopy with AI")],
     ),
     study(
         "NCT05000012",
@@ -260,6 +307,15 @@ STUDIES = [
         countries=["United States", "France", "Germany", "Brazil"],
         intervention_mesh=["Nivolumab"],
         condition_mesh=["Melanoma"],
+        arms=[
+            (
+                "Nivolumab + Relatlimab",
+                "EXPERIMENTAL",
+                ["Biological: Nivolumab", "Biological: Relatlimab (BMS-986016)"],
+                "Fixed dose",
+            ),
+            ("Nivolumab", "ACTIVE_COMPARATOR", ["Biological: Nivolumab"], "Monotherapy"),
+        ],
     ),
     study(
         "NCT05000013",
@@ -290,6 +346,33 @@ STUDIES = [
         countries=["France"],
         intervention_mesh=["Pembrolizumab"],
         condition_mesh=["Melanoma"],
+        arms=[("Keytruda", "EXPERIMENTAL", ["Biological: Keytruda"], "Single arm")],
+    ),
+    # Matches an intervention search for "pembrolizumab" through the arm description only: the drug is
+    # not an intervention of this trial. Exercises the drug-match check.
+    study(
+        "NCT05000015",
+        "Nivolumab in Advanced Renal Cell Carcinoma After Progression on Pembrolizumab",
+        "COMPLETED",
+        "2018-09-01",
+        "2022-03-01",
+        ["PHASE2"],
+        enrollment=45,
+        sponsor="Dana-Farber Cancer Institute",
+        sponsor_class="OTHER",
+        conditions=["Renal Cell Carcinoma"],
+        interventions=[("BIOLOGICAL", "Nivolumab", [])],
+        countries=["Canada"],
+        intervention_mesh=["Nivolumab"],
+        condition_mesh=["Carcinoma, Renal Cell"],
+        arms=[
+            (
+                "Nivolumab",
+                "EXPERIMENTAL",
+                ["Biological: Nivolumab"],
+                "Nivolumab 240 mg every two weeks for patients whose disease progressed on prior pembrolizumab",
+            )
+        ],
     ),
 ]
 

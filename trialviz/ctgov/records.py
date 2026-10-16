@@ -34,6 +34,7 @@ P_COLLABORATORS = "protocolSection.sponsorCollaboratorsModule.collaborators"
 P_CONDITIONS = "protocolSection.conditionsModule.conditions"
 P_INTERVENTIONS = "protocolSection.armsInterventionsModule.interventions"
 P_LOCATIONS = "protocolSection.contactsLocationsModule.locations"
+P_ARM_GROUPS = "protocolSection.armsInterventionsModule.armGroups"
 P_INTERVENTION_MESH = "derivedSection.interventionBrowseModule.meshes"
 P_CONDITION_MESH = "derivedSection.conditionBrowseModule.meshes"
 
@@ -88,6 +89,8 @@ class Trial:
     countries: tuple[str, ...] = ()
     country_location_index: dict[str, int] = field(default_factory=dict)
     site_count: int = 0
+    # One entry per arm group: the intervention names listed for that arm, prefix ("Drug: ") removed.
+    arm_interventions: tuple[tuple[str, ...], ...] = ()
     intervention_mesh_terms: tuple[str, ...] = ()
     condition_mesh_terms: tuple[str, ...] = ()
 
@@ -129,6 +132,20 @@ class Trial:
             return None
         return round((end - start).days / 30.4375, 1)
 
+    @property
+    def has_arm_data(self) -> bool:
+        return any(self.arm_interventions)
+
+    def mentions_drug(self, term: str) -> bool:
+        """True when `term` appears in an intervention name, an other name, or an intervention MeSH term."""
+        needle = term.casefold().strip()
+        if not needle:
+            return False
+        haystacks = [i.name for i in self.interventions]
+        haystacks += [o for i in self.interventions for o in i.other_names]
+        haystacks += list(self.intervention_mesh_terms)
+        return any(needle in h.casefold() for h in haystacks)
+
     def drug_interventions(self) -> list[Intervention]:
         """Interventions that are drugs or biologicals, excluding placebo-like controls."""
         return [
@@ -156,6 +173,14 @@ def is_control_intervention(name: str) -> bool:
     if not stripped:
         return True
     return bool(_CONTROL_RE.match(stripped)) or "placebo" in stripped.lower()
+
+
+_PREFIX_RE = re.compile(r"^\s*[A-Za-z][A-Za-z _/-]{1,30}:\s+")
+
+
+def strip_intervention_prefix(name: str) -> str:
+    """Arm group entries read 'Drug: Pembrolizumab'; return the name without the type prefix."""
+    return _PREFIX_RE.sub("", name, count=1).strip()
 
 
 def parse_partial_date(value: str | None) -> date | None:
@@ -222,6 +247,11 @@ def parse_study(raw: dict[str, Any]) -> Trial:
             first_index[country] = idx
             countries.append(country)
 
+    arms: list[tuple[str, ...]] = []
+    for arm in _get(raw, P_ARM_GROUPS, []) or []:
+        names = tuple(strip_intervention_prefix(n) for n in (arm.get("interventionNames") or []) if isinstance(n, str))
+        arms.append(tuple(n for n in names if n))
+
     phases = tuple(p for p in (_get(raw, P_PHASES, []) or []) if isinstance(p, str))
     collaborators = tuple(
         (c.get("name") or "").strip() for c in (_get(raw, P_COLLABORATORS, []) or []) if (c.get("name") or "").strip()
@@ -251,6 +281,7 @@ def parse_study(raw: dict[str, Any]) -> Trial:
         countries=tuple(countries),
         country_location_index=first_index,
         site_count=len(locations),
+        arm_interventions=tuple(arms),
         intervention_mesh_terms=intervention_mesh,
         condition_mesh_terms=condition_mesh,
     )

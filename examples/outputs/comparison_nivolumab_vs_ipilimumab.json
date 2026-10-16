@@ -55,6 +55,11 @@
           "description": "Number of trials"
         },
         {
+          "name": "exactness",
+          "type": "string",
+          "description": "'exact' or 'sampled' (see schema)"
+        },
+        {
           "name": "citation_count",
           "type": "integer",
           "description": "Distinct trials supporting this row"
@@ -69,7 +74,12 @@
         "sort": "natural",
         "stacked": false,
         "value_format": "integer",
-        "y_zero_based": true
+        "y_zero_based": true,
+        "groupby_semantics": "overlapping",
+        "bucket_sum": 2709,
+        "distinct_trials": 2112,
+        "unclassified_count": 0,
+        "hidden_count": 0
       },
       "data": [
         {
@@ -77,6 +87,7 @@
           "phase_code": "EARLY_PHASE1",
           "series": "Nivolumab",
           "trial_count": 35,
+          "exactness": "exact",
           "citation_count": 35,
           "citations": [
             {
@@ -161,6 +172,7 @@
           "phase_code": "PHASE1",
           "series": "Nivolumab",
           "trial_count": 391,
+          "exactness": "exact",
           "citation_count": 391,
           "citations": [
             {
@@ -245,6 +257,7 @@
           "phase_code": "PHASE1|PHASE2",
           "series": "Nivolumab",
           "trial_count": 323,
+          "exactness": "exact",
           "citation_count": 323,
           "citations": [
             {
@@ -329,6 +342,7 @@
           "phase_code": "PHASE2",
           "series": "Nivolumab",
           "trial_count": 814,
+          "exactness": "exact",
           "citation_count": 814,
           "citations": [
             {
@@ -413,6 +427,7 @@
           "phase_code": "PHASE2|PHASE3",
           "series": "Nivolumab",
           "trial_count": 27,
+          "exactness": "exact",
           "citation_count": 27,
           "citations": [
             {
@@ -497,6 +512,7 @@
           "phase_code": "PHASE3",
           "series": "Nivolumab",
           "trial_count": 159,
+          "exactness": "exact",
           "citation_count": 159,
           "citations": [
             {
@@ -581,6 +597,7 @@
           "phase_code": "PHASE4",
           "series": "Nivolumab",
           "trial_count": 17,
+          "exactness": "exact",
           "citation_count": 17,
           "citations": [
             {
@@ -665,6 +682,7 @@
           "phase_code": "NA",
           "series": "Nivolumab",
           "trial_count": 50,
+          "exactness": "exact",
           "citation_count": 50,
           "citations": [
             {
@@ -749,6 +767,7 @@
           "phase_code": "EARLY_PHASE1",
           "series": "Ipilimumab",
           "trial_count": 13,
+          "exactness": "exact",
           "citation_count": 13,
           "citations": [
             {
@@ -833,6 +852,7 @@
           "phase_code": "PHASE1",
           "series": "Ipilimumab",
           "trial_count": 230,
+          "exactness": "exact",
           "citation_count": 230,
           "citations": [
             {
@@ -917,6 +937,7 @@
           "phase_code": "PHASE1|PHASE2",
           "series": "Ipilimumab",
           "trial_count": 135,
+          "exactness": "exact",
           "citation_count": 135,
           "citations": [
             {
@@ -1001,6 +1022,7 @@
           "phase_code": "PHASE2",
           "series": "Ipilimumab",
           "trial_count": 395,
+          "exactness": "exact",
           "citation_count": 395,
           "citations": [
             {
@@ -1085,6 +1107,7 @@
           "phase_code": "PHASE2|PHASE3",
           "series": "Ipilimumab",
           "trial_count": 13,
+          "exactness": "exact",
           "citation_count": 13,
           "citations": [
             {
@@ -1169,6 +1192,7 @@
           "phase_code": "PHASE3",
           "series": "Ipilimumab",
           "trial_count": 73,
+          "exactness": "exact",
           "citation_count": 73,
           "citations": [
             {
@@ -1253,6 +1277,7 @@
           "phase_code": "PHASE4",
           "series": "Ipilimumab",
           "trial_count": 7,
+          "exactness": "exact",
           "citation_count": 7,
           "citations": [
             {
@@ -1337,6 +1362,7 @@
           "phase_code": "NA",
           "series": "Ipilimumab",
           "trial_count": 27,
+          "exactness": "exact",
           "citation_count": 27,
           "citations": [
             {
@@ -1423,9 +1449,13 @@
       "query": "Compare phases for trials involving nivolumab vs ipilimumab.",
       "interpretation": "Compare the distribution of trial phases for trials involving nivolumab versus trials involving ipilimumab.",
       "assumptions": [
-        "Restricted to interventional studies because observational studies do not have a phase."
+        "Restricted to interventional studies because observational studies do not have a phase.",
+        "Series 'Nivolumab': 136 of 1,816 fetched trials matched 'nivolumab' without listing it as an intervention by name, other name, or MeSH term (the registry's intervention search also matches descriptions); they are included. Set drug_match=strict to exclude them.",
+        "Series 'Ipilimumab': 75 of 893 fetched trials matched 'ipilimumab' without listing it as an intervention by name, other name, or MeSH term (the registry's intervention search also matches descriptions); they are included. Set drug_match=strict to exclude them."
       ],
-      "warnings": [],
+      "warnings": [
+        "597 trials involve both 'Nivolumab' and 'Ipilimumab' and are counted in both series, so values across series do not add up to distinct trials. comparison_mode=partition counts each trial once."
+      ],
       "plan": {
         "analysis": "comparison",
         "viz_type": "grouped_bar_chart",
@@ -1529,8 +1559,15 @@
           "total_matching": 1816,
           "fetched": 1816,
           "truncated": false,
+          "coverage": 1.0,
+          "fetch_policy": "sample",
           "sample_order": "StartDate:desc",
-          "count_method": "sampled"
+          "count_method": "sampled",
+          "drug_match": {
+            "mode": "any",
+            "listed_as_intervention": 1680,
+            "mention_only": 136
+          }
         },
         {
           "label": "Ipilimumab",
@@ -1553,36 +1590,78 @@
           "total_matching": 893,
           "fetched": 893,
           "truncated": false,
+          "coverage": 1.0,
+          "fetch_policy": "sample",
           "sample_order": "StartDate:desc",
-          "count_method": "sampled"
+          "count_method": "sampled",
+          "drug_match": {
+            "mode": "any",
+            "listed_as_intervention": 818,
+            "mention_only": 75
+          }
         }
       ],
+      "series_overlap": [
+        {
+          "series": [
+            "Nivolumab",
+            "Ipilimumab"
+          ],
+          "trials_in_all": 597,
+          "exact": true
+        }
+      ],
+      "verification": {
+        "method": "Every row, node, and edge was re-derived from the fetched trial records by a second pass that shares only the field definitions with the aggregation code; every citation was checked for membership in its datum and every cited field value against the record. Registry counts cannot be re-derived locally and are checked for internal consistency instead.",
+        "checks": [
+          {
+            "name": "structure",
+            "status": "passed",
+            "detail": "16 rows match the documented columns"
+          },
+          {
+            "name": "citations_match_records",
+            "status": "passed",
+            "detail": "80 citations point at fetched records and quote values present in them"
+          },
+          {
+            "name": "values_recounted",
+            "status": "passed",
+            "detail": "16 rows re-derived from 2709 records"
+          },
+          {
+            "name": "partition_sum",
+            "status": "skipped",
+            "detail": "rows overlap (a trial can sit in several rows), so values are not summed"
+          }
+        ]
+      },
       "source": {
         "name": "ClinicalTrials.gov",
         "api_base": "https://clinicaltrials.gov/api/v2",
-        "retrieved_at": "2026-10-16T02:25:19+00:00"
+        "retrieved_at": "2026-10-16T04:01:44+00:00"
       },
       "api_calls": [
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=nivolumab&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=nivolumab&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
           "status": 200,
-          "elapsed_ms": 773,
+          "elapsed_ms": 889,
           "cached": false,
           "studies_returned": 1000,
           "total_count": 1816
         },
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=ipilimumab&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=ipilimumab&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
           "status": 200,
-          "elapsed_ms": 939,
+          "elapsed_ms": 1049,
           "cached": false,
           "studies_returned": 893,
           "total_count": 893
         },
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=nivolumab&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true&pageToken=ZVNj7o2Elu8o3lpzBdv-p-numpOQJJxuYPSh2_ISnD6SuP08FCfCFfbU99BK2SI",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=nivolumab&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true&pageToken=ZVNj7o2Elu8o3lpzBdv-p-numpOQJJxuYPSh2_ISnD6SuP08FCfCFfbU99BK2SI",
           "status": 200,
-          "elapsed_ms": 743,
+          "elapsed_ms": 875,
           "cached": false,
           "studies_returned": 816,
           "total_count": null
@@ -1595,10 +1674,10 @@
         "fallback_reason": null
       },
       "timing": {
-        "interpret_ms": 1810,
-        "retrieve_ms": 1624,
-        "aggregate_ms": 15,
-        "total_ms": 3450
+        "interpret_ms": 2077,
+        "retrieve_ms": 1876,
+        "aggregate_ms": 103,
+        "total_ms": 4057
       }
     }
   }

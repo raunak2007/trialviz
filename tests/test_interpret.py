@@ -34,7 +34,7 @@ def plan_for(query: str, structured: EntityFilter | None = None):
 def test_time_trend_with_since():
     p = plan_for("How has the number of trials for pembrolizumab changed per year since 2015?")
     assert p.analysis == AnalysisType.TIME_TREND and p.viz_type == VizType.TIME_SERIES
-    assert p.filter.terms == ["pembrolizumab"]
+    assert p.filter.drugs == ["pembrolizumab"]  # the -mab stem marks it as a drug
     assert (p.filter.start_year, p.filter.end_year) == (2015, 2026)
 
 
@@ -64,7 +64,7 @@ def test_comparison_of_drugs():
     assert [s.label for s in p.series] == ["nivolumab", "ipilimumab"]
     assert p.viz_type == VizType.GROUPED_BAR_CHART
     resolved = dict(p.resolved_filters())
-    assert resolved["nivolumab"].terms == ["nivolumab"] and resolved["nivolumab"].study_types == [StudyType.INTERVENTIONAL]
+    assert resolved["nivolumab"].drugs == ["nivolumab"] and resolved["nivolumab"].study_types == [StudyType.INTERVENTIONAL]
 
 
 def test_comparison_of_conditions_by_sponsor_class():
@@ -113,7 +113,7 @@ def test_quarterly_granularity_and_year_range():
     p = plan_for("Show trials per quarter for semaglutide between 2018 and 2024")
     assert p.time_granularity == TimeGranularity.QUARTER
     assert (p.filter.start_year, p.filter.end_year) == (2018, 2024)
-    assert p.filter.terms == ["semaglutide"]
+    assert p.filter.drugs == ["semaglutide"]
 
 
 def test_unanswerable_questions_raise_plan_errors():

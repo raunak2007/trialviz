@@ -6,7 +6,7 @@
   "response": {
     "error": {
       "code": "unsupported_query",
-      "message": "Participant ages are not available through this backend, which only provides trial-level fields such as phase, status, sponsor, enrollment, start year, duration, and site count.",
+      "message": "Participant ages are not available through this backend, which only covers trial-level fields such as enrollment, start year, duration, and site count.",
       "suggestions": [
         "How has the number of trials for pembrolizumab changed per year since 2015?",
         "How are melanoma trials distributed across phases?",

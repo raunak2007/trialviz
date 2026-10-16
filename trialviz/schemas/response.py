@@ -39,9 +39,18 @@ class Citation(BaseModel):
     evidence: list[Evidence] = Field(..., description="The field values that place this trial in this datum")
 
 
+Exactness = Literal["exact", "sampled"]
+
+
 class Cited(BaseModel):
     """Mixin fields present on every row, node, and edge."""
 
+    exactness: Exactness = Field(
+        ...,
+        description="'exact' when the value was computed from every matching record or is a registry count; "
+        "'sampled' when it was computed from a truncated sample of the most recently started trials. A scatter "
+        "point is always exact (it is one record); meta.retrieval[].coverage says whether every trial is plotted",
+    )
     citations: list[Citation] = Field(
         default_factory=list,
         description="Up to `citations_per_datum` supporting trial records (empty when citations are disabled)",
@@ -123,7 +132,7 @@ class Row(Cited):
     def _data_fields_first(self, handler: SerializerFunctionWrapHandler) -> dict:
         """Serialize the chart fields before the citation fields so rows read naturally."""
         data = handler(self)
-        tail = {k: data.pop(k) for k in ("citation_count", "citations") if k in data}
+        tail = {k: data.pop(k) for k in ("exactness", "citation_count", "citations") if k in data}
         return {**data, **tail}
 
 
@@ -158,6 +167,9 @@ class NetworkData(BaseModel):
 SortOrder = Literal["natural", "value_desc", "value_asc"]
 
 
+GroupbySemantics = Literal["partition", "overlapping"]
+
+
 class ChartConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -165,6 +177,26 @@ class ChartConfig(BaseModel):
     stacked: bool = Field(False, description="For grouped bars: stack instead of placing side by side")
     value_format: Literal["integer", "number"] = Field("integer", description="Number format for the y channel")
     y_zero_based: bool = Field(True, description="Y axis should start at zero")
+    groupby_semantics: GroupbySemantics = Field(
+        ...,
+        description="'partition': every trial is in at most one row, so values can be summed and shown as shares. "
+        "'overlapping': a trial can appear in several rows (several countries, several conditions, both series "
+        "of a comparison), so values must not be summed or shown as shares of a total",
+    )
+    bucket_sum: int | None = Field(
+        ..., description="Sum of the measure over all rows; null for scatter plots, where each row is one trial"
+    )
+    distinct_trials: int | None = Field(
+        ...,
+        description="Distinct trials behind the rows. Null when the rows are registry counts for an overlapping "
+        "dimension or for several series, because the registry does not report the distinct total",
+    )
+    unclassified_count: int | None = Field(
+        ..., description="Fetched trials in no row because the dimension or measure is missing (e.g. no start date)"
+    )
+    hidden_count: int | None = Field(
+        ..., description="Fetched trials in no row because every category they belong to was trimmed from the chart"
+    )
 
 
 class BinSpec(BaseModel):
@@ -182,7 +214,7 @@ class _ChartBase(BaseModel):
     subtitle: str | None = Field(None, description="Filters and caveats in one line, suitable to show under the title")
     encoding: ChartEncoding
     columns: list[Column] = Field(..., description="Every key present on each data row")
-    config: ChartConfig = Field(default_factory=ChartConfig)
+    config: ChartConfig
     data: list[Row]
 
 
@@ -215,6 +247,11 @@ class NetworkGraphSpec(BaseModel):
     subtitle: str | None = None
     encoding: NetworkEncoding = Field(default_factory=NetworkEncoding)
     node_kinds: list[str] = Field(..., description="Distinct values of the node `kind` field, in legend order")
+    edge_semantics: str = Field(..., description="What an edge means, e.g. 'both drugs listed in the same arm of a trial'")
+    trials_considered: int = Field(..., ge=0, description="Fetched trials that had the data needed to contribute edges")
+    trials_skipped: int = Field(
+        0, ge=0, description="Fetched trials that lacked the data needed (for drug_drug: trials with no arm groups)"
+    )
     data: NetworkData
 
 
@@ -240,20 +277,43 @@ class ApiCall(BaseModel):
     total_count: int | None = None
 
 
+class DrugMatch(BaseModel):
+    """How the fetched records relate to the drug terms in the filter.
+
+    `query.intr` matches any mention in the intervention area, including descriptions, so a
+    trial can match without listing the drug as an intervention.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    mode: Literal["any", "strict"] = Field(..., description="'strict' excluded mention-only trials from the chart")
+    listed_as_intervention: int = Field(
+        ..., ge=0, description="Fetched trials whose interventions, other names, or MeSH terms include the drug"
+    )
+    mention_only: int = Field(
+        ..., ge=0, description="Fetched trials that matched the search without listing the drug as an intervention"
+    )
+
+
 class SeriesRetrieval(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     label: str
     filter: EntityFilter = Field(..., description="Effective filter used for this series")
     total_matching: int | None = Field(None, description="Trials matching the filter according to the API")
-    fetched: int = Field(..., description="Trial records actually downloaded and aggregated")
+    fetched: int = Field(..., description="Trial records downloaded (before any drug_match=strict exclusion)")
     truncated: bool = Field(..., description="True when fetched < total_matching")
+    coverage: float = Field(..., ge=0, le=1, description="fetched / total_matching (1.0 when every matching record was fetched)")
+    fetch_policy: Literal["sample", "complete"] = Field(
+        ..., description="'complete' means the analysis asked for every record up to the complete_up_to ceiling"
+    )
     sample_order: str = Field(
         "StartDate:desc", description="Sort order used when fetching, so a truncated sample is well defined"
     )
     count_method: Literal["sampled", "exact_server_counts"] = Field(
         ..., description="'exact_server_counts' means bar heights came from one API count query per category"
     )
+    drug_match: DrugMatch | None = Field(None, description="Present when the filter contains drug terms")
 
 
 class PlannerInfo(BaseModel):
@@ -282,6 +342,31 @@ class SourceInfo(BaseModel):
     retrieved_at: str = Field(..., description="ISO 8601 UTC timestamp")
 
 
+class SeriesOverlap(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    series: list[str] = Field(..., min_length=2, description="Labels of the overlapping series")
+    trials_in_all: int = Field(..., ge=0, description="Distinct trials that belong to every listed series")
+    exact: bool = Field(..., description="False when at least one of the series was sampled, so the overlap is a lower bound")
+
+
+class VerificationCheck(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    name: str
+    status: Literal["passed", "skipped"]
+    detail: str | None = None
+
+
+class Verification(BaseModel):
+    """Independent checks run on the finished chart before it is returned. A failed check is a 500, never a 200."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    method: str = Field(..., description="How the checks were carried out")
+    checks: list[VerificationCheck]
+
+
 class Meta(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -292,6 +377,10 @@ class Meta(BaseModel):
     plan: QueryPlan = Field(..., description="The executed plan, for transparency and debugging")
     filters: EntityFilter = Field(..., description="Base filter applied to every series")
     retrieval: list[SeriesRetrieval]
+    series_overlap: list[SeriesOverlap] = Field(
+        default_factory=list, description="For comparisons: trials counted in more than one series"
+    )
+    verification: Verification
     source: SourceInfo
     api_calls: list[ApiCall]
     planner: PlannerInfo

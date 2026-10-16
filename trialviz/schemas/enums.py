@@ -110,7 +110,8 @@ class NumericField(StrEnum):
 
 class NetworkKind(StrEnum):
     SPONSOR_DRUG = "sponsor_drug"  # bipartite: lead sponsors to drugs they test
-    DRUG_DRUG = "drug_drug"  # drugs co-tested in the same trial
+    DRUG_DRUG = "drug_drug"  # drugs given in combination: listed in the same arm group
+    DRUG_DRUG_SAME_TRIAL = "drug_drug_same_trial"  # drugs listed anywhere in the same trial, comparators included
     CONDITION_DRUG = "condition_drug"  # bipartite: conditions to drugs
     SPONSOR_CONDITION = "sponsor_condition"  # bipartite: lead sponsors to conditions
     SPONSOR_COLLABORATOR = "sponsor_collaborator"  # lead sponsor to collaborators

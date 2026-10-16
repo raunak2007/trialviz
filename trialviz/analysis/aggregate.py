@@ -51,6 +51,10 @@ class Bucket:
             for t, ev in self.supporting[:limit]
         ]
 
+    @property
+    def trial_ids(self) -> set[str]:
+        return {t.nct_id for t, _ in self.supporting}
+
 
 @dataclass
 class GroupResult:
@@ -58,6 +62,7 @@ class GroupResult:
     uncategorized: int = 0  # trials with no value for the dimension (e.g. missing start date)
     skipped_no_measure: int = 0  # trials dropped because the measure was missing (enrollment)
     categories_before_trim: int = 0
+    unclassified_ids: set[str] = field(default_factory=set)  # NCT ids behind the two counts above
 
 
 # ------------------------------------------------------------------ periods
@@ -123,13 +128,16 @@ def group_by(
     buckets: dict[str, Bucket] = {}
     uncategorized = 0
     skipped = 0
+    unclassified: set[str] = set()
     for trial in trials:
         cats = categories_of(trial, spec, granularity, canon)
         if not cats:
             uncategorized += 1
+            unclassified.add(trial.nct_id)
             continue
         if measure == Measure.TOTAL_ENROLLMENT and trial.enrollment is None:
             skipped += 1
+            unclassified.add(trial.nct_id)
             continue
         for cat in cats:
             bucket = buckets.get(cat.label)
@@ -137,7 +145,9 @@ def group_by(
                 period_start = period_of(trial, granularity)[1] if spec.dimension == Dimension.START_YEAR else None
                 bucket = buckets[cat.label] = Bucket(label=cat.label, code=cat.code, period_start=period_start)
             bucket.add(trial, [cat.evidence], measure)
-    return GroupResult(buckets=list(buckets.values()), uncategorized=uncategorized, skipped_no_measure=skipped)
+    return GroupResult(
+        buckets=list(buckets.values()), uncategorized=uncategorized, skipped_no_measure=skipped, unclassified_ids=unclassified
+    )
 
 
 def group_by_pair(

@@ -71,6 +71,25 @@ class QueryRequest(BaseModel):
         "auto",
         description="'llm' requires an Anthropic API key, 'rules' is the deterministic fallback, 'auto' tries llm then rules",
     )
+    comparison_mode: Literal["overlapping", "partition"] = Field(
+        "overlapping",
+        description="For comparisons: 'overlapping' keeps one series per entity (a trial involving both is counted in both, "
+        "and meta.series_overlap says how many); 'partition' regroups trials into 'A only', 'B only', and 'Both' so each "
+        "trial is counted once",
+    )
+    drug_match: Literal["any", "strict"] = Field(
+        "any",
+        description="The registry's drug search matches any mention in the intervention area. 'strict' drops fetched trials "
+        "that do not list the drug as an intervention (by name, other name, or MeSH term); 'any' keeps them and reports "
+        "the count in meta.retrieval[].drug_match",
+    )
+    complete_up_to: int = Field(
+        5000,
+        ge=1000,
+        le=20000,
+        description="For analyses that are sensitive to sampling (networks, scatter, histograms, rankings of free-text "
+        "dimensions) every matching record is fetched when the match count is at most this many, overriding max_trials",
+    )
 
     @model_validator(mode="after")
     def _years_in_order(self) -> QueryRequest:

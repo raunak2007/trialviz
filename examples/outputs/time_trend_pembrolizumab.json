@@ -45,6 +45,11 @@
           "description": "Number of trials started in the period"
         },
         {
+          "name": "exactness",
+          "type": "string",
+          "description": "'exact' or 'sampled' (see schema)"
+        },
+        {
           "name": "citation_count",
           "type": "integer",
           "description": "Distinct trials supporting this row"
@@ -59,13 +64,19 @@
         "sort": "natural",
         "stacked": false,
         "value_format": "integer",
-        "y_zero_based": true
+        "y_zero_based": true,
+        "groupby_semantics": "partition",
+        "bucket_sum": 2905,
+        "distinct_trials": 2905,
+        "unclassified_count": 0,
+        "hidden_count": 0
       },
       "data": [
         {
           "period": "2015",
           "period_start": "2015-01-01",
           "trial_count": 120,
+          "exactness": "exact",
           "citation_count": 120,
           "citations": []
         },
@@ -73,6 +84,7 @@
           "period": "2016",
           "period_start": "2016-01-01",
           "trial_count": 195,
+          "exactness": "exact",
           "citation_count": 195,
           "citations": []
         },
@@ -80,6 +92,7 @@
           "period": "2017",
           "period_start": "2017-01-01",
           "trial_count": 260,
+          "exactness": "exact",
           "citation_count": 260,
           "citations": []
         },
@@ -87,6 +100,7 @@
           "period": "2018",
           "period_start": "2018-01-01",
           "trial_count": 255,
+          "exactness": "exact",
           "citation_count": 255,
           "citations": []
         },
@@ -94,6 +108,7 @@
           "period": "2019",
           "period_start": "2019-01-01",
           "trial_count": 248,
+          "exactness": "exact",
           "citation_count": 248,
           "citations": [
             {
@@ -177,6 +192,7 @@
           "period": "2020",
           "period_start": "2020-01-01",
           "trial_count": 263,
+          "exactness": "exact",
           "citation_count": 263,
           "citations": [
             {
@@ -260,6 +276,7 @@
           "period": "2021",
           "period_start": "2021-01-01",
           "trial_count": 265,
+          "exactness": "exact",
           "citation_count": 265,
           "citations": [
             {
@@ -343,6 +360,7 @@
           "period": "2022",
           "period_start": "2022-01-01",
           "trial_count": 299,
+          "exactness": "exact",
           "citation_count": 299,
           "citations": [
             {
@@ -426,6 +444,7 @@
           "period": "2023",
           "period_start": "2023-01-01",
           "trial_count": 259,
+          "exactness": "exact",
           "citation_count": 259,
           "citations": [
             {
@@ -509,6 +528,7 @@
           "period": "2024",
           "period_start": "2024-01-01",
           "trial_count": 256,
+          "exactness": "exact",
           "citation_count": 256,
           "citations": [
             {
@@ -592,6 +612,7 @@
           "period": "2025",
           "period_start": "2025-01-01",
           "trial_count": 259,
+          "exactness": "exact",
           "citation_count": 259,
           "citations": [
             {
@@ -675,6 +696,7 @@
           "period": "2026",
           "period_start": "2026-01-01",
           "trial_count": 226,
+          "exactness": "exact",
           "citation_count": 226,
           "citations": [
             {
@@ -759,10 +781,11 @@
     },
     "meta": {
       "query": "How has the number of trials for this drug changed per year since 2015?",
-      "interpretation": "Count of trials involving Pembrolizumab per start year, from 2015 onward.",
+      "interpretation": "Count of trials per start year for Pembrolizumab, from 2015 onward.",
       "assumptions": [
-        "'this drug' refers to the supplied structured field Pembrolizumab.",
-        "No end year set, so all years through the present are included.",
+        "'This drug' refers to the supplied drug Pembrolizumab.",
+        "No end year set, so all years from 2015 through the present are included.",
+        "280 of 2,000 fetched trials matched 'Pembrolizumab' without listing it as an intervention by name, other name, or MeSH term (the registry's intervention search also matches descriptions); they are included. Set drug_match=strict to exclude them.",
         "2,905 trials match; values are exact ClinicalTrials.gov counts per category, citations come from the 2,000 most recently started trials."
       ],
       "warnings": [],
@@ -808,10 +831,10 @@
         "numeric_y": null,
         "time_granularity": "year",
         "top_n": null,
-        "interpretation": "Count of trials involving Pembrolizumab per start year, from 2015 onward.",
+        "interpretation": "Count of trials per start year for Pembrolizumab, from 2015 onward.",
         "assumptions": [
-          "'this drug' refers to the supplied structured field Pembrolizumab.",
-          "No end year set, so all years through the present are included."
+          "'This drug' refers to the supplied drug Pembrolizumab.",
+          "No end year set, so all years from 2015 through the present are included."
         ],
         "planner_mode": "llm"
       },
@@ -849,28 +872,61 @@
           "total_matching": 2905,
           "fetched": 2000,
           "truncated": true,
+          "coverage": 0.6885,
+          "fetch_policy": "sample",
           "sample_order": "StartDate:desc",
-          "count_method": "exact_server_counts"
+          "count_method": "exact_server_counts",
+          "drug_match": {
+            "mode": "any",
+            "listed_as_intervention": 1720,
+            "mention_only": 280
+          }
         }
       ],
+      "series_overlap": [],
+      "verification": {
+        "method": "Every row, node, and edge was re-derived from the fetched trial records by a second pass that shares only the field definitions with the aggregation code; every citation was checked for membership in its datum and every cited field value against the record. Registry counts cannot be re-derived locally and are checked for internal consistency instead.",
+        "checks": [
+          {
+            "name": "structure",
+            "status": "passed",
+            "detail": "12 rows match the documented columns"
+          },
+          {
+            "name": "citations_match_records",
+            "status": "passed",
+            "detail": "40 citations point at fetched records and quote values present in them"
+          },
+          {
+            "name": "values_recounted",
+            "status": "passed",
+            "detail": "0 rows re-derived from 2000 records; 12 registry-count rows checked for internal consistency"
+          },
+          {
+            "name": "partition_sum",
+            "status": "passed",
+            "detail": "registry counts sum to 2905"
+          }
+        ]
+      },
       "source": {
         "name": "ClinicalTrials.gov",
         "api_base": "https://clinicaltrials.gov/api/v2",
-        "retrieved_at": "2026-10-16T02:25:12+00:00"
+        "retrieved_at": "2026-10-16T04:01:29+00:00"
       },
       "api_calls": [
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2015-01-01%2C2026-12-31%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2015-01-01%2C2026-12-31%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
           "status": 200,
-          "elapsed_ms": 827,
+          "elapsed_ms": 821,
           "cached": false,
           "studies_returned": 1000,
           "total_count": 2905
         },
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2015-01-01%2C2026-12-31%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true&pageToken=ZVNj7o2Elu8o3lpzBdv-p-numpOQJJxuY_an2fcbnj6SuP08FCfCFfTX9tdP2CI",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2015-01-01%2C2026-12-31%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true&pageToken=ZVNj7o2Elu8o3lpzBdv-p-numpOQJJxuY_an2fcbnj6SuP08FCfCFfTX9tdP2CI",
           "status": 200,
-          "elapsed_ms": 914,
+          "elapsed_ms": 919,
           "cached": false,
           "studies_returned": 1000,
           "total_count": null
@@ -878,34 +934,34 @@
         {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2015-01-01%2C2015-12-31%5D&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 104,
+          "elapsed_ms": 105,
           "cached": false,
           "studies_returned": 1,
           "total_count": 120
         },
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2018-01-01%2C2018-12-31%5D&fields=NCTId&countTotal=true",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2017-01-01%2C2017-12-31%5D&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 175,
+          "elapsed_ms": 181,
           "cached": false,
           "studies_returned": 1,
-          "total_count": 255
+          "total_count": 260
         },
         {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2016-01-01%2C2016-12-31%5D&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 178,
+          "elapsed_ms": 184,
           "cached": false,
           "studies_returned": 1,
           "total_count": 195
         },
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2017-01-01%2C2017-12-31%5D&fields=NCTId&countTotal=true",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2018-01-01%2C2018-12-31%5D&fields=NCTId&countTotal=true",
           "status": 200,
           "elapsed_ms": 184,
           "cached": false,
           "studies_returned": 1,
-          "total_count": 260
+          "total_count": 255
         },
         {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2019-01-01%2C2019-12-31%5D&fields=NCTId&countTotal=true",
@@ -916,41 +972,33 @@
           "total_count": 248
         },
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2020-01-01%2C2020-12-31%5D&fields=NCTId&countTotal=true",
-          "status": 200,
-          "elapsed_ms": 282,
-          "cached": false,
-          "studies_returned": 1,
-          "total_count": 263
-        },
-        {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2021-01-01%2C2021-12-31%5D&fields=NCTId&countTotal=true",
-          "status": 200,
-          "elapsed_ms": 284,
-          "cached": false,
-          "studies_returned": 1,
-          "total_count": 265
-        },
-        {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2022-01-01%2C2022-12-31%5D&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 297,
+          "elapsed_ms": 292,
           "cached": false,
           "studies_returned": 1,
           "total_count": 299
         },
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2023-01-01%2C2023-12-31%5D&fields=NCTId&countTotal=true",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2021-01-01%2C2021-12-31%5D&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 311,
+          "elapsed_ms": 296,
           "cached": false,
           "studies_returned": 1,
-          "total_count": 259
+          "total_count": 265
         },
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2025-01-01%2C2025-12-31%5D&fields=NCTId&countTotal=true",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2020-01-01%2C2020-12-31%5D&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 384,
+          "elapsed_ms": 296,
+          "cached": false,
+          "studies_returned": 1,
+          "total_count": 263
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2023-01-01%2C2023-12-31%5D&fields=NCTId&countTotal=true",
+          "status": 200,
+          "elapsed_ms": 317,
           "cached": false,
           "studies_returned": 1,
           "total_count": 259
@@ -958,15 +1006,23 @@
         {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2024-01-01%2C2024-12-31%5D&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 385,
+          "elapsed_ms": 401,
           "cached": false,
           "studies_returned": 1,
           "total_count": 256
         },
         {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2025-01-01%2C2025-12-31%5D&fields=NCTId&countTotal=true",
+          "status": 200,
+          "elapsed_ms": 402,
+          "cached": false,
+          "studies_returned": 1,
+          "total_count": 259
+        },
+        {
           "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1&query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2026-01-01%2C2026-12-31%5D&fields=NCTId&countTotal=true",
           "status": 200,
-          "elapsed_ms": 403,
+          "elapsed_ms": 405,
           "cached": false,
           "studies_returned": 1,
           "total_count": 226
@@ -979,10 +1035,10 @@
         "fallback_reason": null
       },
       "timing": {
-        "interpret_ms": 2781,
-        "retrieve_ms": 2320,
-        "aggregate_ms": 16,
-        "total_ms": 5119
+        "interpret_ms": 3758,
+        "retrieve_ms": 2355,
+        "aggregate_ms": 24,
+        "total_ms": 6137
       }
     }
   }

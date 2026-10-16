@@ -53,6 +53,15 @@ async def test_cache_serves_repeat_requests(fake_api):
     assert [c.cached for c in log.calls] == [False, True]
 
 
+async def test_complete_fetch_raises_the_cap_from_the_first_page(fake_api, client):
+    log = CallLog()
+    result = await client.fetch_studies(EntityFilter(conditions=["melanoma"]), max_records=5, complete_up_to=100, log=log)
+    assert len(result.studies) == 12 and result.truncated is False
+    assert [c.studies_returned for c in log.calls] == [5, 5, 2]  # paged at the original page size, no count request
+    result = await client.fetch_studies(EntityFilter(conditions=["melanoma"]), max_records=5, complete_up_to=10)
+    assert len(result.studies) == 5 and result.truncated is True
+
+
 async def test_count_studies_uses_total_count(client):
     assert await client.count_studies(EntityFilter(conditions=["melanoma"]), extra_advanced="AREA[Phase]PHASE3") == 4
 
@@ -72,4 +81,4 @@ def test_fake_api_evaluates_essie(studies):
     fake = FakeCTGov(studies)
     params = {"filter.advanced": "AREA[Phase]PHASE2 AND NOT AREA[Phase]PHASE1 AND NOT AREA[Phase]PHASE3"}
     matched = [s for s in studies if fake._matches(s, params)]
-    assert len(matched) == 4
+    assert len(matched) == 5

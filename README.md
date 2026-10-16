@@ -6,11 +6,11 @@ visualization specification backed by live ClinicalTrials.gov data.
 ```
 POST /query  {"query": "How are melanoma trials distributed across phases?"}
 
-   question ──► interpret ──► retrieve ──► aggregate ──► spec ──► validate ──► JSON
-                (model or     (CT.gov v2   (pure         (bar, line,  (citations
-                 rules, into   API, paged,  functions,    scatter,     match bars,
-                 a closed      cached,      provenance    histogram,   sums match
-                 menu)         counted)     per bucket)   network)     records)
+   question ──► interpret ──► retrieve ──► aggregate ──► spec ──► verify ──► JSON
+                (model or     (CT.gov v2   (pure         (bar, line,  (every value
+                 rules, into   API, paged,  functions,    scatter,     re-derived,
+                 a closed      cached,      provenance    histogram,   citations
+                 menu)         counted)     per bucket)   network)     checked)
 ```
 
 The model, when one is configured, only ever decides *what to compute* from a
@@ -52,7 +52,7 @@ curl -s localhost:8000/query -H 'content-type: application/json' \
   -d '{"query": "How has the number of trials for this drug changed per year since 2015?", "drug_name": "Pembrolizumab"}' | jq .
 ```
 
-* Demo page: open <http://localhost:8000/> (charts via Vega-Lite, networks via d3; click any mark to see its citations).
+* Demo page: open <http://localhost:8000/> (charts via Vega-Lite, networks via d3). Click any bar, point, node, or edge to see the registry records behind it; the panel under the chart says whether the values add up, how many records were fetched, and what the verifier checked.
 * Interactive API docs: <http://localhost:8000/docs>. JSON Schemas: <http://localhost:8000/schema>.
 * Health: `GET /health` reports which planner is active.
 
@@ -71,12 +71,21 @@ modal secret create trialviz-anthropic ANTHROPIC_API_KEY=sk-ant-...
 modal deploy modal_app.py        # prints https://<workspace>--trialviz-web.modal.run
 ```
 
-A live deployment for this submission: **(URL goes here after `modal deploy`)**.
+A live deployment for this submission: <https://rmondal--trialviz-web.us-east.modal.run/> (demo page; API docs at <https://rmondal--trialviz-web.us-east.modal.run/docs>).
 
 Tests (no network needed; they run against a recorded fixture served through a fake API):
 
 ```bash
 pytest -q
+```
+
+Planner evaluation and live API measurements (section 8):
+
+```bash
+python scripts/eval_planner.py --planner both                                   # main set, both planners
+python scripts/eval_planner.py --planner both --questions evals/planner_questions_heldout.jsonl
+python scripts/measure_api.py                                                   # six live measurements, curl-reproducible
+python scripts/run_examples.py                                                  # the example runs in examples/outputs/
 ```
 
 Fully offline run of the whole service, including the demo page, against the fixture:
@@ -141,6 +150,9 @@ Error envelope:
 | `citations_per_datum` | integer | no | 0 to 50, default 5 | Cap on citations per bar, bucket, point, node, or edge. `citation_count` is always the full number. |
 | `count_mode` | `auto \| sample \| exact` | no | default `auto` | How bar heights are counted when the match set exceeds `max_trials`. |
 | `planner` | `auto \| llm \| rules` | no | default `auto` | `auto` uses the model if a key is configured and falls back to rules. |
+| `complete_up_to` | integer | no | 1000 to 20000, default 5000 | For analyses whose answer depends on which records were fetched (networks, scatter, histograms, open-vocabulary rankings, grouped charts, enrollment sums, partition comparisons, strict drug matching), every matching record is fetched when the registry count is at most this many, overriding `max_trials`. See [fetch policy](#sampling-complete-fetches-and-exact-counts). |
+| `comparison_mode` | `overlapping \| partition` | no | default `overlapping` | `overlapping` keeps one series per entity and reports how many trials are in more than one (`meta.series_overlap`); `partition` regroups into `A only`, `B only`, `Both` so each trial is counted once. |
+| `drug_match` | `any \| strict` | no | default `any` | The registry's drug search matches any mention in the intervention area. `strict` drops fetched trials that do not list the drug as an intervention; `any` keeps them and reports both counts in `meta.retrieval[].drug_match`. |
 
 Structured fields are authoritative: when both the question and a field name a
 drug, the field wins. They apply to every series of a comparison unless a series
@@ -176,12 +188,15 @@ contract a renderer needs.
     {"name": "phase", "type": "string", "description": "Phase (display label)"},
     {"name": "phase_code", "type": "string", "description": "Raw ClinicalTrials.gov value behind `phase`, or null"},
     {"name": "trial_count", "type": "integer", "description": "Number of trials"},
+    {"name": "exactness", "type": "string", "description": "'exact' or 'sampled'"},
     {"name": "citation_count", "type": "integer", "description": "Distinct trials supporting this row"},
     {"name": "citations", "type": "string", "description": "Array of Citation objects, truncated to citations_per_datum"}
   ],
-  "config": {"sort": "natural", "stacked": false, "value_format": "integer", "y_zero_based": true},
+  "config": {"sort": "natural", "stacked": false, "value_format": "integer", "y_zero_based": true,
+             "groupby_semantics": "partition",   // every trial in at most one row: values can be summed
+             "bucket_sum": 97, "distinct_trials": 97, "unclassified_count": 0, "hidden_count": 0},
   "data": [
-    {"phase": "Phase 3", "phase_code": "PHASE3", "trial_count": 41, "citation_count": 41,
+    {"phase": "Phase 3", "phase_code": "PHASE3", "trial_count": 41, "exactness": "exact", "citation_count": 41,
      "citations": [{"nct_id": "NCT01234567", "title": "...", "url": "https://clinicaltrials.gov/study/NCT01234567",
                     "evidence": [{"field": "protocolSection.identificationModule.briefTitle", "value": "..."},
                                  {"field": "protocolSection.designModule.phases", "value": "[\"PHASE3\"]"}]}]}
@@ -202,10 +217,39 @@ Rendering rules:
 * `citation_count` can exceed `citations.length` (capped by
   `citations_per_datum`) and can be larger than the number of fetched records
   when exact server counts were used (see `meta.retrieval[].count_method`).
+* `exactness` on every row, node, and edge is `exact` when the value was
+  computed from every matching record or is a registry count, and `sampled`
+  when it was computed from a truncated sample. A chart can mix both (a
+  category the registry could not count stays sampled).
+* `config.groupby_semantics` says whether values may be summed: under
+  `partition` every trial is in at most one row; under `overlapping` a trial
+  can sit in several rows (a multi-country trial, a multi-condition trial, both
+  series of a comparison) and a sum or a share of total would double count.
+  `bucket_sum`, `distinct_trials`, `unclassified_count` (no value for the
+  dimension or measure) and `hidden_count` (only in categories trimmed by top N)
+  are the reconciliation: under partition semantics with a complete fetch,
+  `distinct_trials + unclassified_count + hidden_count` equals the fetched
+  record count, and the verifier checks it.
+
+What the numbers mean, for every chart:
+
+* "year" is the trial's start year (`startDateStruct.date`), never the
+  registration or completion year; a trial with no start date is unclassified.
+* "sponsor" is the lead sponsor; `query.spons` searches collaborators too, so
+  "trials sponsored by X" can include trials X collaborated on (the sponsor to
+  collaborator network separates the roles).
+* a trial with sites in four countries counts once in each of the four country
+  bars; the country chart is therefore `overlapping`.
+* a trial listing Phase 1 and Phase 2 is one "Phase 1/Phase 2" trial.
+* a drug search counts a trial that mentions the drug anywhere in its
+  intervention area; `meta.retrieval[].drug_match` says how many fetched trials
+  do not list it as an intervention.
+* in a comparison a trial that involves both entities is counted in both series
+  unless `comparison_mode=partition`; `meta.series_overlap` carries the number.
 
 Row shapes by type:
 
-| type | row keys (besides `citation_count`, `citations`) |
+| type | row keys (besides `exactness`, `citation_count`, `citations`) |
 |---|---|
 | `bar_chart` | `<dimension>` (display label), `<dimension>_code` (raw value, only for enumerated dimensions), `trial_count` or `total_enrollment` |
 | `grouped_bar_chart` | same as `bar_chart` plus `series` (the entity, or the secondary grouping) |
@@ -230,20 +274,33 @@ Dimension row keys: `phase`, `country`, `intervention_type`, `sponsor_class`,
     "directed": false
   },
   "node_kinds": ["sponsor", "drug"],                 // legend order; `kind` of every node is one of these
+  "edge_semantics": "the lead sponsor ran a trial that lists the drug as an intervention",
+  "trials_considered": 2412,                          // fetched trials that had the data needed to contribute
+  "trials_skipped": 0,                                // for drug_drug: trials with no arm groups
   "data": {
     "nodes": [{"id": "drug:pembrolizumab", "label": "Pembrolizumab", "kind": "drug", "trial_count": 312,
-               "citation_count": 312, "citations": [...]}],
+               "exactness": "exact", "citation_count": 312, "citations": [...]}],
     "edges": [{"source": "sponsor:merck sharp & dohme llc", "target": "drug:pembrolizumab", "trial_count": 88,
-               "citation_count": 88, "citations": [...]}]
+               "exactness": "exact", "citation_count": 88, "citations": [...]}]
   }
 }
 ```
 
 Node ids are `<kind>:<normalized name>` and are unique. Every edge endpoint is
-present in `nodes`. Edge weight is the number of distinct trials in which both
-endpoints appear; node size is the number of trials the entity appears in among
-trials that contributed at least one edge. Edge citations carry two evidence
-entries, one per endpoint.
+present in `nodes`. Edge weight is the number of distinct trials in which the
+pair occurs under `edge_semantics`; node size is the number of trials the
+entity appears in among trials that contributed at least one edge. Edge
+citations carry two evidence entries, one per endpoint.
+
+Two drug-to-drug kinds exist because "in the same trial" and "given together"
+are different claims. `drug_drug` links two drugs only when a trial lists them
+in the same arm group (`armGroups[].interventionNames`), so pembrolizumab
+versus docetaxel, which share a trial but not an arm, is not an edge; trials
+without arm groups cannot contribute and are counted in `trials_skipped`.
+`drug_drug_same_trial` links any two drugs listed anywhere in the same trial,
+comparators included. The difference is not marginal: in interventional
+melanoma trials 44% of same-trial drug pairs never share an arm (section 8.2).
+The edge citations quote the arm entries that justify the link.
 
 ### 4.3 Citations
 
@@ -271,7 +328,9 @@ fields.
 | `warnings` | Data caveats worth surfacing: truncated categories, records missing a value, trimmed networks, failed exact counts. |
 | `plan` | The executed `QueryPlan`: analysis, viz type, filters, series, dimension, measure, network kind, numeric fields, granularity, top_n. |
 | `filters` | The base `EntityFilter` applied to every series. |
-| `retrieval[]` | Per series: effective filter, `total_matching` (registry count), `fetched`, `truncated`, `sample_order`, `count_method` (`sampled` or `exact_server_counts`). |
+| `retrieval[]` | Per series: effective filter, `total_matching` (registry count), `fetched`, `truncated`, `coverage` (fetched / matching), `fetch_policy` (`sample` or `complete`), `sample_order`, `count_method` (`sampled` or `exact_server_counts`), and for drug searches `drug_match` (`mode`, `listed_as_intervention`, `mention_only`). |
+| `series_overlap[]` | For comparisons: for each pair of series (and all series together when there are more than two) the number of trials in every one of them, and whether that number is exact or a lower bound from samples. |
+| `verification` | The checks run on the finished chart before it was returned (section 5.4): `method` and one `{name, status, detail}` per check. A failed check never reaches a client; it is a 500. |
 | `source` | `ClinicalTrials.gov`, API base, `retrieved_at` (UTC). |
 | `api_calls[]` | Every request made: full URL (reproducible with curl), status, latency, cache hit, records returned, `totalCount`. |
 | `planner` | `mode` (`llm` or `rules`), `model`, `attempts`, `fallback_reason`. |
@@ -300,20 +359,33 @@ Pydantic before anything else sees it. A draft that fails validation, or a
 reply that is prose instead of a tool call, is sent back to the model once
 with the reason; a second failure hands over to the rule-based planner. The
 system prompt (`trialviz/interpret/llm.py`) explains the menu, today's date,
-and how relative dates resolve, and gives nine worked examples. The model
+and how relative dates resolve, and gives ten worked examples. The model
 never sees trial data.
 
-This took two iterations against the live API. The first version used the
-grammar-constrained structured-output mode (`output_config.format`); the API
-returned `400 Schema is too complex` for this schema, after 20 to 45 seconds
-per call, so every request silently fell back to the rule-based planner. The
-second version forced the tool with `tool_choice: {"type": "tool"}`, which
-the current model generation (Sonnet 5.5, Opus 5.5, Fable 5.1) rejects with a
-400. The shipped version uses `tool_choice: auto` plus validation and one
-corrective retry. I chose that over flattening the schema to satisfy the
-grammar compiler: the nested `filter` and per-series overrides are what make
-comparisons expressible, and `meta.planner` records which path produced every
-plan, so a fallback is never silent.
+This took two iterations against the live API, with `anthropic==1.15.0` and
+`claude-sonnet-5-5` (the default model, configurable with `TRIALVIZ_MODEL`).
+The first version used the grammar-constrained structured-output mode
+(`output_config.format` with the `PlanDraft` schema). Every call returned, after
+20 to 45 seconds, `400 {'type': 'invalid_request_error', 'message': 'Schema is
+too complex.'}`, so every request silently fell back to the rule-based planner.
+The second version forced the tool with `tool_choice: {"type": "tool", "name":
+"submit_query_plan"}` and then `{"type": "any"}`; both returned, immediately,
+`400 {'type': 'invalid_request_error', 'message': 'tool_choice: type "tool" and
+"any" are not supported for this model.'}` (request ids `req_011Cg57k3VaSmpAQVuF9Q81z`,
+`req_011Cg57kG3d75iohqikc4PW1`). I observed this on `claude-sonnet-5-5`; the
+tool-use documentation's support table, checked the same day, lists forced tool
+choice as unsupported for the other current models as well, which is why I did
+not try them. The shipped version uses `tool_choice: {"type": "auto"}` plus
+validation and one corrective retry, and the planner tests include a scripted
+client that returns prose instead of a tool call to exercise that path. I chose
+this over flattening the schema to satisfy the grammar compiler: the nested
+`filter` and per-series overrides are what make comparisons expressible, and
+`meta.planner` records which path produced every plan, so a fallback is never
+silent.
+
+Both planners are scored against `evals/planner_questions.jsonl` (47 reworded
+questions with expected plans) and `evals/planner_questions_heldout.jsonl` (17
+more, written after the rules were finished); section 8.1 has the numbers.
 
 `normalize()` (`trialviz/interpret/normalize.py`) turns a draft into an
 executable `QueryPlan` and is where the rules live, so they apply identically to
@@ -339,8 +411,11 @@ model once; if the model is unavailable (no key, auth failure, network, a
 refusal, or a schema mismatch), the rule-based planner
 (`trialviz/interpret/rules.py`) takes over and `meta.planner.fallback_reason`
 says why. The rules are keyword and regex heuristics for the question classes
-in the appendix of the assignment; they are deliberately conservative and
-return `unsupported` when they cannot tell what to group by.
+in the appendix of the assignment plus the phrasings in the evaluation set:
+entity typing uses adjacency cues ("the drug X", "sponsored by X", "patients
+with X"), INN stems (`-mab`, `-nib`, `-tide`, ...), disease words, and a short
+list of organizations, and they return `unsupported` when they cannot tell
+what to group by rather than guess.
 
 ### 5.2 Retrieve: `QueryPlan` to records
 
@@ -365,15 +440,35 @@ reason about.
 small `Trial` dataclass and keeps the array indices needed to cite the exact
 JSON path later (which location entry, which intervention).
 
-### Sampling and exact counts
+### Sampling, complete fetches, and exact counts
 
 A filter like "melanoma" matches far more trials than it is reasonable to
-download per request. The sample is capped at `max_trials`, and
-`meta.retrieval[].truncated` says when the cap was hit. Bar heights computed
-from a truncated sample would be wrong, so when a series is truncated (or
-`count_mode=exact`) and the chart is a plain count over a dimension the
-registry can filter on, the pipeline asks the API for one `totalCount` per
-category and uses those as the values. The sample is still used for citations.
+download per request, and the registry pages serially (`pageToken` chains),
+so there is a real cost per thousand records. Every series therefore gets one
+of two fetch policies, recorded in `meta.retrieval[].fetch_policy`:
+
+* `sample`: download up to `max_trials` records (most recently started first)
+  and, when the sample is truncated, replace the bar heights with registry
+  counts (next paragraph). Used for plain counts over dimensions the registry
+  can filter on: phase, status, study type, sponsor class, intervention type,
+  start period, country.
+* `complete`: the first page's `totalCount` decides. When the filter matches at
+  most `complete_up_to` trials (default 5,000), every record is fetched, the
+  values are exact, and `coverage` is 1.0. Above the ceiling the service falls
+  back to the sample, marks every value `sampled`, and warns that raising
+  `complete_up_to` (up to 20,000) or narrowing the filter would make it exact.
+  Used wherever the answer depends on which records were fetched: networks,
+  scatter plots, histograms, rankings of open vocabularies (sponsor,
+  condition, drug), grouped charts, enrollment sums, partition comparisons,
+  and strict drug matching. A network built from "the 2,000 most recent
+  trials" would look authoritative without being so; this makes it either
+  exact or visibly sampled.
+
+Bar heights computed from a truncated sample would be wrong, so under the
+`sample` policy, when a series is truncated (or `count_mode=exact`) and the
+chart is a plain count over a dimension the registry can filter on, the
+pipeline asks the API for one `totalCount` per category and uses those as the
+values. The sample is still used for citations.
 
 Dimensions with exact counts: phase, status, study type, sponsor class,
 intervention type, start period (one `RANGE` per year, quarter, or month), and
@@ -382,10 +477,35 @@ the registry's display convention, so "Phase 1/Phase 2" is its own bucket and
 the Essie expressions are made mutually exclusive (`AREA[Phase]PHASE2 AND NOT
 AREA[Phase]PHASE1 AND NOT AREA[Phase]PHASE3`), which is why the bars add up to
 the total. Free-text dimensions (sponsor name, condition, drug name) and
-anything with a secondary grouping stay sampled; `meta.retrieval[].count_method`
-and a line in `meta.assumptions` always say which method produced the numbers.
-If the count requests fail, the response degrades to sampled values with a
-warning instead of failing.
+anything with a secondary grouping use the `complete` policy instead;
+`meta.retrieval[].count_method`, per-row `exactness`, and a line in
+`meta.assumptions` always say which method produced the numbers. If the count
+requests fail, the response degrades to sampled values with a warning instead
+of failing.
+
+**Drug searches match mentions.** `query.intr` searches the whole intervention
+area, including arm and intervention descriptions, so a trial of nivolumab
+"after progression on pembrolizumab" matches a pembrolizumab search. For every
+series with a drug term the pipeline checks each fetched record for the term
+in its intervention names, other names, MeSH terms, and arm entries and
+reports `listed_as_intervention` and `mention_only` in
+`meta.retrieval[].drug_match`; `drug_match=strict` drops the mention-only
+records before aggregation (and disables registry counts, which would include
+them). Measured live, 11.5% of pembrolizumab matches are mention-only
+(section 8.2). The check is a substring match on the term as typed, so a brand-name
+search ("Keytruda") undercounts listed trials whose records only say
+"pembrolizumab"; the default is therefore `any`, and the counts are there to
+read. `scripts/measure_api.py` measures the mention-only share live.
+
+**Comparisons disclose overlap.** The series of a comparison are fetched
+independently, so a trial that involves both entities is in both. The
+pipeline intersects the fetched id sets and reports the result in
+`meta.series_overlap` (exact when every series was fetched completely, a lower
+bound otherwise) and as a warning. With `comparison_mode=partition` the trials
+are regrouped into `A only`, `B only`, and `Both` (`More than one` for three or
+more series) so the chart is a partition; this needs every record of every
+series, so it uses the `complete` policy and falls back to overlapping series
+with a warning when a series exceeds the ceiling.
 
 ### 5.3 Aggregate
 
@@ -396,9 +516,13 @@ order, and the evidence path. `aggregate.py` groups trials into buckets that
 keep every supporting trial and its evidence; a trial is counted once per
 bucket. `numeric.py` bins enrollment, duration, and site counts on fixed
 human-readable edges and builds scatter points. `networks.py` builds
-co-occurrence graphs (sponsor to drug, drug to drug, condition to drug, sponsor
-to condition, sponsor to collaborator), prunes to the heaviest edges, and
-attaches citations to every node and edge.
+co-occurrence graphs (sponsor to drug, drug to drug in the same arm, drug to
+drug in the same trial, condition to drug, sponsor to condition, sponsor to
+collaborator), prunes to the heaviest edges, and attaches citations to every
+node and edge. The same-arm kind matches each arm's `interventionNames`
+entries ("Drug: Pembrolizumab") back to the trial's interventions by
+normalized name before folding, so a combination edge cites the arm entry
+that lists both drugs.
 
 Drug names are folded by `drugs.py`: dose, route, and parenthetical noise is
 stripped, and the registry's own MeSH terms (`interventionBrowseModule`) anchor
@@ -408,16 +532,44 @@ itself, so "MK-3475", "Keytruda", and "pembrolizumab 200 mg" become one node
 without a hand-maintained synonym table. Placebo, sham, and standard-of-care
 arms are excluded from drug networks.
 
-### 5.4 Spec and validation
+### 5.4 Spec and verification
 
 `trialviz/viz/build.py` has one builder per analysis and only reshapes the
-aggregation output into rows, encodings, and column docs. Titles and subtitles
-are templated from the plan (`titles.py`), not generated. `validate.py` runs
-before the response is returned: every row carries the encoded fields and only
-documented keys, values are non-negative numbers, citations reference fetched
-trials and carry evidence, `citation_count ≥ len(citations)`, network edges
-reference existing nodes, and for single-valued untrimmed sampled charts the
-values sum to the number of categorized records. A failure is a 500, by design.
+aggregation output into rows, encodings, and column docs, adding the
+`exactness`, `groupby_semantics`, and reconciliation counts described in 4.1.
+Titles and subtitles are templated from the plan (`titles.py`), not generated.
+
+`validate.py` then re-derives the chart from the records before the response
+is returned, with a second pass that shares only the field definitions (what
+"phase" or "country" means for a record) with the aggregation code and none of
+the bucketing, trimming, exact-count merging, or network accumulation:
+
+* `structure`: rows carry the encoded fields and only documented keys, values
+  are non-negative numbers, node ids are unique, edges reference nodes.
+* `citations_match_records`: every citation points at a fetched record, its
+  title and url match that record, and every quoted `(field, value)` pair is
+  present in the record (an altered evidence value is caught here).
+* `values_recounted`: for every sampled or completely fetched row, the trials
+  whose re-extracted category equals the row's label (and series, and split
+  label) are counted again, or their enrollment summed again, and must equal
+  the value and `citation_count`; every cited trial must belong to its row (a
+  citation moved to the wrong bar is caught here); scatter points are re-read
+  from their record; histogram bins are re-binned; network node and edge
+  weights are recounted from entity pairs. Registry counts cannot be
+  re-derived from a sample, so those rows are checked for internal
+  consistency (value, `citation_count`, and `exactness` agree with the count
+  the registry returned).
+* `partition_sum`: under partition semantics `bucket_sum` equals the row sum,
+  equals `distinct_trials` for trial counts, and `distinct + unclassified +
+  hidden` equals the number of fetched records; skipped, and said so, for
+  overlapping charts.
+
+The report is returned as `meta.verification`. A failure is a 500, by design,
+and the pipeline tests tamper with real responses (a changed count, a changed
+`citation_count`, a citation moved to another bar, an altered evidence value,
+an altered title, a wrong `bucket_sum`, a wrong `exactness`, a heavier network
+edge, a citation attached to the wrong edge, a trial moved between years, a
+mis-binned histogram) and assert that each is rejected.
 
 ## 6. Query coverage
 
@@ -426,21 +578,23 @@ values sum to the number of categorized records. A failure is a 500, by design.
 | "How has the number of trials for [drug] changed per year since 2015?" | `time_trend` | `time_series` | yes |
 | "How many trials started each year for [condition]?" | `time_trend` | `time_series` | yes |
 | "... per quarter / per month" | `time_trend` with granularity | `time_series` | yes |
-| "... over time by phase" | `time_trend` + `split_by` | multi-line `time_series` | sampled |
+| "... over time by phase" | `time_trend` + `split_by` | multi-line `time_series` | complete fetch up to the ceiling |
 | "How are [condition] trials distributed across phases?" | `distribution` by phase | `bar_chart` | yes |
 | "Most common intervention types / sponsor classes / statuses / study types" | `distribution` | `bar_chart` | yes |
-| "Which sponsors / conditions / drugs appear most in [X] trials?" | `distribution` (top N) | `bar_chart` | sampled |
-| "Trials by phase and sponsor class" | `distribution` + `split_by` | `grouped_bar_chart` | sampled |
+| "Which sponsors / conditions / drugs appear most in [X] trials?" | `distribution` (top N) | `bar_chart` | complete fetch up to the ceiling |
+| "Trials by phase and sponsor class" | `distribution` + `split_by` | `grouped_bar_chart` | complete fetch up to the ceiling |
 | "Compare phases for Drug A vs Drug B" | `comparison` | `grouped_bar_chart` | yes, per series |
 | "Compare sponsor categories across two conditions" | `comparison` | `grouped_bar_chart` | yes, per series |
 | "Compare trials per year for A vs B" | `comparison` by start year | multi-line `time_series` | yes, per series |
 | "Which countries have the most recruiting trials for [condition]?" | `geographic` | `bar_chart` (top 20) | yes |
-| "Network of sponsors and drugs for [condition]" | `network` sponsor_drug | `network_graph` | n/a |
-| "Which drugs co-occur in combination studies?" | `network` drug_drug | `network_graph` | n/a |
-| condition to drug, sponsor to condition, sponsor to collaborator | `network` | `network_graph` | n/a |
-| "Plot enrollment against start year, colored by phase" | `scatter` | `scatter_plot` | n/a |
-| "Distribution of enrollment / trial duration / number of sites" | `histogram` | `histogram` | n/a |
-| "Total enrollment by phase" | any count analysis with `measure=total_enrollment` | as above | sampled |
+| "Network of sponsors and drugs for [condition]" | `network` sponsor_drug | `network_graph` | complete fetch up to the ceiling |
+| "Which drugs co-occur in combination studies?" | `network` drug_drug (same arm) | `network_graph` | complete fetch up to the ceiling |
+| "Which drugs appear in the same trials as [drug]?" | `network` drug_drug_same_trial | `network_graph` | complete fetch up to the ceiling |
+| condition to drug, sponsor to condition, sponsor to collaborator | `network` | `network_graph` | complete fetch up to the ceiling |
+| "Plot enrollment against start year, colored by phase" | `scatter` | `scatter_plot` | complete fetch up to the ceiling |
+| "Distribution of enrollment / trial duration / number of sites" | `histogram` | `histogram` | complete fetch up to the ceiling |
+| "Total enrollment by phase" | any count analysis with `measure=total_enrollment` | as above | complete fetch up to the ceiling |
+| "A vs B, counting each trial once" | `comparison` with `comparison_mode=partition` | `grouped_bar_chart` (`A only`, `B only`, `Both`) | complete fetch up to the ceiling |
 
 Adding a dimension is one entry in `dimensions.SPECS` plus, optionally, one
 Essie expression in `exact_counts.bucket_expressions`. Adding a network kind is
@@ -473,6 +627,37 @@ plainly.
 **Sorting by start date when sampling.** Relevance ranking from the registry is
 opaque; "the 2,000 most recently started matching trials" is a sample a reader
 can reason about, and it makes repeat runs stable.
+
+**Complete fetch up to a ceiling for sample-sensitive analyses.** A sponsor
+network of the most recent 2,000 trials is a chart about 2024 to 2026
+sponsors, and a warning line does not repair that. Fetching everything up to
+`complete_up_to` makes the common cases (a drug, a rare condition, a sponsor)
+exact at the cost of a few serial pages, and above the ceiling the response
+says `sampled` on every datum rather than in a footnote. The alternative,
+refusing above the ceiling, would make the service useless for "melanoma"; the
+alternative in the other direction, no ceiling, would make it slow and rude to
+the registry.
+
+**Overlap is data, not prose, and partition is opt-in.** The default comparison
+keeps one series per entity because that is what the question asked, but the
+response carries the intersection size and the chart says `overlapping`. The
+partition view answers a different question ("how many trials are only about
+A") and changes the series labels, so it is a request option rather than a
+silent rewrite.
+
+**Same-arm semantics for combinations.** "Co-occur in combination studies" is
+a claim about treatment, and comparator arms are the opposite of a
+combination. Arm groups are one more field in the projection and the registry
+fills them for most interventional trials; the trials that lack them are
+counted and reported rather than guessed at. The looser same-trial graph is
+kept as its own kind with its own name.
+
+**Verification re-derives, it does not re-run.** The verifier shares the
+dimension definitions with the aggregator (two definitions of "phase" would be
+a bug, not a check) and nothing else, so a mistake in bucketing, trimming,
+exact-count merging, or citation bookkeeping shows up as a disagreement. It
+runs on every response, costs a few milliseconds, and its report is part of
+the response so the claim "the numbers match the citations" is inspectable.
 
 **Phase buckets follow the registry's display convention.** A trial listing both
 Phase 1 and Phase 2 is one "Phase 1/Phase 2" trial, not one of each. That keeps
@@ -511,14 +696,17 @@ something else), and a generic `x`/`y` row format (loses self-description).
 
 ## 8. Testing and how correctness was checked
 
-`pytest -q` runs 78 tests in under a second with no network:
+`pytest -q` runs 87 tests in under a second with no network:
 
-* `tests/fixtures/studies.json` is a hand-written set of 14 records in the
+* `tests/fixtures/studies.json` is a hand-written set of 15 records in the
   exact nested shape the v2 API returns for a `fields`-restricted request,
   built by `tests/fixtures/make_fixture.py`. It deliberately covers combined
   phases, observational studies with no phase, a missing start date, brand and
   code names that fold to one MeSH term, placebo arms, multi-country trials,
-  duplicate country entries, and collaborators.
+  duplicate country entries, collaborators, arm groups that separate
+  combinations from comparators (pembrolizumab plus lenvatinib in one arm,
+  pembrolizumab versus docetaxel in two), a trial with no arm data, and a
+  trial that matches a pembrolizumab search only through an arm description.
 * `tests/conftest.py` implements a fake ClinicalTrials.gov that evaluates the
   real request parameters the client sends, including a small Essie evaluator
   for `AREA[...]`, `RANGE[...]`, `AND`, `OR`, `NOT`, and parentheses, plus
@@ -534,7 +722,11 @@ something else), and a generic `x`/`y` row format (loses self-description).
   stubbed SDK client (prompt assembly, retry feedback, refusals, API errors),
   and the HTTP layer including every error envelope.
 * `trialviz/viz/validate.py` runs on every real response as a last line of
-  defense, and the pipeline tests assert that it rejects tampered specs.
+  defense; the pipeline tests tamper with real responses in eleven ways
+  (section 5.4) and assert that each one is rejected, and they check the
+  reconciliation counts, exactness marks, overlap disclosure, partition
+  regrouping, drug-match counts, same-arm versus same-trial edges, and the
+  complete-fetch ceiling against the fixture.
 * The demo page was exercised in a headless browser against the fake API for
   every chart type, which caught three real bugs (a collapsed chart width, a
   duplicate element id that swallowed citation clicks, and a time axis that
@@ -550,6 +742,66 @@ something else), and a generic `x`/`y` row format (loses self-description).
 The example outputs in `examples/outputs/` were produced against the live API
 with `scripts/run_examples.py`.
 
+### 8.1 Planner evaluation
+
+`evals/planner_questions.jsonl` holds 47 questions with the plan a correct
+planner should produce (analysis, grouping, measure, granularity, top N, every
+filter field, and each comparison series), covering every analysis type with
+several phrasings each, structured-field requests, and questions that must be
+refused. `evals/planner_questions_heldout.jsonl` holds 17 more written after
+the rule-based planner was finished. `scripts/eval_planner.py` runs a planner
+over a set with today pinned to 2026-10-15 and reports two scores: *plan*
+(every expected field matches, so a drug filed under free-text `terms` is a
+miss) and *intent* (right analysis, grouping, and entity names, whichever
+field they landed in, which is what decides whether the right chart comes
+back). Results go to `evals/results-<set>.md` with every mismatch listed.
+
+| planner | main set (47) plan / intent | held-out set (17) plan / intent |
+|---|---|---|
+| rules | 47/47 / 47/47 (in-sample: the rules were developed against this set) | 9/17 / 10/17 |
+| llm (`claude-sonnet-5-5`, one attempt each, no fallbacks) | 47/47 / 47/47 | 17/17 / 17/17 |
+
+Run on 2026-10-15 with `anthropic==1.15.0`; the per-question plans are in
+`evals/results-main-llm.json` and `evals/results-heldout-llm.json`. The rules
+planner's in-sample score says nothing about generalization; its held-out
+score is the honest one and is why the model is the primary planner. The
+held-out misses ("Phase breakdown of trials run by Gilead" refused, "Ozempic"
+filed as free text, "longer ovarian cancer" taken as the condition) are listed
+in `evals/results-heldout.md`; the rules were not changed in response to them.
+
+### 8.2 Live API measurements
+
+`scripts/measure_api.py` measures six properties of the live registry that
+the design depends on and writes `evals/api_measurements.md` with the exact
+request URLs, so every number is one `curl` away. Measured on 2026-10-15
+against a registry of 607,160 studies:
+
+1. **Drug searches match mentions.** `query.intr=pembrolizumab` matches 2,979
+   trials; 342 of them (11.5%) do not list pembrolizumab as an intervention by
+   name, other name, MeSH term, or arm entry (for example NCT07691645, a herbal
+   formula trial that mentions it in an arm description). This is why
+   `drug_match` exists and is reported on every drug search.
+2. **An explicit "Not Applicable" phase is not the same as no phase.** 238,901
+   studies carry `AREA[Phase]NA`; a further 143,959 have no phase value at all,
+   of which 141,774 are observational. This is why phase charts restrict to
+   interventional studies and keep "Not specified" separate from "Not
+   Applicable".
+3. **UNKNOWN status is common.** 97,949 studies (16.1%) have `overallStatus`
+   UNKNOWN, against 64,768 RECRUITING. It is a bar of its own, never dropped.
+4. **`query.spons` counts collaborators.** Pfizer: 6,094 trials with
+   `query.spons`, 3,887 with `query.lead`. "Sponsored by X" in this service
+   means lead sponsor or collaborator, and the sponsor-to-collaborator network
+   separates the roles.
+5. **Same trial is not same arm.** Among 3,140 interventional melanoma trials
+   (all fetched), 4,052 distinct drug pairs co-occur somewhere in a trial but
+   only 2,265 are ever listed in the same arm: 1,787 pairs (44.1%) are
+   comparators or alternatives, not combinations. 320 of the 3,140 trials list
+   no arm groups at all, which is why `trials_skipped` is reported.
+6. **A missing `AREA[]` prefix is a free-text search.** For melanoma,
+   `filter.advanced=AREA[Phase]PHASE3` matches 221 trials and the bare
+   `PHASE3` matches 230; the gap is small here but the two are different
+   queries, which is why every clause goes through `essie_area`.
+
 ## 9. Limitations and what I would do with more time
 
 * **Entity recognition depends on the registry's search.** "Keytruda" works
@@ -558,13 +810,14 @@ with `scripts/run_examples.py`.
   registry's MeSH tree or a drug thesaurus before searching and surface
   "did you mean".
 * **Exact counts cover enumerated dimensions and countries only.** Sponsor
-  names, conditions, and drug names stay sample-based when the match set is
-  large, as do split and stacked charts. Essie can express those too; it is a
-  question of request budget and of deciding how fuzzy text matches should be
-  bucketed.
-* **Sample bias is stated, not removed.** A truncated network or histogram
-  describes the most recent trials. A stratified or random sample would need
-  either more requests or a different data source (the bulk download).
+  names, conditions, drug names, split charts, and enrollment sums are fetched
+  completely up to the ceiling and sampled above it. Essie can express
+  per-sponsor counts too; it is a question of request budget and of deciding
+  how fuzzy text matches should be bucketed.
+* **Sample bias above the ceiling is stated, not removed.** A network or
+  histogram built above `complete_up_to` describes the most recent trials and
+  every datum says `sampled`. A stratified or random sample would need either
+  more requests or a different data source (the bulk download).
 * **Network semantics are simple.** Edges are raw co-occurrence counts. Lift or
   PMI-style weights, community detection, and time slicing would make the
   graphs more informative; the node/edge shape already carries what a frontend
@@ -575,10 +828,24 @@ with `scripts/run_examples.py`.
 * **No persistence.** The cache is in-process; a shared cache (Redis) and a
   job queue would be the first operational additions, followed by request
   tracing per `meta.api_calls` entry.
-* **Rule-based planner coverage is narrow by design.** It handles the
-  appendix's phrasings and common variants; anything unusual should go to the
-  model. With more time I would build an evaluation set of a few hundred
-  questions with expected plans and run both planners against it in CI.
+* **Rule-based planner coverage is narrow by design.** It scores 47/47 on the
+  set it was developed against and 9/17 on the held-out set; anything unusual
+  should go to the model. The next step is a larger held-out set and running
+  both planners in CI, with the held-out score as the gate.
+* **Drug matching is a substring check on the term as typed.** It is exact for
+  generic names and undercounts for brand names and codes, because the
+  registry expands those synonyms and the local check does not; `strict` mode
+  should be used with generic names. Resolving the query term through the
+  records' MeSH terms first would fix this.
+* **Partition comparisons need complete fetches.** With samples, "A only" would
+  mislabel trials older than the other series' cutoff, so above the ceiling
+  the response falls back to overlapping series rather than guess. Three or
+  more series are partitioned into "X only" groups plus one "More than one"
+  group rather than every intersection.
+* **Same-arm edges depend on arm groups being filled in.** Trials without arm
+  data are counted and reported, not inferred; registry records that name an
+  intervention in an arm under a different spelling than in the interventions
+  list are matched by normalized name only.
 * **Single-user demo page.** It is a renderer for the spec, not a product.
   A real frontend would keep chart state, allow drilling into citations by
   clicking through to the registry, and compare runs.
@@ -588,34 +855,19 @@ with `scripts/run_examples.py`.
 `examples/queries.json` lists the example requests; `scripts/run_examples.py`
 runs them and writes the actual JSON outputs to `examples/outputs/` with a
 summary table in `examples/README.md`. The set covers a time trend with exact
-yearly counts, a phase distribution, a drug-vs-drug comparison, a country
-ranking, two networks, a scatter plot, and one deliberately unsupported question
-to show the error envelope.
+yearly counts, a phase distribution, a drug-vs-drug comparison in both
+comparison modes, a country ranking, a same-arm combination network, a
+sponsor-to-drug network, a scatter plot, and one deliberately unsupported
+question to show the error envelope.
 
 ## 11. AI tools and what was designed vs generated
 
-*(Raunak: this section is a draft for you to edit so it reflects exactly what you did. Keep it honest; they will ask about it.)*
+I used Claude throughout this project, mainly in the Claude app's agent mode, plus one Claude Code session that audited the demo page against web design guidelines. Here is the split as accurately as I can describe it, because I expect to be asked about it.
 
-I used Claude (Anthropic's model, through the Claude app's agent mode) as a
-pair programmer throughout. I set the architecture and the design decisions in
-section 7 up front and reviewed each layer as it was produced; Claude wrote most
-of the first-draft code, the fixture, the tests, and the demo page from those
-decisions, and I iterated on it.
+I set the goal and the constraints: a backend that answers questions from ClinicalTrials.gov with charts that can be trusted, built within the assignment's time budget, with a live deployment. I picked the stack from the options Claude laid out (Python, FastAPI, Pydantic, httpx, and Anthropic's API for the planner with a rule-based fallback), chose to build the demo page, the Dockerfile and the Modal deployment, and decided which improvements to take on in the last day after comparing the first version against other public submissions: overlap disclosure and partition comparisons, same-arm networks, the drug-match check, the complete-fetch ceiling, the verifier, the planner evaluations and the live measurements.
 
-Designed and decided by me: the pipeline shape and the rule that the model only
-picks menu items; the Python/FastAPI/Pydantic stack; using Anthropic structured
-outputs for the plan and a rule-based fallback; sampling by most-recent start
-date with a cap, and exact server-side counts when the sample would be
-truncated; the request and response contracts (specific row keys plus encoding
-plus column docs; citations with JSON paths); phase bucketing by the registry's
-convention; MeSH-anchored drug name folding; refusing unbounded queries; the
-post-build validator.
+Claude proposed the architecture (the closed-menu planner, registry counts when a sample is truncated, MeSH-anchored name folding, the response contract with citations and exactness) and wrote most of the code, the fixture, the tests, the fake registry server, the evaluation sets, the scripts, the demo page and the first draft of this README. I reviewed each piece as it came, asked for changes where I disagreed, and verified the parts that touch the real world myself: I ran every live call against ClinicalTrials.gov and the Anthropic API, hit the two API rejections described in section 5.1 and reported them back, ran the test suite, the examples, both planner evaluations and the measurement script on my machine, and deployed and checked the live endpoint. The numbers in sections 8.1 and 8.2 come from those runs, not from the model.
 
-Generated and adapted: the bulk of the implementation of each module, the
-regex-based fallback planner, the fake ClinicalTrials.gov server used in tests,
-the Vega-Lite and d3 rendering code in the demo page, and the first draft of
-this README. I verified the API parameter syntax against the ClinicalTrials.gov
-documentation and third-party references, ran the live examples myself, and
-spot-checked numbers against the website.
+Two things I would not have found on my own: the mention-only share of drug searches and the gap between same-trial and same-arm drug pairs came out of the measurement script, and the three demo page bugs listed in section 8 came out of a headless browser pass.
 
 How correctness was validated is in section 8.

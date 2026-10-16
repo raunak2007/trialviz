@@ -1,0 +1,552 @@
+{
+  "request": {
+    "query": "Sponsor class breakdown for trials of this drug",
+    "drug_name": "pembrolizumab",
+    "drug_match": "strict",
+    "citations_per_datum": 2
+  },
+  "http_status": 200,
+  "response": {
+    "visualization": {
+      "title": "Pembrolizumab trials by lead sponsor class",
+      "subtitle": null,
+      "encoding": {
+        "x": {
+          "field": "sponsor_class",
+          "type": "nominal",
+          "title": "Lead sponsor class",
+          "granularity": null
+        },
+        "y": {
+          "field": "trial_count",
+          "type": "quantitative",
+          "title": "Number of trials",
+          "granularity": null
+        },
+        "color": null,
+        "tooltip": [
+          "sponsor_class",
+          "trial_count",
+          "citation_count"
+        ]
+      },
+      "columns": [
+        {
+          "name": "sponsor_class",
+          "type": "string",
+          "description": "Lead sponsor class (display label)"
+        },
+        {
+          "name": "sponsor_class_code",
+          "type": "string",
+          "description": "Raw ClinicalTrials.gov value behind `sponsor_class`, or null"
+        },
+        {
+          "name": "trial_count",
+          "type": "integer",
+          "description": "Number of trials"
+        },
+        {
+          "name": "exactness",
+          "type": "string",
+          "description": "'exact' or 'sampled' (see schema)"
+        },
+        {
+          "name": "citation_count",
+          "type": "integer",
+          "description": "Distinct trials supporting this row"
+        },
+        {
+          "name": "citations",
+          "type": "string",
+          "description": "Array of Citation objects (see schema), truncated to citations_per_datum"
+        }
+      ],
+      "config": {
+        "sort": "value_desc",
+        "stacked": false,
+        "value_format": "integer",
+        "y_zero_based": true,
+        "groupby_semantics": "partition",
+        "bucket_sum": 2637,
+        "distinct_trials": 2637,
+        "unclassified_count": 0,
+        "hidden_count": 0
+      },
+      "data": [
+        {
+          "sponsor_class": "Other (academic, hospital, nonprofit)",
+          "sponsor_class_code": "OTHER",
+          "trial_count": 1399,
+          "exactness": "exact",
+          "citation_count": 1399,
+          "citations": [
+            {
+              "nct_id": "NCT04266730",
+              "title": "Trial of a Personalized and Adaptive Neoantigen Dose-Adjusted Vaccine Concurrently With Pembrolizumab",
+              "url": "https://clinicaltrials.gov/study/NCT04266730",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Trial of a Personalized and Adaptive Neoantigen Dose-Adjusted Vaccine Concurrently With Pembrolizumab"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "OTHER"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07843550",
+              "title": "A Phase 1/2 Trial Of Larotrectinib And Pembrolizumab In Patients With Solid Tumors Previously Treated With Immune Checkpoint Inhibitor Monotherapy",
+              "url": "https://clinicaltrials.gov/study/NCT07843550",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Phase 1/2 Trial Of Larotrectinib And Pembrolizumab In Patients With Solid Tumors Previously Treated With Immune Checkpoint Inhibitor Monotherapy"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "OTHER"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sponsor_class": "Industry",
+          "sponsor_class_code": "INDUSTRY",
+          "trial_count": 1108,
+          "exactness": "exact",
+          "citation_count": 1108,
+          "citations": [
+            {
+              "nct_id": "NCT06093425",
+              "title": "Combination of Osemitamab (TST001), Pembrolizumab and Chemotherapy as First-line Therapy in Advanced or Metastatic GC/GEJ Adenocarcinoma",
+              "url": "https://clinicaltrials.gov/study/NCT06093425",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Combination of Osemitamab (TST001), Pembrolizumab and Chemotherapy as First-line Therapy in Advanced or Metastatic GC/GEJ Adenocarcinoma"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "INDUSTRY"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT06724042",
+              "title": "Study of ISM5939 in Patients With Advanced and/or Metastatic Solid Tumors",
+              "url": "https://clinicaltrials.gov/study/NCT06724042",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Study of ISM5939 in Patients With Advanced and/or Metastatic Solid Tumors"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "INDUSTRY"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sponsor_class": "NIH",
+          "sponsor_class_code": "NIH",
+          "trial_count": 79,
+          "exactness": "exact",
+          "citation_count": 79,
+          "citations": [
+            {
+              "nct_id": "NCT07689240",
+              "title": "Testing the Investigational Medication Pembrolizumab After Kidney Removal for Patients With Non-Clear Cell Renal Cell Carcinoma",
+              "url": "https://clinicaltrials.gov/study/NCT07689240",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Testing the Investigational Medication Pembrolizumab After Kidney Removal for Patients With Non-Clear Cell Renal Cell Carcinoma"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "NIH"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07572123",
+              "title": "Evaluating the Addition of Maintenance Immunotherapy Compared to the Usual Treatment of Chemotherapy and Autologous Stem Cell Transplant Alone for High-risk Patients With Relapsed or Refractory Hodgkin Lymphoma",
+              "url": "https://clinicaltrials.gov/study/NCT07572123",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Evaluating the Addition of Maintenance Immunotherapy Compared to the Usual Treatment of Chemotherapy and Autologous Stem Cell Transplant Alone for High-risk Patients With Relapsed or Refractory Hodgkin Lymphoma"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "NIH"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sponsor_class": "Network",
+          "sponsor_class_code": "NETWORK",
+          "trial_count": 22,
+          "exactness": "exact",
+          "citation_count": 22,
+          "citations": [
+            {
+              "nct_id": "NCT07765433",
+              "title": "Testing the Addition of Ivonescimab Combined With Standard Chemotherapy Compared to the Usual Chemotherapy and Immunotherapy Treatment for Patients With Advanced Biliary Tract Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT07765433",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Testing the Addition of Ivonescimab Combined With Standard Chemotherapy Compared to the Usual Chemotherapy and Immunotherapy Treatment for Patients With Advanced Biliary Tract Cancer"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "NETWORK"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07809256",
+              "title": "A Prospective, Single-center, Non-randomized, Interventional Study on the Effectiveness and Safety of Combined Immunotargeted Therapy in Patients With Metastatic Non-small Cell Cancer With a RET Gene Translocation",
+              "url": "https://clinicaltrials.gov/study/NCT07809256",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Prospective, Single-center, Non-randomized, Interventional Study on the Effectiveness and Safety of Combined Immunotargeted Therapy in Patients With Metastatic Non-small Cell Cancer With a RET Gene Translocation"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "NETWORK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sponsor_class": "Other government",
+          "sponsor_class_code": "OTHER_GOV",
+          "trial_count": 20,
+          "exactness": "exact",
+          "citation_count": 20,
+          "citations": [
+            {
+              "nct_id": "NCT07349303",
+              "title": "Neoadjuvant Pembrolizumab in Patients With Stage IIb/c Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT07349303",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Neoadjuvant Pembrolizumab in Patients With Stage IIb/c Melanoma"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "OTHER_GOV"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07136545",
+              "title": "A Phase I/II Trial of HCB101 in Combination With Pembrolizumab for Patients With Platinum-Refractory, Recurrent or Metastatic Head and Neck Squamous Cell Carcinoma (SirH&N Trial)",
+              "url": "https://clinicaltrials.gov/study/NCT07136545",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Phase I/II Trial of HCB101 in Combination With Pembrolizumab for Patients With Platinum-Refractory, Recurrent or Metastatic Head and Neck Squamous Cell Carcinoma (SirH&N Trial)"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "OTHER_GOV"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sponsor_class": "U.S. federal agency",
+          "sponsor_class_code": "FED",
+          "trial_count": 6,
+          "exactness": "exact",
+          "citation_count": 6,
+          "citations": [
+            {
+              "nct_id": "NCT07859592",
+              "title": "Labyrinthin Vaccination in Veterans With Lung Adenocarcinoma",
+              "url": "https://clinicaltrials.gov/study/NCT07859592",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Labyrinthin Vaccination in Veterans With Lung Adenocarcinoma"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "FED"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT05467748",
+              "title": "EZH2 Inhibitor, Tulmimetostat, and PD-1 Blockade for Treatment of Advanced Non-small Cell Lung Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT05467748",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "EZH2 Inhibitor, Tulmimetostat, and PD-1 Blockade for Treatment of Advanced Non-small Cell Lung Cancer"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "FED"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sponsor_class": "Unknown",
+          "sponsor_class_code": "UNKNOWN",
+          "trial_count": 2,
+          "exactness": "exact",
+          "citation_count": 2,
+          "citations": [
+            {
+              "nct_id": "NCT04999800",
+              "title": "Study of Pembrolizumab Combined With Anlotinib in the First Line Therapy for R/M HNSCC With CPS\u22651",
+              "url": "https://clinicaltrials.gov/study/NCT04999800",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Study of Pembrolizumab Combined With Anlotinib in the First Line Therapy for R/M HNSCC With CPS\u22651"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "UNKNOWN"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT04740996",
+              "title": "Study of Pembrolizumab in the First Line Therapy for R/M HNSCC in China",
+              "url": "https://clinicaltrials.gov/study/NCT04740996",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Study of Pembrolizumab in the First Line Therapy for R/M HNSCC in China"
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "UNKNOWN"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sponsor_class": "Individual",
+          "sponsor_class_code": "INDIV",
+          "trial_count": 1,
+          "exactness": "exact",
+          "citation_count": 1,
+          "citations": [
+            {
+              "nct_id": "NCT03695835",
+              "title": "A Data Collection Study for Patients With Adenocarcinoma Treated With the MyVaccx Immunotherapy Regimen.",
+              "url": "https://clinicaltrials.gov/study/NCT03695835",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Data Collection Study for Patients With Adenocarcinoma Treated With the MyVaccx Immunotherapy Regimen."
+                },
+                {
+                  "field": "protocolSection.sponsorCollaboratorsModule.leadSponsor.class",
+                  "value": "INDIV"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "bar_chart"
+    },
+    "meta": {
+      "query": "Sponsor class breakdown for trials of this drug",
+      "interpretation": "Count pembrolizumab trials broken down by sponsor class.",
+      "assumptions": [
+        "'This drug' refers to the supplied drug pembrolizumab.",
+        "Measured as trial count.",
+        "all 2,979 matching trials were fetched; values are exact.",
+        "342 of 2,979 fetched trials matched 'pembrolizumab' without listing it as an intervention (the registry's intervention search also matches descriptions); drug_match=strict excluded them from the chart."
+      ],
+      "warnings": [],
+      "plan": {
+        "analysis": "distribution",
+        "viz_type": "bar_chart",
+        "filter": {
+          "drugs": [
+            "pembrolizumab"
+          ],
+          "conditions": [],
+          "sponsors": [],
+          "countries": [],
+          "terms": [],
+          "phases": [],
+          "statuses": [],
+          "study_types": [],
+          "start_year": null,
+          "end_year": null
+        },
+        "series": [
+          {
+            "label": "pembrolizumab trials",
+            "filter": {
+              "drugs": [],
+              "conditions": [],
+              "sponsors": [],
+              "countries": [],
+              "terms": [],
+              "phases": [],
+              "statuses": [],
+              "study_types": [],
+              "start_year": null,
+              "end_year": null
+            }
+          }
+        ],
+        "dimension": "sponsor_class",
+        "split_by": null,
+        "measure": "trial_count",
+        "network": null,
+        "numeric_x": null,
+        "numeric_y": null,
+        "time_granularity": "year",
+        "top_n": null,
+        "interpretation": "Count pembrolizumab trials broken down by sponsor class.",
+        "assumptions": [
+          "'This drug' refers to the supplied drug pembrolizumab.",
+          "Measured as trial count."
+        ],
+        "planner_mode": "llm"
+      },
+      "filters": {
+        "drugs": [
+          "pembrolizumab"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "retrieval": [
+        {
+          "label": "pembrolizumab trials",
+          "filter": {
+            "drugs": [
+              "pembrolizumab"
+            ],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          },
+          "total_matching": 2979,
+          "fetched": 2979,
+          "truncated": false,
+          "coverage": 1.0,
+          "fetch_policy": "complete",
+          "sample_order": "StartDate:desc",
+          "count_method": "sampled",
+          "drug_match": {
+            "mode": "strict",
+            "listed_as_intervention": 2637,
+            "mention_only": 342
+          }
+        }
+      ],
+      "series_overlap": [],
+      "verification": {
+        "method": "Every row, node, and edge was re-derived from the fetched trial records by a second pass that shares only the field definitions with the aggregation code; every citation was checked for membership in its datum and every cited field value against the record. Registry counts cannot be re-derived locally and are checked for internal consistency instead.",
+        "checks": [
+          {
+            "name": "structure",
+            "status": "passed",
+            "detail": "8 rows match the documented columns"
+          },
+          {
+            "name": "citations_match_records",
+            "status": "passed",
+            "detail": "15 citations point at fetched records and quote values present in them"
+          },
+          {
+            "name": "values_recounted",
+            "status": "passed",
+            "detail": "8 rows re-derived from 2637 records"
+          },
+          {
+            "name": "partition_sum",
+            "status": "passed",
+            "detail": "2637 in rows + 0 unclassified + 0 hidden = 2637 fetched"
+          }
+        ]
+      },
+      "source": {
+        "name": "ClinicalTrials.gov",
+        "api_base": "https://clinicaltrials.gov/api/v2",
+        "retrieved_at": "2026-10-16T04:01:40+00:00"
+      },
+      "api_calls": [
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=pembrolizumab&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
+          "status": 200,
+          "elapsed_ms": 761,
+          "cached": false,
+          "studies_returned": 1000,
+          "total_count": 2979
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=pembrolizumab&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true&pageToken=ZVNj7o2Elu8o3lpzBdv-p-numpOQJJxuY_am2Pwbmj6SuP08FCfCFffS_9pM1iI",
+          "status": 200,
+          "elapsed_ms": 855,
+          "cached": false,
+          "studies_returned": 1000,
+          "total_count": null
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=pembrolizumab&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true&pageToken=ZVNj7o2Elu8o3lpzBdv-p-numpOQJJxuYPSg3_MYlD6SuP08FCfCFPTX_9RN1CI",
+          "status": 200,
+          "elapsed_ms": 942,
+          "cached": false,
+          "studies_returned": 979,
+          "total_count": null
+        }
+      ],
+      "planner": {
+        "mode": "llm",
+        "model": "claude-sonnet-5-5",
+        "attempts": 1,
+        "fallback_reason": null
+      },
+      "timing": {
+        "interpret_ms": 2074,
+        "retrieve_ms": 2747,
+        "aggregate_ms": 45,
+        "total_ms": 4867
+      }
+    }
+  }
+}

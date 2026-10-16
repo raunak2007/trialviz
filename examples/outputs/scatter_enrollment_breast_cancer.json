@@ -63,6 +63,11 @@
           "description": "Phase"
         },
         {
+          "name": "exactness",
+          "type": "string",
+          "description": "'exact' or 'sampled' (see schema)"
+        },
+        {
           "name": "citation_count",
           "type": "integer",
           "description": "Distinct trials supporting this row"
@@ -77,7 +82,12 @@
         "sort": "natural",
         "stacked": false,
         "value_format": "number",
-        "y_zero_based": false
+        "y_zero_based": false,
+        "groupby_semantics": "partition",
+        "bucket_sum": null,
+        "distinct_trials": 500,
+        "unclassified_count": 0,
+        "hidden_count": 0
       },
       "data": [
         {
@@ -86,6 +96,7 @@
           "start_year": 2027,
           "enrollment": 12,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -115,6 +126,7 @@
           "start_year": 2027,
           "enrollment": 68,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -144,6 +156,7 @@
           "start_year": 2027,
           "enrollment": 150,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -173,6 +186,7 @@
           "start_year": 2027,
           "enrollment": 147,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -202,6 +216,7 @@
           "start_year": 2027,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -231,6 +246,7 @@
           "start_year": 2027,
           "enrollment": 100,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -260,6 +276,7 @@
           "start_year": 2027,
           "enrollment": 20,
           "group": "Early Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -289,6 +306,7 @@
           "start_year": 2027,
           "enrollment": 750,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -318,6 +336,7 @@
           "start_year": 2027,
           "enrollment": 250,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -347,6 +366,7 @@
           "start_year": 2027,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -376,6 +396,7 @@
           "start_year": 2027,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -405,6 +426,7 @@
           "start_year": 2027,
           "enrollment": 562,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -434,6 +456,7 @@
           "start_year": 2027,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -463,6 +486,7 @@
           "start_year": 2027,
           "enrollment": 126,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -492,6 +516,7 @@
           "start_year": 2027,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -521,6 +546,7 @@
           "start_year": 2027,
           "enrollment": 400,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -550,6 +576,7 @@
           "start_year": 2027,
           "enrollment": 5270,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -579,6 +606,7 @@
           "start_year": 2027,
           "enrollment": 88,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -608,6 +636,7 @@
           "start_year": 2027,
           "enrollment": 77,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -637,6 +666,7 @@
           "start_year": 2027,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -666,6 +696,7 @@
           "start_year": 2027,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -695,6 +726,7 @@
           "start_year": 2027,
           "enrollment": 46,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -724,6 +756,7 @@
           "start_year": 2027,
           "enrollment": 105,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -753,6 +786,7 @@
           "start_year": 2027,
           "enrollment": 55,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -782,6 +816,7 @@
           "start_year": 2027,
           "enrollment": 1792,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -811,6 +846,7 @@
           "start_year": 2027,
           "enrollment": 352,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -840,6 +876,7 @@
           "start_year": 2027,
           "enrollment": 44,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -869,6 +906,7 @@
           "start_year": 2027,
           "enrollment": 200,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -898,6 +936,7 @@
           "start_year": 2027,
           "enrollment": 224,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -927,6 +966,7 @@
           "start_year": 2027,
           "enrollment": 20,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -956,6 +996,7 @@
           "start_year": 2027,
           "enrollment": 86,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -985,6 +1026,7 @@
           "start_year": 2027,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1014,6 +1056,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1043,6 +1086,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1072,6 +1116,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1101,6 +1146,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1130,6 +1176,7 @@
           "start_year": 2026,
           "enrollment": 244,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1159,6 +1206,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1188,6 +1236,7 @@
           "start_year": 2026,
           "enrollment": 165,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1217,6 +1266,7 @@
           "start_year": 2026,
           "enrollment": 51,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1246,6 +1296,7 @@
           "start_year": 2026,
           "enrollment": 27,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1275,6 +1326,7 @@
           "start_year": 2026,
           "enrollment": 250,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1304,6 +1356,7 @@
           "start_year": 2026,
           "enrollment": 15,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1333,6 +1386,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1362,6 +1416,7 @@
           "start_year": 2026,
           "enrollment": 136,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1391,6 +1446,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1420,6 +1476,7 @@
           "start_year": 2026,
           "enrollment": 4000,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1449,6 +1506,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1478,6 +1536,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1507,6 +1566,7 @@
           "start_year": 2026,
           "enrollment": 175,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1536,6 +1596,7 @@
           "start_year": 2026,
           "enrollment": 200,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1565,6 +1626,7 @@
           "start_year": 2026,
           "enrollment": 29,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1594,6 +1656,7 @@
           "start_year": 2026,
           "enrollment": 1302,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1623,6 +1686,7 @@
           "start_year": 2026,
           "enrollment": 74,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1652,6 +1716,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1681,6 +1746,7 @@
           "start_year": 2026,
           "enrollment": 84,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1710,6 +1776,7 @@
           "start_year": 2026,
           "enrollment": 18,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1739,6 +1806,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1768,6 +1836,7 @@
           "start_year": 2026,
           "enrollment": 15000,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1797,6 +1866,7 @@
           "start_year": 2026,
           "enrollment": 80,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1826,6 +1896,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1855,6 +1926,7 @@
           "start_year": 2026,
           "enrollment": 1116,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1884,6 +1956,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1913,6 +1986,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1942,6 +2016,7 @@
           "start_year": 2026,
           "enrollment": 432,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -1971,6 +2046,7 @@
           "start_year": 2026,
           "enrollment": 67,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2000,6 +2076,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2029,6 +2106,7 @@
           "start_year": 2026,
           "enrollment": 176,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2058,6 +2136,7 @@
           "start_year": 2026,
           "enrollment": 90,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2087,6 +2166,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2116,6 +2196,7 @@
           "start_year": 2026,
           "enrollment": 16,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2145,6 +2226,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2174,6 +2256,7 @@
           "start_year": 2026,
           "enrollment": 1500,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2203,6 +2286,7 @@
           "start_year": 2026,
           "enrollment": 51,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2232,6 +2316,7 @@
           "start_year": 2026,
           "enrollment": 1084,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2261,6 +2346,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2290,6 +2376,7 @@
           "start_year": 2026,
           "enrollment": 176,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2319,6 +2406,7 @@
           "start_year": 2026,
           "enrollment": 72,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2348,6 +2436,7 @@
           "start_year": 2026,
           "enrollment": 873,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2377,6 +2466,7 @@
           "start_year": 2026,
           "enrollment": 71,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2406,6 +2496,7 @@
           "start_year": 2026,
           "enrollment": 852,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2435,6 +2526,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2464,6 +2556,7 @@
           "start_year": 2026,
           "enrollment": 184,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2493,6 +2586,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2522,6 +2616,7 @@
           "start_year": 2026,
           "enrollment": 452,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2551,6 +2646,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2580,6 +2676,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2609,6 +2706,7 @@
           "start_year": 2026,
           "enrollment": 300,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2638,6 +2736,7 @@
           "start_year": 2026,
           "enrollment": 28,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2667,6 +2766,7 @@
           "start_year": 2026,
           "enrollment": 90,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2696,6 +2796,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2725,6 +2826,7 @@
           "start_year": 2026,
           "enrollment": 25,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2754,6 +2856,7 @@
           "start_year": 2026,
           "enrollment": 2748,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2783,6 +2886,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2812,6 +2916,7 @@
           "start_year": 2026,
           "enrollment": 374,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2841,6 +2946,7 @@
           "start_year": 2026,
           "enrollment": 190,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2870,6 +2976,7 @@
           "start_year": 2026,
           "enrollment": 240,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2899,6 +3006,7 @@
           "start_year": 2026,
           "enrollment": 358,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2928,6 +3036,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2957,6 +3066,7 @@
           "start_year": 2026,
           "enrollment": 818,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -2986,6 +3096,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3015,6 +3126,7 @@
           "start_year": 2026,
           "enrollment": 110,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3044,6 +3156,7 @@
           "start_year": 2026,
           "enrollment": 61,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3073,6 +3186,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3102,6 +3216,7 @@
           "start_year": 2026,
           "enrollment": 150,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3131,6 +3246,7 @@
           "start_year": 2026,
           "enrollment": 32,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3160,6 +3276,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3189,6 +3306,7 @@
           "start_year": 2026,
           "enrollment": 10,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3218,6 +3336,7 @@
           "start_year": 2026,
           "enrollment": 534,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3247,6 +3366,7 @@
           "start_year": 2026,
           "enrollment": 388,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3276,6 +3396,7 @@
           "start_year": 2026,
           "enrollment": 900,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3305,6 +3426,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3334,6 +3456,7 @@
           "start_year": 2026,
           "enrollment": 9,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3363,6 +3486,7 @@
           "start_year": 2026,
           "enrollment": 162,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3392,6 +3516,7 @@
           "start_year": 2026,
           "enrollment": 65,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3421,6 +3546,7 @@
           "start_year": 2026,
           "enrollment": 112,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3450,6 +3576,7 @@
           "start_year": 2026,
           "enrollment": 140,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3479,6 +3606,7 @@
           "start_year": 2026,
           "enrollment": 960,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3508,6 +3636,7 @@
           "start_year": 2026,
           "enrollment": 15,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3537,6 +3666,7 @@
           "start_year": 2026,
           "enrollment": 400,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3566,6 +3696,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3595,6 +3726,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3624,6 +3756,7 @@
           "start_year": 2026,
           "enrollment": 80,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3653,6 +3786,7 @@
           "start_year": 2026,
           "enrollment": 1520,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3682,6 +3816,7 @@
           "start_year": 2026,
           "enrollment": 76,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3711,6 +3846,7 @@
           "start_year": 2026,
           "enrollment": 10,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3740,6 +3876,7 @@
           "start_year": 2026,
           "enrollment": 24,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3769,6 +3906,7 @@
           "start_year": 2026,
           "enrollment": 828,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3798,6 +3936,7 @@
           "start_year": 2026,
           "enrollment": 42,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3827,6 +3966,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3856,6 +3996,7 @@
           "start_year": 2026,
           "enrollment": 80,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3885,6 +4026,7 @@
           "start_year": 2026,
           "enrollment": 760,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3914,6 +4056,7 @@
           "start_year": 2026,
           "enrollment": 180,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3943,6 +4086,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -3972,6 +4116,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4001,6 +4146,7 @@
           "start_year": 2026,
           "enrollment": 0,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4030,6 +4176,7 @@
           "start_year": 2026,
           "enrollment": 140,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4059,6 +4206,7 @@
           "start_year": 2026,
           "enrollment": 257,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4088,6 +4236,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4117,6 +4266,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4146,6 +4296,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4175,6 +4326,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4204,6 +4356,7 @@
           "start_year": 2026,
           "enrollment": 150,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4233,6 +4386,7 @@
           "start_year": 2026,
           "enrollment": 171,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4262,6 +4416,7 @@
           "start_year": 2026,
           "enrollment": 747,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4291,6 +4446,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4320,6 +4476,7 @@
           "start_year": 2026,
           "enrollment": 48,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4349,6 +4506,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4378,6 +4536,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4407,6 +4566,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4436,6 +4596,7 @@
           "start_year": 2026,
           "enrollment": 180,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4465,6 +4626,7 @@
           "start_year": 2026,
           "enrollment": 160,
           "group": "Phase 2/Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4494,6 +4656,7 @@
           "start_year": 2026,
           "enrollment": 370,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4523,6 +4686,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4552,6 +4716,7 @@
           "start_year": 2026,
           "enrollment": 87,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4581,6 +4746,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4610,6 +4776,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4639,6 +4806,7 @@
           "start_year": 2026,
           "enrollment": 80000,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4668,6 +4836,7 @@
           "start_year": 2026,
           "enrollment": 224,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4697,6 +4866,7 @@
           "start_year": 2026,
           "enrollment": 51,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4726,6 +4896,7 @@
           "start_year": 2026,
           "enrollment": 84,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4755,6 +4926,7 @@
           "start_year": 2026,
           "enrollment": 220,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4784,6 +4956,7 @@
           "start_year": 2026,
           "enrollment": 24,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4813,6 +4986,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4842,6 +5016,7 @@
           "start_year": 2026,
           "enrollment": 98,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4871,6 +5046,7 @@
           "start_year": 2026,
           "enrollment": 128,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4900,6 +5076,7 @@
           "start_year": 2026,
           "enrollment": 70,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4929,6 +5106,7 @@
           "start_year": 2026,
           "enrollment": 84,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4958,6 +5136,7 @@
           "start_year": 2026,
           "enrollment": 494,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -4987,6 +5166,7 @@
           "start_year": 2026,
           "enrollment": 80,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5016,6 +5196,7 @@
           "start_year": 2026,
           "enrollment": 285,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5045,6 +5226,7 @@
           "start_year": 2026,
           "enrollment": 200,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5074,6 +5256,7 @@
           "start_year": 2026,
           "enrollment": 58,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5103,6 +5286,7 @@
           "start_year": 2026,
           "enrollment": 0,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5132,6 +5316,7 @@
           "start_year": 2026,
           "enrollment": 160,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5161,6 +5346,7 @@
           "start_year": 2026,
           "enrollment": 534,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5190,6 +5376,7 @@
           "start_year": 2026,
           "enrollment": 225,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5219,6 +5406,7 @@
           "start_year": 2026,
           "enrollment": 140,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5248,6 +5436,7 @@
           "start_year": 2026,
           "enrollment": 78,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5277,6 +5466,7 @@
           "start_year": 2026,
           "enrollment": 66,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5306,6 +5496,7 @@
           "start_year": 2026,
           "enrollment": 64,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5335,6 +5526,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5364,6 +5556,7 @@
           "start_year": 2026,
           "enrollment": 200,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5393,6 +5586,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5422,6 +5616,7 @@
           "start_year": 2026,
           "enrollment": 1000,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5451,6 +5646,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5480,6 +5676,7 @@
           "start_year": 2026,
           "enrollment": 436,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5509,6 +5706,7 @@
           "start_year": 2026,
           "enrollment": 10,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5538,6 +5736,7 @@
           "start_year": 2026,
           "enrollment": 330,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5567,6 +5766,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5596,6 +5796,7 @@
           "start_year": 2026,
           "enrollment": 55,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5625,6 +5826,7 @@
           "start_year": 2026,
           "enrollment": 162,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5654,6 +5856,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5683,6 +5886,7 @@
           "start_year": 2026,
           "enrollment": 90,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5712,6 +5916,7 @@
           "start_year": 2026,
           "enrollment": 250,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5741,6 +5946,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5770,6 +5976,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5799,6 +6006,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5828,6 +6036,7 @@
           "start_year": 2026,
           "enrollment": 228,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5857,6 +6066,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5886,6 +6096,7 @@
           "start_year": 2026,
           "enrollment": 30000,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5915,6 +6126,7 @@
           "start_year": 2026,
           "enrollment": 31,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5944,6 +6156,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -5973,6 +6186,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6002,6 +6216,7 @@
           "start_year": 2026,
           "enrollment": 80,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6031,6 +6246,7 @@
           "start_year": 2026,
           "enrollment": 235,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6060,6 +6276,7 @@
           "start_year": 2026,
           "enrollment": 80,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6089,6 +6306,7 @@
           "start_year": 2026,
           "enrollment": 104,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6118,6 +6336,7 @@
           "start_year": 2026,
           "enrollment": 3000,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6147,6 +6366,7 @@
           "start_year": 2026,
           "enrollment": 252,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6176,6 +6396,7 @@
           "start_year": 2026,
           "enrollment": 592,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6205,6 +6426,7 @@
           "start_year": 2026,
           "enrollment": 144,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6234,6 +6456,7 @@
           "start_year": 2026,
           "enrollment": 33,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6263,6 +6486,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Early Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6292,6 +6516,7 @@
           "start_year": 2026,
           "enrollment": 0,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6321,6 +6546,7 @@
           "start_year": 2026,
           "enrollment": 180,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6350,6 +6576,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6379,6 +6606,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6408,6 +6636,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6437,6 +6666,7 @@
           "start_year": 2026,
           "enrollment": 70,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6466,6 +6696,7 @@
           "start_year": 2026,
           "enrollment": 35,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6495,6 +6726,7 @@
           "start_year": 2026,
           "enrollment": 102,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6524,6 +6756,7 @@
           "start_year": 2026,
           "enrollment": 104,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6553,6 +6786,7 @@
           "start_year": 2026,
           "enrollment": 134,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6582,6 +6816,7 @@
           "start_year": 2026,
           "enrollment": 234,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6611,6 +6846,7 @@
           "start_year": 2026,
           "enrollment": 80,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6640,6 +6876,7 @@
           "start_year": 2026,
           "enrollment": 35,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6669,6 +6906,7 @@
           "start_year": 2026,
           "enrollment": 48,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6698,6 +6936,7 @@
           "start_year": 2026,
           "enrollment": 114,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6727,6 +6966,7 @@
           "start_year": 2026,
           "enrollment": 110,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6756,6 +6996,7 @@
           "start_year": 2026,
           "enrollment": 138,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6785,6 +7026,7 @@
           "start_year": 2026,
           "enrollment": 55,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6814,6 +7056,7 @@
           "start_year": 2026,
           "enrollment": 794,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6843,6 +7086,7 @@
           "start_year": 2026,
           "enrollment": 216,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6872,6 +7116,7 @@
           "start_year": 2026,
           "enrollment": 116,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6901,6 +7146,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6930,6 +7176,7 @@
           "start_year": 2026,
           "enrollment": 24,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6959,6 +7206,7 @@
           "start_year": 2026,
           "enrollment": 260,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -6988,6 +7236,7 @@
           "start_year": 2026,
           "enrollment": 110,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7017,6 +7266,7 @@
           "start_year": 2026,
           "enrollment": 106,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7046,6 +7296,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7075,6 +7326,7 @@
           "start_year": 2026,
           "enrollment": 44,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7104,6 +7356,7 @@
           "start_year": 2026,
           "enrollment": 140,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7133,6 +7386,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7162,6 +7416,7 @@
           "start_year": 2026,
           "enrollment": 430,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7191,6 +7446,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7220,6 +7476,7 @@
           "start_year": 2026,
           "enrollment": 765,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7249,6 +7506,7 @@
           "start_year": 2026,
           "enrollment": 128,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7278,6 +7536,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7307,6 +7566,7 @@
           "start_year": 2026,
           "enrollment": 96,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7336,6 +7596,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7365,6 +7626,7 @@
           "start_year": 2026,
           "enrollment": 70,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7394,6 +7656,7 @@
           "start_year": 2026,
           "enrollment": 300,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7423,6 +7686,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7452,6 +7716,7 @@
           "start_year": 2026,
           "enrollment": 39,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7481,6 +7746,7 @@
           "start_year": 2026,
           "enrollment": 70,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7510,6 +7776,7 @@
           "start_year": 2026,
           "enrollment": 374,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7539,6 +7806,7 @@
           "start_year": 2026,
           "enrollment": 25,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7568,6 +7836,7 @@
           "start_year": 2026,
           "enrollment": 108,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7597,6 +7866,7 @@
           "start_year": 2026,
           "enrollment": 156,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7626,6 +7896,7 @@
           "start_year": 2026,
           "enrollment": 46,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7655,6 +7926,7 @@
           "start_year": 2026,
           "enrollment": 250,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7684,6 +7956,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7713,6 +7986,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7742,6 +8016,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7771,6 +8046,7 @@
           "start_year": 2026,
           "enrollment": 76,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7800,6 +8076,7 @@
           "start_year": 2026,
           "enrollment": 26,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7829,6 +8106,7 @@
           "start_year": 2026,
           "enrollment": 1978,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7858,6 +8136,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7887,6 +8166,7 @@
           "start_year": 2026,
           "enrollment": 192,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7916,6 +8196,7 @@
           "start_year": 2026,
           "enrollment": 73,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7945,6 +8226,7 @@
           "start_year": 2026,
           "enrollment": 1500,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -7974,6 +8256,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8003,6 +8286,7 @@
           "start_year": 2026,
           "enrollment": 76,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8032,6 +8316,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8061,6 +8346,7 @@
           "start_year": 2026,
           "enrollment": 27,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8090,6 +8376,7 @@
           "start_year": 2026,
           "enrollment": 25,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8119,6 +8406,7 @@
           "start_year": 2026,
           "enrollment": 270,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8148,6 +8436,7 @@
           "start_year": 2026,
           "enrollment": 216,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8177,6 +8466,7 @@
           "start_year": 2026,
           "enrollment": 456,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8206,6 +8496,7 @@
           "start_year": 2026,
           "enrollment": 150,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8235,6 +8526,7 @@
           "start_year": 2026,
           "enrollment": 300,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8264,6 +8556,7 @@
           "start_year": 2026,
           "enrollment": 35,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8293,6 +8586,7 @@
           "start_year": 2026,
           "enrollment": 38,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8322,6 +8616,7 @@
           "start_year": 2026,
           "enrollment": 2300,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8351,6 +8646,7 @@
           "start_year": 2026,
           "enrollment": 45,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8380,6 +8676,7 @@
           "start_year": 2026,
           "enrollment": 168,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8409,6 +8706,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8438,6 +8736,7 @@
           "start_year": 2026,
           "enrollment": 70,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8467,6 +8766,7 @@
           "start_year": 2026,
           "enrollment": 53,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8496,6 +8796,7 @@
           "start_year": 2026,
           "enrollment": 154,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8525,6 +8826,7 @@
           "start_year": 2026,
           "enrollment": 639,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8554,6 +8856,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8583,6 +8886,7 @@
           "start_year": 2026,
           "enrollment": 343,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8612,6 +8916,7 @@
           "start_year": 2026,
           "enrollment": 770,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8641,6 +8946,7 @@
           "start_year": 2026,
           "enrollment": 306,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8670,6 +8976,7 @@
           "start_year": 2026,
           "enrollment": 227,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8699,6 +9006,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8728,6 +9036,7 @@
           "start_year": 2026,
           "enrollment": 520,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8757,6 +9066,7 @@
           "start_year": 2026,
           "enrollment": 200,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8786,6 +9096,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8815,6 +9126,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8844,6 +9156,7 @@
           "start_year": 2026,
           "enrollment": 308,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8873,6 +9186,7 @@
           "start_year": 2026,
           "enrollment": 150,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8902,6 +9216,7 @@
           "start_year": 2026,
           "enrollment": 76,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8931,6 +9246,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8960,6 +9276,7 @@
           "start_year": 2026,
           "enrollment": 90,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -8989,6 +9306,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9018,6 +9336,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9047,6 +9366,7 @@
           "start_year": 2026,
           "enrollment": 499,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9076,6 +9396,7 @@
           "start_year": 2026,
           "enrollment": 37,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9105,6 +9426,7 @@
           "start_year": 2026,
           "enrollment": 15,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9134,6 +9456,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9163,6 +9486,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9192,6 +9516,7 @@
           "start_year": 2026,
           "enrollment": 35,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9221,6 +9546,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9250,6 +9576,7 @@
           "start_year": 2026,
           "enrollment": 90,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9279,6 +9606,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9308,6 +9636,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9337,6 +9666,7 @@
           "start_year": 2026,
           "enrollment": 200,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9366,6 +9696,7 @@
           "start_year": 2026,
           "enrollment": 400,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9395,6 +9726,7 @@
           "start_year": 2026,
           "enrollment": 0,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9424,6 +9756,7 @@
           "start_year": 2026,
           "enrollment": 42,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9453,6 +9786,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9482,6 +9816,7 @@
           "start_year": 2026,
           "enrollment": 28,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9511,6 +9846,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9540,6 +9876,7 @@
           "start_year": 2026,
           "enrollment": 80,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9569,6 +9906,7 @@
           "start_year": 2026,
           "enrollment": 35,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9598,6 +9936,7 @@
           "start_year": 2026,
           "enrollment": 400,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9627,6 +9966,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9656,6 +9996,7 @@
           "start_year": 2026,
           "enrollment": 105,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9685,6 +10026,7 @@
           "start_year": 2026,
           "enrollment": 75,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9714,6 +10056,7 @@
           "start_year": 2026,
           "enrollment": 42,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9743,6 +10086,7 @@
           "start_year": 2026,
           "enrollment": 112,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9772,6 +10116,7 @@
           "start_year": 2026,
           "enrollment": 446,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9801,6 +10146,7 @@
           "start_year": 2026,
           "enrollment": 700,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9830,6 +10176,7 @@
           "start_year": 2026,
           "enrollment": 500,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9859,6 +10206,7 @@
           "start_year": 2026,
           "enrollment": 180,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9888,6 +10236,7 @@
           "start_year": 2026,
           "enrollment": 21,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9917,6 +10266,7 @@
           "start_year": 2026,
           "enrollment": 258,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9946,6 +10296,7 @@
           "start_year": 2026,
           "enrollment": 74,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -9975,6 +10326,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10004,6 +10356,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10033,6 +10386,7 @@
           "start_year": 2026,
           "enrollment": 189,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10062,6 +10416,7 @@
           "start_year": 2026,
           "enrollment": 35,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10091,6 +10446,7 @@
           "start_year": 2026,
           "enrollment": 115,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10120,6 +10476,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10149,6 +10506,7 @@
           "start_year": 2026,
           "enrollment": 280,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10178,6 +10536,7 @@
           "start_year": 2026,
           "enrollment": 636,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10207,6 +10566,7 @@
           "start_year": 2026,
           "enrollment": 24,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10236,6 +10596,7 @@
           "start_year": 2026,
           "enrollment": 44,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10265,6 +10626,7 @@
           "start_year": 2026,
           "enrollment": 108,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10294,6 +10656,7 @@
           "start_year": 2026,
           "enrollment": 220,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10323,6 +10686,7 @@
           "start_year": 2026,
           "enrollment": 43,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10352,6 +10716,7 @@
           "start_year": 2026,
           "enrollment": 150,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10381,6 +10746,7 @@
           "start_year": 2026,
           "enrollment": 1,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10410,6 +10776,7 @@
           "start_year": 2026,
           "enrollment": 55,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10439,6 +10806,7 @@
           "start_year": 2026,
           "enrollment": 29,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10468,6 +10836,7 @@
           "start_year": 2026,
           "enrollment": 35,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10497,6 +10866,7 @@
           "start_year": 2026,
           "enrollment": 87,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10526,6 +10896,7 @@
           "start_year": 2026,
           "enrollment": 10,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10555,6 +10926,7 @@
           "start_year": 2026,
           "enrollment": 0,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10584,6 +10956,7 @@
           "start_year": 2026,
           "enrollment": 71,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10613,6 +10986,7 @@
           "start_year": 2026,
           "enrollment": 72,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10642,6 +11016,7 @@
           "start_year": 2026,
           "enrollment": 6,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10671,6 +11046,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10700,6 +11076,7 @@
           "start_year": 2026,
           "enrollment": 3380,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10729,6 +11106,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10758,6 +11136,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10787,6 +11166,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10816,6 +11196,7 @@
           "start_year": 2026,
           "enrollment": 90,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10845,6 +11226,7 @@
           "start_year": 2026,
           "enrollment": 66,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10874,6 +11256,7 @@
           "start_year": 2026,
           "enrollment": 70,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10903,6 +11286,7 @@
           "start_year": 2026,
           "enrollment": 10,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10932,6 +11316,7 @@
           "start_year": 2026,
           "enrollment": 80,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10961,6 +11346,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -10990,6 +11376,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11019,6 +11406,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11048,6 +11436,7 @@
           "start_year": 2026,
           "enrollment": 168,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11077,6 +11466,7 @@
           "start_year": 2026,
           "enrollment": 156,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11106,6 +11496,7 @@
           "start_year": 2026,
           "enrollment": 150,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11135,6 +11526,7 @@
           "start_year": 2026,
           "enrollment": 649,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11164,6 +11556,7 @@
           "start_year": 2026,
           "enrollment": 150,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11193,6 +11586,7 @@
           "start_year": 2026,
           "enrollment": 56,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11222,6 +11616,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Early Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11251,6 +11646,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11280,6 +11676,7 @@
           "start_year": 2026,
           "enrollment": 70,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11309,6 +11706,7 @@
           "start_year": 2026,
           "enrollment": 299,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11338,6 +11736,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11367,6 +11766,7 @@
           "start_year": 2026,
           "enrollment": 119,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11396,6 +11796,7 @@
           "start_year": 2026,
           "enrollment": 235000,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11425,6 +11826,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11454,6 +11856,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11483,6 +11886,7 @@
           "start_year": 2026,
           "enrollment": 21,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11512,6 +11916,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11541,6 +11946,7 @@
           "start_year": 2026,
           "enrollment": 132,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11570,6 +11976,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11599,6 +12006,7 @@
           "start_year": 2026,
           "enrollment": 98,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11628,6 +12036,7 @@
           "start_year": 2026,
           "enrollment": 286,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11657,6 +12066,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11686,6 +12096,7 @@
           "start_year": 2026,
           "enrollment": 59,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11715,6 +12126,7 @@
           "start_year": 2026,
           "enrollment": 26,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11744,6 +12156,7 @@
           "start_year": 2026,
           "enrollment": 446,
           "group": "Phase 2/Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11773,6 +12186,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11802,6 +12216,7 @@
           "start_year": 2026,
           "enrollment": 227,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11831,6 +12246,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11860,6 +12276,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11889,6 +12306,7 @@
           "start_year": 2026,
           "enrollment": 160,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11918,6 +12336,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11947,6 +12366,7 @@
           "start_year": 2026,
           "enrollment": 0,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -11976,6 +12396,7 @@
           "start_year": 2026,
           "enrollment": 15,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12005,6 +12426,7 @@
           "start_year": 2026,
           "enrollment": 160,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12034,6 +12456,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12063,6 +12486,7 @@
           "start_year": 2026,
           "enrollment": 42,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12092,6 +12516,7 @@
           "start_year": 2026,
           "enrollment": 120,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12121,6 +12546,7 @@
           "start_year": 2026,
           "enrollment": 0,
           "group": "Early Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12150,6 +12576,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Early Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12179,6 +12606,7 @@
           "start_year": 2026,
           "enrollment": 63,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12208,6 +12636,7 @@
           "start_year": 2026,
           "enrollment": 34,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12237,6 +12666,7 @@
           "start_year": 2026,
           "enrollment": 140,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12266,6 +12696,7 @@
           "start_year": 2026,
           "enrollment": 140,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12295,6 +12726,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12324,6 +12756,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12353,6 +12786,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12382,6 +12816,7 @@
           "start_year": 2026,
           "enrollment": 42,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12411,6 +12846,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12440,6 +12876,7 @@
           "start_year": 2026,
           "enrollment": 65,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12469,6 +12906,7 @@
           "start_year": 2026,
           "enrollment": 126,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12498,6 +12936,7 @@
           "start_year": 2026,
           "enrollment": 74,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12527,6 +12966,7 @@
           "start_year": 2026,
           "enrollment": 23,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12556,6 +12996,7 @@
           "start_year": 2026,
           "enrollment": 57,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12585,6 +13026,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12614,6 +13056,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12643,6 +13086,7 @@
           "start_year": 2026,
           "enrollment": 46,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12672,6 +13116,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12701,6 +13146,7 @@
           "start_year": 2026,
           "enrollment": 52,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12730,6 +13176,7 @@
           "start_year": 2026,
           "enrollment": 110,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12759,6 +13206,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12788,6 +13236,7 @@
           "start_year": 2026,
           "enrollment": 1800,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12817,6 +13266,7 @@
           "start_year": 2026,
           "enrollment": 400,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12846,6 +13296,7 @@
           "start_year": 2026,
           "enrollment": 8,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12875,6 +13326,7 @@
           "start_year": 2026,
           "enrollment": 28,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12904,6 +13356,7 @@
           "start_year": 2026,
           "enrollment": 0,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12933,6 +13386,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12962,6 +13416,7 @@
           "start_year": 2026,
           "enrollment": 130,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -12991,6 +13446,7 @@
           "start_year": 2026,
           "enrollment": 59,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13020,6 +13476,7 @@
           "start_year": 2026,
           "enrollment": 86,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13049,6 +13506,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13078,6 +13536,7 @@
           "start_year": 2026,
           "enrollment": 194,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13107,6 +13566,7 @@
           "start_year": 2026,
           "enrollment": 20,
           "group": "Early Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13136,6 +13596,7 @@
           "start_year": 2026,
           "enrollment": 126,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13165,6 +13626,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13194,6 +13656,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13223,6 +13686,7 @@
           "start_year": 2026,
           "enrollment": 275,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13252,6 +13716,7 @@
           "start_year": 2026,
           "enrollment": 36,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13281,6 +13746,7 @@
           "start_year": 2026,
           "enrollment": 45,
           "group": "Phase 4",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13310,6 +13776,7 @@
           "start_year": 2026,
           "enrollment": 10,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13339,6 +13806,7 @@
           "start_year": 2026,
           "enrollment": 98,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13368,6 +13836,7 @@
           "start_year": 2026,
           "enrollment": 1056,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13397,6 +13866,7 @@
           "start_year": 2026,
           "enrollment": 70,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13426,6 +13896,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13455,6 +13926,7 @@
           "start_year": 2026,
           "enrollment": 650,
           "group": "Phase 2/Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13484,6 +13956,7 @@
           "start_year": 2026,
           "enrollment": 175,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13513,6 +13986,7 @@
           "start_year": 2026,
           "enrollment": 182,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13542,6 +14016,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13571,6 +14046,7 @@
           "start_year": 2026,
           "enrollment": 5000,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13600,6 +14076,7 @@
           "start_year": 2026,
           "enrollment": 100,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13629,6 +14106,7 @@
           "start_year": 2026,
           "enrollment": 420,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13658,6 +14136,7 @@
           "start_year": 2026,
           "enrollment": 15,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13687,6 +14166,7 @@
           "start_year": 2026,
           "enrollment": 42,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13716,6 +14196,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13745,6 +14226,7 @@
           "start_year": 2026,
           "enrollment": 15,
           "group": "Phase 1",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13774,6 +14256,7 @@
           "start_year": 2026,
           "enrollment": 80,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13803,6 +14286,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13832,6 +14316,7 @@
           "start_year": 2026,
           "enrollment": 600,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13861,6 +14346,7 @@
           "start_year": 2026,
           "enrollment": 50,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13890,6 +14376,7 @@
           "start_year": 2026,
           "enrollment": 60,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13919,6 +14406,7 @@
           "start_year": 2026,
           "enrollment": 1380,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13948,6 +14436,7 @@
           "start_year": 2026,
           "enrollment": 126,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -13977,6 +14466,7 @@
           "start_year": 2026,
           "enrollment": 0,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14006,6 +14496,7 @@
           "start_year": 2026,
           "enrollment": 26,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14035,6 +14526,7 @@
           "start_year": 2026,
           "enrollment": 90,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14064,6 +14556,7 @@
           "start_year": 2026,
           "enrollment": 725,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14093,6 +14586,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14122,6 +14616,7 @@
           "start_year": 2026,
           "enrollment": 820,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14151,6 +14646,7 @@
           "start_year": 2026,
           "enrollment": 280,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14180,6 +14676,7 @@
           "start_year": 2026,
           "enrollment": 200,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14209,6 +14706,7 @@
           "start_year": 2026,
           "enrollment": 24,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14238,6 +14736,7 @@
           "start_year": 2026,
           "enrollment": 216,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14267,6 +14766,7 @@
           "start_year": 2026,
           "enrollment": 45,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14296,6 +14796,7 @@
           "start_year": 2026,
           "enrollment": 912,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14325,6 +14826,7 @@
           "start_year": 2026,
           "enrollment": 170,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14354,6 +14856,7 @@
           "start_year": 2026,
           "enrollment": 150,
           "group": "Phase 1/Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14383,6 +14886,7 @@
           "start_year": 2026,
           "enrollment": 28,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14412,6 +14916,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14441,6 +14946,7 @@
           "start_year": 2026,
           "enrollment": 412,
           "group": "Phase 3",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14470,6 +14976,7 @@
           "start_year": 2026,
           "enrollment": 30,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14499,6 +15006,7 @@
           "start_year": 2026,
           "enrollment": 55,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14528,6 +15036,7 @@
           "start_year": 2026,
           "enrollment": 156,
           "group": "Phase 2",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14557,6 +15066,7 @@
           "start_year": 2026,
           "enrollment": 40,
           "group": "Not Applicable",
+          "exactness": "exact",
           "citation_count": 1,
           "citations": [
             {
@@ -14587,10 +15097,13 @@
       "query": "Plot enrollment against start year for breast cancer trials started since 2020, colored by phase",
       "interpretation": "Scatter plot of enrollment versus start year for breast cancer trials that started since 2020, with points colored by phase.",
       "assumptions": [
+        "Since 2020 means start_year 2020 with no end year.",
         "Restricted to interventional studies because observational studies do not have a phase.",
         "5,346 trials match but only the 500 most recently started were fetched; values are computed from that sample."
       ],
-      "warnings": [],
+      "warnings": [
+        "5,346 trials match, above the complete_up_to ceiling of 5,000; the chart is built from the 500 most recently started trials and its values are marked sampled. Raise complete_up_to (up to 20,000) or narrow the filter."
+      ],
       "plan": {
         "analysis": "scatter",
         "viz_type": "scatter_plot",
@@ -14637,6 +15150,7 @@
         "top_n": null,
         "interpretation": "Scatter plot of enrollment versus start year for breast cancer trials that started since 2020, with points colored by phase.",
         "assumptions": [
+          "Since 2020 means start_year 2020 with no end year.",
           "Restricted to interventional studies because observational studies do not have a phase."
         ],
         "planner_mode": "llm"
@@ -14679,20 +15193,49 @@
           "total_matching": 5346,
           "fetched": 500,
           "truncated": true,
+          "coverage": 0.0935,
+          "fetch_policy": "complete",
           "sample_order": "StartDate:desc",
-          "count_method": "sampled"
+          "count_method": "sampled",
+          "drug_match": null
         }
       ],
+      "series_overlap": [],
+      "verification": {
+        "method": "Every row, node, and edge was re-derived from the fetched trial records by a second pass that shares only the field definitions with the aggregation code; every citation was checked for membership in its datum and every cited field value against the record. Registry counts cannot be re-derived locally and are checked for internal consistency instead.",
+        "checks": [
+          {
+            "name": "structure",
+            "status": "passed",
+            "detail": "500 rows match the documented columns"
+          },
+          {
+            "name": "citations_match_records",
+            "status": "passed",
+            "detail": "500 citations point at fetched records and quote values present in them"
+          },
+          {
+            "name": "values_recounted",
+            "status": "passed",
+            "detail": "500 points re-read from their records"
+          },
+          {
+            "name": "partition_sum",
+            "status": "passed",
+            "detail": "500 plotted + 0 skipped = 500 fetched"
+          }
+        ]
+      },
       "source": {
         "name": "ClinicalTrials.gov",
         "api_base": "https://clinicaltrials.gov/api/v2",
-        "retrieved_at": "2026-10-16T02:25:31+00:00"
+        "retrieved_at": "2026-10-16T04:02:00+00:00"
       },
       "api_calls": [
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=500&query.cond=breast+cancer&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BStartDate%5DRANGE%5B2020-01-01%2CMAX%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=500&query.cond=breast+cancer&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL+AND+AREA%5BStartDate%5DRANGE%5B2020-01-01%2CMAX%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
           "status": 200,
-          "elapsed_ms": 383,
+          "elapsed_ms": 453,
           "cached": false,
           "studies_returned": 500,
           "total_count": 5346
@@ -14705,10 +15248,10 @@
         "fallback_reason": null
       },
       "timing": {
-        "interpret_ms": 1927,
-        "retrieve_ms": 406,
-        "aggregate_ms": 14,
-        "total_ms": 2347
+        "interpret_ms": 2239,
+        "retrieve_ms": 474,
+        "aggregate_ms": 26,
+        "total_ms": 2740
       }
     }
   }

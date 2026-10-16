@@ -3,7 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>trialviz demo</title>
+<title>trialviz</title>
+<link rel="icon" href="data:,">
+<meta name="theme-color" content="#f3f5f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1316" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -11,132 +18,353 @@
 <style>
   :root {
     color-scheme: light;
-    --surface: #fcfcfb; --page: #f9f9f7; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
-    --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,0.10);
-    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #6250d6; --s8: #e34948;
-    --warn-bg: #fff6df; --warn-ink: #6b4b00;
+    --paper: #f3f5f4; --surface: #ffffff; --well: #eaeeec;
+    --ink: #141a1f; --ink-2: #434c55; --muted: #5f6b75;
+    --line: #d6dcdf; --grid: #e4e8ea; --axis: #b9c2c8; --field: #8a96a0;
+    --accent: #0e7c86; --accent-ink: #ffffff; --accent-soft: #e2f1f2;
+    --ok: #17733f; --ok-soft: #e3f3e9; --warn: #8a5a00; --warn-soft: #fff3d6; --bad: #b42318; --bad-soft: #fde8e6;
+    --s1: #0e7c86; --s2: #e07a2f; --s3: #5b6ee1; --s4: #c23d7a; --s5: #2f9e5c; --s6: #b58a00; --s7: #8e5fd8; --s8: #d04c3e;
+    --shadow: 0 1px 2px rgba(20,26,31,0.06), 0 8px 24px -16px rgba(20,26,31,0.25);
+    --radius: 12px;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
-      --surface: #1a1a19; --page: #0d0d0d; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
-      --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
-      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
-      --warn-bg: #3a2e0a; --warn-ink: #f5d78a;
+      --paper: #0f1316; --surface: #171c21; --well: #1f262c;
+      --ink: #e8ecef; --ink-2: #b7c0c8; --muted: #8a96a0;
+      --line: #2a333b; --grid: #262e35; --axis: #46525c; --field: #66727c;
+      --accent: #3fb6bf; --accent-ink: #06272a; --accent-soft: #123a3e;
+      --ok: #52c583; --ok-soft: #10301f; --warn: #e3b25a; --warn-soft: #3a2c0d; --bad: #f08c82; --bad-soft: #3f1512;
+      --s1: #3fb6bf; --s2: #f0924d; --s3: #8b9bf0; --s4: #e26aa3; --s5: #57c585; --s6: #e0b437; --s7: #b494ec; --s8: #ef7a6c;
+      --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px -16px rgba(0,0,0,0.8);
     }
   }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0f1316; --surface: #171c21; --well: #1f262c;
+    --ink: #e8ecef; --ink-2: #b7c0c8; --muted: #8a96a0;
+    --line: #2a333b; --grid: #262e35; --axis: #46525c; --field: #66727c;
+    --accent: #3fb6bf; --accent-ink: #06272a; --accent-soft: #123a3e;
+    --ok: #52c583; --ok-soft: #10301f; --warn: #e3b25a; --warn-soft: #3a2c0d; --bad: #f08c82; --bad-soft: #3f1512;
+    --s1: #3fb6bf; --s2: #f0924d; --s3: #8b9bf0; --s4: #e26aa3; --s5: #57c585; --s6: #e0b437; --s7: #b494ec; --s8: #ef7a6c;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px -16px rgba(0,0,0,0.8);
+  }
+
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--page); color: var(--ink); }
-  header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 14px; }
-  header h1 { font-size: 18px; margin: 0; }
-  header span { color: var(--muted); font-size: 13px; }
-  main { display: grid; grid-template-columns: 340px 1fr; gap: 16px; padding: 16px 20px; max-width: 1500px; }
-  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
-  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-  label { display: block; font-size: 12px; color: var(--ink-2); margin: 10px 0 4px; }
-  textarea, input, select, button { width: 100%; font: inherit; color: var(--ink); background: var(--page); border: 1px solid var(--axis); border-radius: 6px; padding: 8px; }
-  textarea { min-height: 80px; resize: vertical; }
-  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  button.primary { margin-top: 14px; background: var(--s1); color: #fff; border: none; font-weight: 600; cursor: pointer; }
-  button.primary:disabled { opacity: 0.6; cursor: wait; }
-  h2 { font-size: 17px; margin: 0 0 4px; }
-  .subtitle { color: var(--ink-2); font-size: 13px; margin-bottom: 12px; }
-  #chart { display: block; width: 100%; min-height: 320px; }  /* vega-embed would otherwise make it inline-block, collapsing "container" width to 0 */
-  #network svg { width: 100%; height: 520px; background: var(--surface); }
-  .meta { font-size: 13px; color: var(--ink-2); }
-  .meta h3 { font-size: 13px; color: var(--ink); margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.04em; }
-  .warn { background: var(--warn-bg); color: var(--warn-ink); padding: 8px 10px; border-radius: 6px; margin: 6px 0; }
-  .error { background: #fde8e8; color: #7a1f1f; padding: 10px; border-radius: 6px; }
-  table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
-  td, th { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  html { font-size: 15px; }
+  body {
+    margin: 0; min-height: 100vh;
+    font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.933rem; line-height: 1.5;
+    background: var(--paper); color: var(--ink);
+  }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button, a, summary, select { touch-action: manipulation; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .skip { position: absolute; left: 16px; top: -100px; z-index: 10; background: var(--surface); color: var(--accent); padding: 8px 12px; border-radius: 8px; box-shadow: var(--shadow); }
+  .skip:focus { top: 8px; }
+
+  /* ----- top bar */
+  .top { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 18px; padding: 12px 24px; border-bottom: 1px solid var(--line); background: var(--surface); }
+  @media (max-width: 760px) { .top .tag { display: none; } .top { padding: 12px 16px; } }
+  .top .mark { font-weight: 600; font-size: 1.06rem; letter-spacing: -0.01em; }
+  .top .tag { color: var(--ink-2); font-size: 0.9rem; }
+  .top .spacer { flex: 1; }
+  .top nav { display: flex; gap: 6px 8px; align-items: center; flex-wrap: wrap; font-size: 0.86rem; }
+  .top nav a { display: inline-block; padding: 4px 6px; border-radius: 6px; }
+  .top nav a:hover { background: var(--well); }
+  .status { margin-right: 6px; }
+  .status { display: inline-flex; align-items: center; gap: 7px; color: var(--ink-2); }
+  .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+  .status.on::before { background: var(--ok); }
+
+  /* ----- layout */
+  main { display: grid; grid-template-columns: 360px minmax(0, 1fr); grid-template-rows: auto 1fr; grid-template-areas: "ask result" "evidence result";
+         gap: 20px; padding: 20px 24px 40px; max-width: 1480px; margin: 0 auto; }
+  main > * { min-width: 0; }
+  .ask { grid-area: ask; } .evidence { grid-area: evidence; align-self: start; } .result-col { grid-area: result; }
+  @media (max-width: 960px) {
+    main { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; grid-template-areas: "ask" "result" "evidence" "meta"; padding: 16px; }
+    /* one column: keep the evidence card right under the chart instead of below the long details card */
+    .result-col { display: contents; } .result { grid-area: result; } #meta { grid-area: meta; margin-top: 0; }
+  }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .ask { padding: 18px 18px 16px; }
+  h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+  .ask h2 { font-size: 0.95rem; color: var(--ink-2); margin-bottom: 8px; }
+  textarea, input, select {
+    width: 100%; font: inherit; color: var(--ink); background: var(--surface);
+    border: 1px solid var(--field); border-radius: 8px; padding: 9px 10px;
+  }
+  textarea { min-height: 96px; resize: vertical; font-size: 1.02rem; line-height: 1.45; }
+  textarea:focus-visible, input:focus-visible, select:focus-visible { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: 0; }
+  textarea[aria-invalid="true"] { border-color: var(--bad); }
+  .field-error { color: var(--bad); font-size: 0.82rem; margin: 6px 0 0; }
+  .field-error:empty { display: none; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; }
+  .chip { font: inherit; font-size: 0.8rem; color: var(--ink-2); background: var(--well); border: 1px solid transparent; border-radius: 999px; padding: 6px 12px; cursor: pointer; text-align: left; }
+  .chip:hover { border-color: var(--field); color: var(--ink); }
+  .chip.extra { display: none; }
+  .chips.open .chip.extra { display: inline-block; }
+  .chip.more { background: transparent; border-color: var(--line); color: var(--accent); }
+  .opts { margin-top: 10px; border-top: 1px solid var(--line); }
+  .opts summary { cursor: pointer; padding: 10px 0 6px; color: var(--ink-2); font-size: 0.86rem; list-style: none; display: flex; align-items: center; gap: 6px; }
+  .opts summary::-webkit-details-marker { display: none; }
+  .opts summary::before { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); transition: transform .15s; }
+  .opts[open] summary::before { transform: rotate(45deg); }
+  .opts label { display: block; font-size: 0.78rem; color: var(--muted); margin: 8px 0 3px; }
+  .opts .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .opts input, .opts select { padding: 6px 8px; font-size: 0.88rem; }
+  .run { margin-top: 14px; width: 100%; font: inherit; font-weight: 600; font-size: 0.95rem; color: var(--accent-ink); background: var(--accent); border: none; border-radius: 8px; padding: 11px; cursor: pointer; }
+  .run:hover:not(:disabled) { filter: brightness(1.08); }
+  .run:disabled { opacity: 0.65; cursor: progress; }
+  .hint { color: var(--muted); font-size: 0.82rem; margin: 10px 0 0; }
+
+  /* ----- evidence */
+  .evidence { padding: 16px 18px; }
+  .evidence h2 { font-size: 0.95rem; color: var(--ink-2); }
+  .evidence .what { font-weight: 600; color: var(--ink); margin: 4px 0 2px; font-size: 0.95rem; }
+  .evidence .count { color: var(--muted); font-size: 0.82rem; margin-bottom: 8px; }
+  .evidence .empty { color: var(--muted); font-size: 0.86rem; padding: 10px 12px; background: var(--well); border-radius: 8px; }
+  .rec { border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 8px; padding: 8px 10px 8px 12px; margin: 8px 0; background: var(--surface); }
+  .rec .id { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; font-weight: 500; }
+  .rec .id a { color: var(--accent); text-decoration: none; }
+  .rec .id a:hover { text-decoration: underline; }
+  .rec .t { font-size: 0.86rem; color: var(--ink); margin: 1px 0 6px; line-height: 1.35; }
+  .rec .ev { font-size: 0.76rem; margin-top: 4px; }
+  .rec .ev .f { display: block; color: var(--muted); font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+  .rec .ev .v { display: inline-block; color: var(--ink); background: var(--accent-soft); border-radius: 4px; padding: 0 5px; overflow-wrap: anywhere; max-width: 100%; }
+
+  /* ----- result */
+  .result { padding: 20px 22px 18px; position: relative; overflow: hidden; }
+  .result.loading::before { content: ""; position: absolute; top: 0; left: 0; height: 3px; width: 40%; background: var(--accent); animation: slide 1.1s ease-in-out infinite; }
+  @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    .result.loading::before { width: 100%; opacity: 0.6; }  /* static bar so loading is still visible */
+  }
+  .result h2 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; text-wrap: balance; }
+  .titlebar { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .exact { font-size: 0.78rem; font-weight: 500; border-radius: 999px; padding: 2px 9px; white-space: nowrap; }
+  .exact.yes { color: var(--ok); background: var(--ok-soft); }
+  .exact.no { color: var(--warn); background: var(--warn-soft); }
+  .subtitle { color: var(--ink-2); font-size: 0.9rem; margin: 4px 0 12px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.82rem; color: var(--ink-2); margin: 0 0 4px; }
+  .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; background: var(--c); vertical-align: -1px; }
+  #chart { display: block; width: 100%; min-height: 120px; }  /* vega-embed would otherwise make it inline-block, collapsing "container" width to 0 */
+  #network svg { width: 100%; height: 520px; }
+  .empty-state { padding: 48px 8px 40px; color: var(--ink-2); max-width: 46ch; }
+  .empty-state p { margin: 0 0 10px; }
+  .skeleton { display: flex; align-items: flex-end; gap: 18px; height: 320px; padding: 24px 48px 36px 56px; }
+  .skeleton i { flex: 1; background: var(--well); border-radius: 4px 4px 0 0; }
+  kbd { font: inherit; font-size: 0.75rem; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .fact { font-size: 0.86rem; color: var(--ink-2); }
+  .fact b { display: block; color: var(--ink); font-weight: 600; font-size: 0.9rem; margin-bottom: 1px; }
+  .fact.ok b { color: var(--ok); }
+  .fact.ok b::before { content: "✓ "; }
+  .data-table { margin-top: 12px; font-size: 0.86rem; }
+  .data-table summary { cursor: pointer; color: var(--ink-2); padding: 4px 0; }
+  .data-table td button { font: inherit; font-size: 0.8rem; color: var(--accent); background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
+  .data-table td button:hover { border-color: var(--accent); }
+  .error { background: var(--bad-soft); color: var(--bad); padding: 12px 14px; border-radius: 8px; margin-top: 8px; }
+  .error ul { margin: 8px 0 0; padding-left: 18px; }
+  .error pre { background: transparent; padding: 0; color: inherit; }
+
+  /* ----- details */
+  .details { margin-top: 20px; padding: 18px 22px; font-size: 0.88rem; color: var(--ink-2); }
+  .details h3 { font-size: 0.9rem; color: var(--ink); margin: 16px 0 6px; }
+  .details h3:first-child { margin-top: 0; }
+  .details ul { margin: 0; padding-left: 18px; }
+  .details li { margin: 2px 0; }
+  .warn { background: var(--warn-soft); color: var(--warn); padding: 8px 10px; border-radius: 6px; margin: 6px 0; }
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.84rem; }
+  td, th { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
   th { color: var(--muted); font-weight: 500; }
-  code { font-size: 12px; word-break: break-all; }
-  .cite { border-left: 3px solid var(--axis); padding: 4px 8px; margin: 6px 0; font-size: 12.5px; }
-  .cite a { color: var(--s1); }
-  .cite .ev { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; }
-  details summary { cursor: pointer; color: var(--ink-2); font-size: 13px; margin-top: 10px; }
-  pre { background: var(--page); padding: 10px; border-radius: 6px; max-height: 420px; overflow: auto; font-size: 11.5px; }
-  .hint { color: var(--muted); font-size: 12px; }
-  .legend { display: flex; gap: 14px; font-size: 12.5px; margin: 6px 0 2px; }
-  .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; background: var(--c); vertical-align: middle; }
-  .tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); display: none; }
+  td.n { font-variant-numeric: tabular-nums; }
+  table.retrieval { min-width: 680px; }  /* scroll sideways on phones instead of squeezing cells into tall slivers */
+  .checks { display: grid; gap: 4px; }
+  .check { display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: baseline; }
+  .check .s { font-weight: 500; }
+  .check.passed .s { color: var(--ok); }
+  .check.skipped .s { color: var(--muted); }
+  code { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; overflow-wrap: anywhere; }
+  details.more summary { cursor: pointer; color: var(--ink-2); margin-top: 12px; padding: 4px 0; }
+  pre { background: var(--well); padding: 10px; border-radius: 6px; max-height: 420px; overflow: auto; font-size: 0.78rem; }
+  .tip { position: absolute; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font-size: 0.8rem; box-shadow: var(--shadow); display: none; }
 </style>
 </head>
 <body>
-<header><h1>trialviz</h1><span>natural-language questions about clinical trials, answered as visualization specs from ClinicalTrials.gov</span></header>
+<a class="skip" href="#result">Skip to the result</a>
+<header class="top">
+  <h1 class="mark" translate="no">trialviz</h1>
+  <span class="tag">Ask ClinicalTrials.gov a question in plain English; get a chart with the records behind every number.</span>
+  <span class="spacer"></span>
+  <nav aria-label="Service"><span class="status" id="status" role="status">checking…</span><a href="/docs">API docs</a><a href="/schema">Schemas</a></nav>
+</header>
 <main>
-  <section class="panel">
-    <label for="examples">Example questions</label>
-    <select id="examples"><option value="">Pick one…</option></select>
-    <label for="query">Question</label>
-    <textarea id="query">How are melanoma trials distributed across phases?</textarea>
-    <div class="row">
-      <div><label for="drug">drug_name (optional)</label><input id="drug" placeholder="e.g. pembrolizumab"></div>
-      <div><label for="condition">condition (optional)</label><input id="condition" placeholder="e.g. melanoma"></div>
+    <div class="card ask">
+      <h2 id="query-label">Question</h2>
+      <textarea id="query" name="query" aria-labelledby="query-label" aria-describedby="query-error run-hint" autocomplete="off">How are melanoma trials distributed across phases?</textarea>
+      <p class="field-error" id="query-error" role="alert"></p>
+      <div class="chips" id="examples" role="group" aria-label="Example questions"></div>
+      <details class="opts">
+        <summary>Options</summary>
+        <div class="row">
+          <div><label for="drug">Drug name</label><input id="drug" name="drug" placeholder="e.g. pembrolizumab…" autocomplete="off" spellcheck="false"></div>
+          <div><label for="condition">Condition</label><input id="condition" name="condition" placeholder="e.g. melanoma…" autocomplete="off" spellcheck="false"></div>
+        </div>
+        <div class="row">
+          <div><label for="planner">Planner</label>
+            <select id="planner" name="planner"><option value="auto">auto</option><option value="llm">llm</option><option value="rules">rules</option></select></div>
+          <div><label for="count_mode">Counting</label>
+            <select id="count_mode" name="count_mode"><option value="auto">auto</option><option value="sample">sample</option><option value="exact">exact</option></select></div>
+        </div>
+        <div class="row">
+          <div><label for="comparison_mode">Comparisons</label>
+            <select id="comparison_mode" name="comparison_mode"><option value="overlapping">overlapping</option><option value="partition">partition</option></select></div>
+          <div><label for="drug_match">Drug match</label>
+            <select id="drug_match" name="drug_match"><option value="any">any</option><option value="strict">strict</option></select></div>
+        </div>
+        <div class="row">
+          <div><label for="max_trials">Max records per series</label><input id="max_trials" name="max_trials" type="number" inputmode="numeric" value="2000" min="50" max="10000"></div>
+          <div><label for="complete_up_to">Fetch everything up to</label><input id="complete_up_to" name="complete_up_to" type="number" inputmode="numeric" value="5000" min="1000" max="20000"></div>
+        </div>
+        <div class="row">
+          <div><label for="citations">Citations per datum</label><input id="citations" name="citations" type="number" inputmode="numeric" value="5" min="0" max="50"></div>
+          <div></div>
+        </div>
+      </details>
+      <button class="run" id="run" type="button">Run query</button>
+      <p class="hint" id="run-hint">Every bar, point, node, and edge can be clicked to see the trial records behind it, or use the table under the chart. <kbd>⌘</kbd>&nbsp;<kbd>Enter</kbd> or <kbd>Ctrl</kbd>&nbsp;<kbd>Enter</kbd> in the question box runs it.</p>
     </div>
-    <div class="row">
-      <div><label for="max_trials">max_trials</label><input id="max_trials" type="number" value="2000" min="50" max="10000"></div>
-      <div><label for="citations">citations_per_datum</label><input id="citations" type="number" value="5" min="0" max="50"></div>
-    </div>
-    <div class="row">
-      <div><label for="count_mode">count_mode</label>
-        <select id="count_mode"><option value="auto">auto</option><option value="sample">sample</option><option value="exact">exact</option></select></div>
-      <div><label for="planner">planner</label>
-        <select id="planner"><option value="auto">auto</option><option value="llm">llm</option><option value="rules">rules</option></select></div>
-    </div>
-    <button class="primary" id="run">Run query</button>
-    <p class="hint">Click a bar, point, node, or edge to see the trial records behind it.</p>
-    <div id="cite-panel"></div>
-  </section>
-  <section>
-    <div class="panel" id="result">
-      <h2 id="title">Ask a question to get started</h2>
+    <section class="card evidence" id="evidence" aria-labelledby="evidence-label">
+      <h2 id="evidence-label">Evidence</h2>
+      <p class="sr-only" id="cite-status" aria-live="polite"></p>
+      <div id="cite-panel"><div class="empty">Run a question, then click a mark on the chart.</div></div>
+    </section>
+  <section class="result-col">
+    <div class="card result" id="result" tabindex="-1" aria-labelledby="title">
+      <div class="titlebar" aria-live="polite"><h2 id="title">Ask a question to get started</h2><span id="exact"></span></div>
       <div class="subtitle" id="subtitle"></div>
+      <div class="empty-state" id="empty">
+        <p>Questions can be about trends over time, how trials are distributed across phases, statuses, sponsors or countries, comparisons between drugs or conditions, networks of sponsors and drugs, and scatter plots or histograms of enrollment and duration.</p>
+        <p>Numbers come from the registry's records or its own counts, never from the language model, and the response says whether each value is exact or sampled.</p>
+      </div>
       <div id="legend" class="legend"></div>
       <div id="chart"></div>
       <div id="network"></div>
-      <div id="error"></div>
+      <details class="data-table" id="data-table" hidden><summary>Chart values as a table</summary><div class="scroll" id="data-table-body"></div></details>
+      <div id="error" role="alert"></div>
+      <div id="facts" class="facts" style="display: none;"></div>
     </div>
-    <div class="panel meta" id="meta" style="margin-top: 16px; display: none;"></div>
+    <div class="card details" id="meta" style="display: none;"></div>
   </section>
 </main>
 <div class="tip" id="tip"></div>
 <script>
-const SERIES = ["--s1","--s2","--s3","--s4","--s5","--s6","--s7","--s8"].map(v => getComputedStyle(document.documentElement).getPropertyValue(v).trim());
 const INK = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const seriesColors = () => ["--s1","--s2","--s3","--s4","--s5","--s6","--s7","--s8"].map(INK);
+let SERIES = seriesColors();
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+// colors are read from CSS when a chart is drawn, so redraw it when the system color scheme flips
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { SERIES = seriesColors(); if (window.__last) render(window.__last, { keepEvidence: true }); });
 const $ = id => document.getElementById(id);
+const fmt = n => (n === null || n === undefined) ? "n/a" : Number(n).toLocaleString();
+
+fetch("/health").then(r => r.json()).then(h => {
+  const el = $("status");
+  el.textContent = h.planner === "llm" ? `model planner (${h.model})` : "rule-based planner";
+  el.classList.add("on");
+}).catch(() => { $("status").textContent = "offline"; });
 
 fetch("/examples").then(r => r.json()).then(list => {
-  for (const ex of list) {
-    const o = document.createElement("option");
-    o.value = JSON.stringify(ex.request); o.textContent = ex.request.query; $("examples").appendChild(o);
+  list.forEach((ex, i) => {
+    const b = document.createElement("button");
+    b.className = "chip" + (i >= 5 ? " extra" : ""); b.type = "button";
+    const r = ex.request, extras = [];
+    if (r.comparison_mode === "partition") extras.push("count each trial once");
+    if (r.drug_match === "strict") extras.push("strict drug match");
+    if (r.drug_name) extras.push(`drug: ${r.drug_name}`);
+    b.textContent = r.query.replace(/[.?]$/, "") + (extras.length ? ` (${extras.join(", ")})` : "");
+    b.addEventListener("click", () => {
+      const req = ex.request;
+      $("query").value = req.query || ""; $("drug").value = req.drug_name || ""; $("condition").value = req.condition || "";
+      $("comparison_mode").value = req.comparison_mode || "overlapping"; $("drug_match").value = req.drug_match || "any";
+      if (req.citations_per_datum) $("citations").value = req.citations_per_datum;
+      if (req.max_trials) $("max_trials").value = req.max_trials;
+      run();
+    });
+    $("examples").appendChild(b);
+  });
+  if (list.length > 5) {
+    const more = document.createElement("button");
+    more.className = "chip more"; more.type = "button"; more.textContent = `${list.length - 5} more`; more.setAttribute("aria-expanded", "false");
+    more.addEventListener("click", () => {
+      const open = $("examples").classList.toggle("open");
+      more.textContent = open ? "fewer" : `${list.length - 5} more`; more.setAttribute("aria-expanded", String(open));
+    });
+    $("examples").appendChild(more);
   }
 }).catch(() => {});
-$("examples").addEventListener("change", e => {
-  if (!e.target.value) return;
-  const req = JSON.parse(e.target.value);
-  $("query").value = req.query || ""; $("drug").value = req.drug_name || ""; $("condition").value = req.condition || "";
-});
 $("run").addEventListener("click", run);
+$("query").addEventListener("keydown", e => { if ((e.metaKey || e.ctrlKey) && e.key === "Enter") run(); });
+$("query").addEventListener("input", () => { if ($("query").getAttribute("aria-invalid")) { $("query").removeAttribute("aria-invalid"); $("query-error").textContent = ""; } });
+$("data-table-body").addEventListener("click", e => { const b = e.target.closest("button[data-k]"); if (b) tableItems[+b.dataset.k](); });
+let tableItems = [];
 
-async function run() {
+function requestBody() {
   const body = { query: $("query").value.trim(), max_trials: +$("max_trials").value, citations_per_datum: +$("citations").value,
-                 count_mode: $("count_mode").value, planner: $("planner").value };
+                 count_mode: $("count_mode").value, planner: $("planner").value, comparison_mode: $("comparison_mode").value,
+                 drug_match: $("drug_match").value, complete_up_to: +$("complete_up_to").value };
   if ($("drug").value.trim()) body.drug_name = $("drug").value.trim();
   if ($("condition").value.trim()) body.condition = $("condition").value.trim();
-  $("run").disabled = true; $("error").innerHTML = ""; $("cite-panel").innerHTML = ""; $("meta").style.display = "none";
-  $("title").textContent = "Working…"; $("subtitle").textContent = ""; $("chart").innerHTML = ""; $("network").innerHTML = ""; $("legend").innerHTML = "";
+  return body;
+}
+
+function clearResult() {
+  $("error").innerHTML = ""; $("meta").style.display = "none"; $("facts").innerHTML = ""; $("exact").textContent = ""; $("exact").className = "";
+  $("subtitle").textContent = ""; $("chart").innerHTML = ""; $("network").innerHTML = ""; $("legend").innerHTML = ""; $("empty").style.display = "none";
+  $("facts").style.display = "none"; $("data-table").hidden = true; $("data-table-body").innerHTML = ""; tableItems = [];
+  $("chart").removeAttribute("role"); $("chart").removeAttribute("aria-label");
+}
+
+function reset() {
+  clearResult();
+  $("cite-panel").innerHTML = `<div class="empty">Click a mark on the chart to see its records.</div>`; $("cite-status").textContent = "";
+}
+
+const SKELETON = `<div class="skeleton" aria-hidden="true">${[38, 62, 48, 90, 74, 56, 30].map(h => `<i style="height:${h}%"></i>`).join("")}</div>`;
+
+async function run() {
+  const body = requestBody();
+  if (body.query.length < 3) {  // the API needs at least 3 characters; say so next to the box instead of sending a request
+    $("query").setAttribute("aria-invalid", "true");
+    $("query-error").textContent = "Type a question of at least 3 characters, or pick one of the examples below.";
+    $("query").focus();
+    return;
+  }
+  reset();
+  $("run").disabled = true; $("run").textContent = "Running…"; $("result").classList.add("loading"); $("result").setAttribute("aria-busy", "true"); $("title").textContent = "Working…";
+  $("chart").innerHTML = SKELETON;
   try {
     const res = await fetch("/query", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-    const data = await res.json();
+    let data;
+    try { data = await res.json(); }
+    catch { data = { error: { code: "server_error", message: `The server answered with status ${res.status} and a body that is not JSON. Try again, and check the server log if it keeps happening.` } }; }
     if (!res.ok) { showError(data); return; }
     render(data);
   } catch (err) {
-    $("title").textContent = "Request failed"; $("error").innerHTML = `<div class="error">${escapeHtml(String(err))}</div>`;
-  } finally { $("run").disabled = false; }
+    clearResult();
+    $("title").textContent = "Request failed";
+    $("error").innerHTML = `<div class="error">Could not reach the trialviz server (${escapeHtml(String(err))}). Check that it is running, then run the question again.</div>`;
+  } finally { $("run").disabled = false; $("run").textContent = "Run query"; $("result").classList.remove("loading"); $("result").removeAttribute("aria-busy"); }
 }
 
 function showError(data) {
+  clearResult();
   const e = data.error || { code: "error", message: JSON.stringify(data) };
   $("title").textContent = e.code.replace(/_/g, " ");
   let html = `<div class="error">${escapeHtml(e.message)}`;
@@ -145,15 +373,99 @@ function showError(data) {
   $("error").innerHTML = html + "</div>";
 }
 
-function render(data) {
+function render(data, { keepEvidence = false } = {}) {
+  clearResult();
   const viz = data.visualization;
+  window.__last = data;
   $("title").textContent = viz.title; $("subtitle").textContent = viz.subtitle || "";
+  const all = viz.type === "network_graph" ? [...viz.data.nodes, ...viz.data.edges] : viz.data;
+  const sampled = all.some(d => d.exactness === "sampled");
+  const tag = $("exact"); tag.textContent = sampled ? "contains sampled values" : "exact"; tag.className = "exact " + (sampled ? "no" : "yes");
+  renderFacts(data);
   renderMeta(data);
   if (typeof vegaEmbed === "undefined" || typeof d3 === "undefined") {
-    $("error").innerHTML = `<div class="error">The chart libraries (Vega-Lite, d3) did not load from the CDN, so the spec is shown as JSON below instead.</div>`;
+    $("error").innerHTML = `<div class="error">The chart libraries (Vega-Lite, d3) did not load from the CDN, so the chart cannot be drawn; the response is in the details below.</div>`;
     return;
   }
   if (viz.type === "network_graph") renderNetwork(viz); else renderChart(viz);
+  renderDataTable(viz);
+  if (!keepEvidence) autoEvidence(viz);
+}
+
+// The evidence column is never empty: start with the records behind the largest value.
+function autoEvidence(viz) {
+  if (viz.type === "network_graph") {
+    const e = viz.data.edges[0];
+    if (!e) return;
+    const label = id => (viz.data.nodes.find(n => n.id === id) || { label: id }).label;
+    showCitations(e, viz, `${label(e.source)} ↔ ${label(e.target)}`, { auto: true });
+    return;
+  }
+  const yf = viz.encoding.y.field;
+  const top = viz.data.filter(r => r.citations && r.citations.length).sort((a, b) => b[yf] - a[yf])[0];
+  if (top) showCitations(top, viz, undefined, { auto: true });
+}
+
+// ---------------------------------------------------------------- keyboard and screen reader route to every mark
+function renderDataTable(viz) {
+  $("data-table").hidden = false; $("data-table").open = false;
+  $("data-table").ontoggle = () => { if ($("data-table").open && !$("data-table-body").innerHTML) buildDataTable(viz); };  // built on demand: scatter plots can have thousands of rows
+}
+
+function buildDataTable(viz) {
+  tableItems = [];
+  const btn = (k, label) => `<button type="button" data-k="${k}" aria-label="Show records for ${escapeHtml(label)}">Show records</button>`;
+  let html;
+  if (viz.type === "network_graph") {
+    const label = id => (viz.data.nodes.find(n => n.id === id) || { label: id }).label;
+    const edges = viz.data.edges.map(e => { const name = `${label(e.source)} ↔ ${label(e.target)}`; return [name, e, name]; });
+    const nodes = viz.data.nodes.map(n => [`${n.label} (${n.kind})`, n, n.label]);
+    html = `<table><tr><th>Edge or node</th><th>Trials</th><th></th></tr>` + [...edges, ...nodes].map(([name, d, citeLabel]) => {
+      const k = tableItems.push(() => showCitations(d, viz, citeLabel)) - 1;
+      return `<tr><td>${escapeHtml(name)}</td><td class="n">${fmt(d.trial_count)}</td><td>${btn(k, name)}</td></tr>`;
+    }).join("") + "</table>";
+  } else {
+    const enc = viz.encoding, xf = enc.x.field, yf = enc.y.field, cf = enc.color && enc.color.field;
+    const xv = r => xf === "period_start" && r.period ? r.period : r[xf];
+    html = `<table><tr><th>${escapeHtml(enc.x.title || xf)}</th>${cf ? `<th>${escapeHtml(enc.color.title || cf)}</th>` : ""}<th>${escapeHtml(enc.y.title || yf)}</th><th></th></tr>` +
+      viz.data.map(r => {
+        const k = tableItems.push(() => showCitations(r, viz)) - 1;
+        const name = `${xv(r)}${cf ? ` (${r[cf]})` : ""}`;
+        return `<tr><td>${escapeHtml(xv(r))}</td>${cf ? `<td>${escapeHtml(r[cf])}</td>` : ""}<td class="n">${fmt(r[yf])}</td><td>${btn(k, name)}</td></tr>`;
+      }).join("") + "</table>";
+  }
+  $("data-table-body").innerHTML = html;
+}
+
+// ---------------------------------------------------------------- plain-language facts under the chart
+function renderFacts(data) {
+  const viz = data.visualization, m = data.meta, facts = [];
+  const fetched = m.retrieval.reduce((a, r) => a + r.fetched, 0);
+  const matching = m.retrieval.every(r => r.total_matching !== null) ? m.retrieval.reduce((a, r) => a + r.total_matching, 0) : null;
+  if (viz.type === "network_graph") {
+    facts.push(["Edge meaning", viz.edge_semantics]);
+    facts.push(["Trials", `${fmt(viz.trials_considered)} considered${viz.trials_skipped ? `, ${fmt(viz.trials_skipped)} skipped for missing arm data` : ""}`]);
+  } else if (viz.config) {
+    const c = viz.config;
+    if (c.groupby_semantics === "partition") {
+      facts.push(["Bars add up", c.bucket_sum === null ? `${fmt(c.distinct_trials)} trials plotted, ${fmt(c.unclassified_count)} without a value`
+        : `each trial sits in one row: ${fmt(c.distinct_trials)} trials in rows, ${fmt(c.unclassified_count)} unclassified, ${fmt(c.hidden_count)} hidden by trimming`]);
+    } else {
+      facts.push(["Bars do not add up", `a trial can sit in several rows: ${fmt(c.bucket_sum)} row entries over ${c.distinct_trials === null ? "an unknown number of" : fmt(c.distinct_trials)} distinct trials`]);
+    }
+  }
+  const anyTrunc = m.retrieval.some(r => r.truncated);
+  const exactCounts = m.retrieval.some(r => r.count_method === "exact_server_counts");
+  const perSeries = m.retrieval.length > 1;
+  const each = f => m.retrieval.map(r => `${escapeHtml(r.label)}: ${f(r)}`).join("; ");
+  facts.push(["Records", !anyTrunc ? (perSeries ? `every series fetched completely (${each(r => fmt(r.fetched))})` : `all ${fmt(matching ?? fetched)} matching trials fetched`)
+    : exactCounts ? (perSeries ? `values are registry counts; citations come from the fetched sample (${each(r => `${fmt(r.fetched)} of ${fmt(r.total_matching)}`)})` : `${fmt(fetched)} of ${fmt(matching)} fetched for citations; values are registry counts`)
+    : (perSeries ? `values come from the most recently started trials (${each(r => `${fmt(r.fetched)} of ${fmt(r.total_matching)}`)})` : `${fmt(fetched)} of ${fmt(matching)} fetched (most recently started); values come from that sample`)]);
+  const checks = m.verification.checks, passed = checks.filter(c => c.status === "passed").length;
+  facts.push(["Verified", (passed === checks.length ? `all ${checks.length} checks passed` : `${passed} of ${checks.length} checks passed, the others not applicable`) +
+    "; every value was re-derived from the fetched records before this response was sent", "ok"]);
+  $("facts").innerHTML = facts.map(([k, v, cls]) => `<div class="fact ${cls || ""}"><b>${escapeHtml(k)}</b>${escapeHtml(v)}</div>`).join("");
+  $("facts").style.display = "grid";
 }
 
 // ---------------------------------------------------------------- charts via Vega-Lite
@@ -174,19 +486,27 @@ function renderChart(viz) {
   const y = { field: enc.y.field, type: "quantitative", title: enc.y.title, scale: { zero: viz.config.y_zero_based },
               axis: viz.config.value_format === "integer" || allInts(enc.y.field) ? intAxis(enc.y.field) : {} };
   const tooltip = (enc.tooltip || []).map(f => ({ field: f }));
-  const color = enc.color ? { field: enc.color.field, type: "nominal", title: enc.color.title, scale: { range: SERIES } } : undefined;
+  const seriesOrder = enc.color ? values.map(r => r[enc.color.field]).filter((v, i, a) => a.indexOf(v) === i) : [];
+  const color = enc.color ? { field: enc.color.field, type: "nominal", title: enc.color.title, scale: { range: SERIES, domain: seriesOrder }, sort: seriesOrder } : undefined;
   let mark, encoding = { x, y, tooltip };
   if (viz.type === "time_series") { mark = { type: "line", point: { size: 60 }, strokeWidth: 2 }; if (color) encoding.color = color; }
   else if (viz.type === "scatter_plot") { mark = { type: "point", filled: true, size: 70, opacity: 0.8 }; if (color) encoding.color = color; }
-  else if (viz.type === "grouped_bar_chart") { mark = { type: "bar", cornerRadiusEnd: 4 }; encoding.color = color; encoding.xOffset = { field: enc.color.field }; }
-  else { mark = { type: "bar", cornerRadiusEnd: 4, color: SERIES[0] }; }
+  else if (viz.type === "grouped_bar_chart") { mark = { type: "bar", cornerRadiusEnd: 3 }; encoding.color = color; encoding.xOffset = { field: enc.color.field, sort: seriesOrder }; }
+  else { mark = { type: "bar", cornerRadiusEnd: 3, color: SERIES[0] }; }
+  const font = "IBM Plex Sans, system-ui, sans-serif";
+  const narrow = $("chart").clientWidth < 560;  // on phones a side legend takes half the width and leaves slivers of bars
   const spec = {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json", width: "container", height: 360, data, mark, encoding,
-    config: { background: INK("--surface"), axis: { gridColor: INK("--grid"), domainColor: INK("--axis"), tickColor: INK("--axis"), labelColor: INK("--ink-2"), titleColor: INK("--ink-2") },
-              legend: { labelColor: INK("--ink-2"), titleColor: INK("--ink-2") }, view: { stroke: null }, font: "system-ui, sans-serif" },
+    config: { background: INK("--surface"), font,
+              axis: { gridColor: INK("--grid"), domainColor: INK("--axis"), tickColor: INK("--axis"), labelColor: INK("--ink-2"), titleColor: INK("--ink-2"), labelFontSize: 11, titleFontSize: 12, titleFontWeight: 500 },
+              legend: { labelColor: INK("--ink-2"), titleColor: INK("--ink-2"), labelFontSize: 11, titleFontSize: 11, ...(narrow ? { orient: "bottom", direction: "vertical" } : {}) }, view: { stroke: null } },
   };
+  $("chart").setAttribute("role", "img");
+  $("chart").setAttribute("aria-label", `${viz.title}. ${viz.subtitle || ""} The values are listed in the table under the chart.`);
   vegaEmbed("#chart", spec, { actions: false }).then(({ view }) => {
     view.addEventListener("click", (_, item) => { if (item && item.datum && item.datum.__i !== undefined) showCitations(rows[item.datum.__i], viz); });
+  }).catch(err => {
+    $("error").innerHTML = `<div class="error">The chart could not be drawn (${escapeHtml(err.message || String(err))}). The values are in the table under the chart and in the details below.</div>`;
   });
 }
 
@@ -196,63 +516,104 @@ function renderNetwork(viz) {
   const kinds = viz.node_kinds, colorOf = k => SERIES[Math.max(0, kinds.indexOf(k)) % SERIES.length];
   $("legend").innerHTML = kinds.map(k => `<span style="--c:${colorOf(k)}">${escapeHtml(k)}</span>`).join("");
   const w = $("network").clientWidth || 800, h = 520;
-  const svg = d3.select("#network").append("svg").attr("viewBox", [0, 0, w, h]);
+  const svg = d3.select("#network").append("svg").attr("viewBox", [0, 0, w, h])
+    .attr("role", "img").attr("aria-label", `${viz.title}. The nodes and edges are listed in the table under the chart.`);
   const maxW = d3.max(edges, e => e.trial_count) || 1, maxN = d3.max(nodes, n => n.trial_count) || 1;
   const r = n => 6 + 18 * Math.sqrt(n.trial_count / maxN);
+  const shortLabel = d => d.label.length > 28 ? d.label.slice(0, 26) + "…" : d.label;
+  const fit = Math.min(1, w / 800);  // narrow containers (phones) get a tighter layout so nodes stay on screen
+  const spread = Math.min(160, 70 + 1500 / Math.max(nodes.length, 1)) * Math.max(fit, 0.7);  // small graphs get more room per node
   const sim = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(edges).id(d => d.id).distance(80).strength(0.5))
-    .force("charge", d3.forceManyBody().strength(-160)).force("center", d3.forceCenter(w / 2, h / 2))
+    .force("link", d3.forceLink(edges).id(d => d.id).distance(spread).strength(0.5))
+    .force("charge", d3.forceManyBody().strength(-Math.min(600, 120 + 3000 / Math.max(nodes.length, 1)) * Math.max(fit, 0.75))).force("center", d3.forceCenter(w / 2, h / 2))
     .force("x", d3.forceX(w / 2).strength(0.06)).force("y", d3.forceY(h / 2).strength(0.08))
     .force("collide", d3.forceCollide(d => r(d) + 14));
-  const link = svg.append("g").selectAll("line").data(edges).join("line")
-    .attr("stroke", INK("--axis")).attr("stroke-width", e => 1 + 6 * e.trial_count / maxW).attr("stroke-linecap", "round").style("cursor", "pointer")
+  const link = svg.append("g").attr("pointer-events", "none").selectAll("line").data(edges).join("line")
+    .attr("stroke", INK("--field")).attr("stroke-width", e => 1 + 6 * e.trial_count / maxW).attr("stroke-linecap", "round");
+  // invisible wide strokes on top so thin edges are still easy to hit with a finger or mouse
+  const linkHit = svg.append("g").selectAll("line").data(edges).join("line")
+    .attr("stroke", "transparent").attr("stroke-width", 16).attr("stroke-linecap", "round").style("cursor", "pointer")
     .on("click", (_, e) => showCitations(e, viz, `${e.source.label} ↔ ${e.target.label}`))
-    .on("mousemove", (ev, e) => tip(ev, `${e.source.label} ↔ ${e.target.label}: ${e.trial_count} trials`)).on("mouseleave", hideTip);
+    .on("mousemove", (ev, e) => tip(ev, `${e.source.label} ↔ ${e.target.label}: ${fmt(e.trial_count)} ${e.trial_count === 1 ? "trial" : "trials"}`)).on("mouseleave", hideTip);
   const node = svg.append("g").selectAll("g").data(nodes).join("g").style("cursor", "pointer")
     .call(d3.drag().clickDistance(6).on("start", (ev, d) => { if (!ev.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
       .on("drag", (ev, d) => { d.fx = ev.x; d.fy = ev.y; }).on("end", (ev, d) => { if (!ev.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }))
     .on("click", (_, d) => showCitations(d, viz, d.label))
-    .on("mousemove", (ev, d) => tip(ev, `${d.label} (${d.kind}): ${d.trial_count} trials`)).on("mouseleave", hideTip);
+    .on("mousemove", (ev, d) => tip(ev, `${d.label} (${d.kind}): ${fmt(d.trial_count)} ${d.trial_count === 1 ? "trial" : "trials"}`)).on("mouseleave", hideTip);
+  node.append("circle").attr("r", d => Math.max(r(d), 12)).attr("fill", "transparent");  // hit area of at least 24px
   node.append("circle").attr("r", r).attr("fill", d => colorOf(d.kind)).attr("stroke", INK("--surface")).attr("stroke-width", 2);
-  node.append("text").text(d => d.label.length > 28 ? d.label.slice(0, 26) + "…" : d.label).attr("font-size", 11).attr("fill", INK("--ink"))
-    .attr("dx", d => r(d) + 4).attr("dy", 4);
-  sim.on("tick", () => {
-    link.attr("x1", e => e.source.x).attr("y1", e => e.source.y).attr("x2", e => e.target.x).attr("y2", e => e.target.y);
-    node.attr("transform", d => `translate(${Math.max(10, Math.min(w - 10, d.x))},${Math.max(10, Math.min(h - 10, d.y))})`);
-  });
+  node.append("text").text(shortLabel).attr("font-size", 11).attr("fill", INK("--ink"))
+    .attr("font-family", "IBM Plex Sans, system-ui, sans-serif").attr("dx", d => r(d) + 4).attr("dy", 4);
+  nodes.forEach(d => { d.reach = r(d) + 4 + Math.min(w / 2, 6.2 * shortLabel(d).length); });  // circle plus label, so the label is not cut off at the right edge
+  const draw = () => {
+    nodes.forEach(d => { d.x = Math.max(r(d) + 2, Math.min(w - d.reach - 2, d.x)); d.y = Math.max(r(d) + 2, Math.min(h - r(d) - 2, d.y)); });
+    for (const l of [link, linkHit]) l.attr("x1", e => e.source.x).attr("y1", e => e.source.y).attr("x2", e => e.target.x).attr("y2", e => e.target.y);
+    node.attr("transform", d => `translate(${d.x},${d.y})`);
+  };
+  if (reducedMotion.matches) { sim.stop(); sim.tick(300); draw(); }  // settle the layout without animating it
+  sim.on("tick", draw);
 }
 
 function tip(ev, text) { const t = $("tip"); t.textContent = text; t.style.display = "block"; t.style.left = (ev.pageX + 12) + "px"; t.style.top = (ev.pageY + 12) + "px"; }
 function hideTip() { $("tip").style.display = "none"; }
 
-// ---------------------------------------------------------------- citations and meta
-function showCitations(datum, viz, label) {
-  const name = label || Object.entries(datum).filter(([k]) => !["citations", "citation_count", "__i"].includes(k)).map(([k, v]) => `${k}: ${v}`).join(", ");
-  let html = `<h3 style="font-size:13px;margin:16px 0 4px">${escapeHtml(name)}</h3><div class="hint">${datum.citation_count} supporting trial(s); showing ${datum.citations.length}</div>`;
+// ---------------------------------------------------------------- evidence cards
+function showCitations(datum, viz, label, { auto = false } = {}) {
+  let name = label;
+  if (!name && viz.encoding && viz.encoding.x) {
+    const xf = viz.encoding.x.field, yf = viz.encoding.y.field, yTitle = (viz.encoding.y.title || yf).toLowerCase();
+    const xv = xf === "period_start" ? datum.period : datum[xf];
+    const unit = yTitle.replace(/^number of /, "");
+    name = `${xv}${datum.series ? ` (${datum.series})` : ""}${datum.group ? ` (${datum.group})` : ""}: ${fmt(datum[yf])} ${datum[yf] === 1 ? unit.replace(/s$/, "") : unit}`;
+    if (viz.type === "scatter_plot") name = `${datum.nct_id}: ${datum.title || ""}`;
+  }
+  const shown = datum.citations.length, total = datum.citation_count;
+  let html = `<div class="what">${escapeHtml(name)}</div>` +
+    `<div class="count">${fmt(total)} supporting ${total === 1 ? "trial" : "trials"}${shown < total ? `, showing ${shown}` : ""}; value is ${datum.exactness}</div>`;
+  if (!shown) html += `<div class="empty">Citations were turned off for this response (citations per datum is 0).</div>`;
   for (const c of datum.citations) {
-    html += `<div class="cite"><a href="${c.url}" target="_blank" rel="noopener">${c.nct_id}</a> ${escapeHtml(c.title || "")}` +
-      c.evidence.map(e => `<div class="ev">${escapeHtml(e.field)} = ${escapeHtml(e.value)}</div>`).join("") + "</div>";
+    const proof = c.evidence.filter(e => !e.field.endsWith("briefTitle"));
+    html += `<div class="rec"><div class="id"><a href="${c.url}" target="_blank" rel="noopener">${escapeHtml(c.nct_id)}</a></div>` +
+      `<div class="t">${escapeHtml(c.title || "")}</div>` +
+      proof.map(e => `<div class="ev"><span class="f">${escapeHtml(shortField(e.field))}</span><span class="v">${escapeHtml(e.value)}</span></div>`).join("") + "</div>";
   }
   $("cite-panel").innerHTML = html;
+  if (auto) return;  // pre-filled after a run: don't announce it or scroll the page away from the chart
+  $("cite-status").textContent = `Evidence for ${name}: ${fmt(total)} supporting ${total === 1 ? "trial" : "trials"}.`;
+  const box = $("evidence").getBoundingClientRect();  // single-column layout: the panel can be off screen when a mark is tapped
+  if (box.top > window.innerHeight || box.bottom < 0) $("evidence").scrollIntoView({ block: "start", behavior: reducedMotion.matches ? "auto" : "smooth" });
 }
 
+function shortField(path) { return path.replace(/^protocolSection\./, "").replace(/^derivedSection\./, ""); }
+
+// ---------------------------------------------------------------- details panel
 function renderMeta(data) {
-  const m = data.meta;
+  const m = data.meta, viz = data.visualization;
   const li = arr => arr.length ? `<ul>${arr.map(a => `<li>${escapeHtml(a)}</li>`).join("")}</ul>` : "<div class='hint'>none</div>";
-  let html = `<h3>Interpretation</h3><div>${escapeHtml(m.interpretation)}</div>`;
+  let html = `<h3>How the question was read</h3><div>${escapeHtml(m.interpretation)}</div>`;
   if (m.warnings.length) html += `<h3>Warnings</h3>` + m.warnings.map(w => `<div class="warn">${escapeHtml(w)}</div>`).join("");
   html += `<h3>Assumptions</h3>${li(m.assumptions)}`;
-  html += `<h3>Retrieval</h3><table><tr><th>series</th><th>matching</th><th>fetched</th><th>truncated</th><th>counting</th></tr>` +
-    m.retrieval.map(r => `<tr><td>${escapeHtml(r.label)}</td><td>${r.total_matching ?? "?"}</td><td>${r.fetched}</td><td>${r.truncated}</td><td>${r.count_method}</td></tr>`).join("") + "</table>";
-  html += `<h3>Planner</h3><div>${m.planner.mode}${m.planner.model ? " (" + escapeHtml(m.planner.model) + ")" : ""}, ${m.planner.attempts} attempt(s)${m.planner.fallback_reason ? "; fallback: " + escapeHtml(m.planner.fallback_reason) : ""}</div>`;
-  html += `<h3>Timing</h3><div>interpret ${m.timing.interpret_ms} ms · retrieve ${m.timing.retrieve_ms} ms · aggregate ${m.timing.aggregate_ms} ms · total ${m.timing.total_ms} ms</div>`;
-  html += `<details><summary>${m.api_calls.length} ClinicalTrials.gov request(s)</summary><table>` +
-    m.api_calls.map(c => `<tr><td><code>${escapeHtml(decodeURIComponent(c.url))}</code></td><td>${c.status}${c.cached ? " (cached)" : ""}</td><td>${c.elapsed_ms} ms</td></tr>`).join("") + "</table></details>";
-  html += `<details><summary>Raw response JSON</summary><pre>${escapeHtml(JSON.stringify(data, null, 2))}</pre></details>`;
+  if (m.series_overlap && m.series_overlap.length) {
+    html += `<h3>Series overlap</h3>` + m.series_overlap.map(o => `<div>${escapeHtml(o.series.join(" and "))}: ${fmt(o.trials_in_all)} ${o.trials_in_all === 1 ? "trial" : "trials"} in all of them${o.exact ? "" : " (lower bound; a series was sampled)"}</div>`).join("");
+  }
+  html += `<h3>Retrieval</h3><div class="scroll"><table class="retrieval"><tr><th>Series</th><th>Matching</th><th>Fetched</th><th>Coverage</th><th>Policy</th><th>Counting</th><th>Drug match</th></tr>` +
+    m.retrieval.map(r => `<tr><td>${escapeHtml(r.label)}</td><td class="n">${fmt(r.total_matching)}</td><td class="n">${fmt(r.fetched)}</td><td class="n">${(r.coverage * 100).toFixed(1)}%</td><td>${r.fetch_policy}</td><td>${r.count_method === "exact_server_counts" ? "registry counts" : "from records"}</td><td>${r.drug_match ? `${fmt(r.drug_match.listed_as_intervention)} listed, ${fmt(r.drug_match.mention_only)} mention only (${r.drug_match.mode})` : ""}</td></tr>`).join("") + "</table></div>";
+  html += `<h3>Verification</h3><div class="checks">` +
+    m.verification.checks.map(c => `<div class="check ${c.status}"><span class="s">${c.status}</span><span><b>${escapeHtml(c.name.replace(/_/g, " "))}</b>${c.detail ? ": " + escapeHtml(c.detail) : ""}</span></div>`).join("") + `</div>` +
+    `<p class="hint">${escapeHtml(m.verification.method)}</p>`;
+  html += `<h3>Planner and timing</h3><div>${m.planner.mode === "llm" ? `model planner (${escapeHtml(m.planner.model)})` : "rule-based planner"}, ${m.planner.attempts} attempt${m.planner.attempts === 1 ? "" : "s"}${m.planner.fallback_reason ? "; fallback: " + escapeHtml(m.planner.fallback_reason) : ""}. ` +
+    `Interpret ${fmt(m.timing.interpret_ms)} ms, retrieve ${fmt(m.timing.retrieve_ms)} ms, aggregate and verify ${fmt(m.timing.aggregate_ms)} ms, total ${fmt(m.timing.total_ms)} ms.</div>`;
+  html += `<details class="more"><summary>${m.api_calls.length} ClinicalTrials.gov ${m.api_calls.length === 1 ? "request" : "requests"}</summary><div class="scroll"><table>` +
+    m.api_calls.map(c => `<tr><td><code>${escapeHtml(decodeURIComponent(c.url))}</code></td><td class="n">${c.status}${c.cached ? " (cached)" : ""}</td><td class="n">${fmt(c.elapsed_ms)} ms</td></tr>`).join("") + "</table></div></details>";
+  html += `<details class="more"><summary>Executed plan</summary><pre>${escapeHtml(JSON.stringify(m.plan, null, 2))}</pre></details>`;
+  html += `<details class="more"><summary>Raw response JSON</summary><pre>${escapeHtml(JSON.stringify(data, null, 2))}</pre></details>`;
   $("meta").innerHTML = html; $("meta").style.display = "block";
 }
 
 function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+
+// Land on a result, not an empty card: run the question in the box once the page is up (append ?noautorun to skip).
+if (!new URLSearchParams(location.search).has("noautorun")) run();
 </script>
 </body>
 </html>

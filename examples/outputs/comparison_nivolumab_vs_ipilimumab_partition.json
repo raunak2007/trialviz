@@ -1,0 +1,1287 @@
+{
+  "request": {
+    "query": "Compare phases for trials involving nivolumab vs ipilimumab.",
+    "comparison_mode": "partition",
+    "citations_per_datum": 2
+  },
+  "http_status": 200,
+  "response": {
+    "visualization": {
+      "title": "Trials by phase: Nivolumab vs Ipilimumab",
+      "subtitle": "Interventional studies",
+      "encoding": {
+        "x": {
+          "field": "phase",
+          "type": "nominal",
+          "title": "Phase",
+          "granularity": null
+        },
+        "y": {
+          "field": "trial_count",
+          "type": "quantitative",
+          "title": "Number of trials",
+          "granularity": null
+        },
+        "color": {
+          "field": "series",
+          "type": "nominal",
+          "title": "Series",
+          "granularity": null
+        },
+        "tooltip": [
+          "phase",
+          "trial_count",
+          "citation_count",
+          "series"
+        ]
+      },
+      "columns": [
+        {
+          "name": "phase",
+          "type": "string",
+          "description": "Phase (display label)"
+        },
+        {
+          "name": "phase_code",
+          "type": "string",
+          "description": "Raw ClinicalTrials.gov value behind `phase`, or null"
+        },
+        {
+          "name": "series",
+          "type": "string",
+          "description": "Series label (which entity the row belongs to)"
+        },
+        {
+          "name": "trial_count",
+          "type": "integer",
+          "description": "Number of trials"
+        },
+        {
+          "name": "exactness",
+          "type": "string",
+          "description": "'exact' or 'sampled' (see schema)"
+        },
+        {
+          "name": "citation_count",
+          "type": "integer",
+          "description": "Distinct trials supporting this row"
+        },
+        {
+          "name": "citations",
+          "type": "string",
+          "description": "Array of Citation objects (see schema), truncated to citations_per_datum"
+        }
+      ],
+      "config": {
+        "sort": "natural",
+        "stacked": false,
+        "value_format": "integer",
+        "y_zero_based": true,
+        "groupby_semantics": "partition",
+        "bucket_sum": 2112,
+        "distinct_trials": 2112,
+        "unclassified_count": 0,
+        "hidden_count": 0
+      },
+      "data": [
+        {
+          "phase": "Early Phase 1",
+          "phase_code": "EARLY_PHASE1",
+          "series": "Nivolumab only",
+          "trial_count": 26,
+          "exactness": "exact",
+          "citation_count": 26,
+          "citations": [
+            {
+              "nct_id": "NCT02652455",
+              "title": "Combining PD-1 Blockade, CD137 Agonism and Adoptive Cell Therapy for Metastatic Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT02652455",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Combining PD-1 Blockade, CD137 Agonism and Adoptive Cell Therapy for Metastatic Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"EARLY_PHASE1\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT03143270",
+              "title": "A Study to Test the Safety and Feasibility of Nivolumab With Drug Eluting Bead Transarterial Chemoembolization in Patients With Liver Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT03143270",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Test the Safety and Feasibility of Nivolumab With Drug Eluting Bead Transarterial Chemoembolization in Patients With Liver Cancer"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"EARLY_PHASE1\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 1",
+          "phase_code": "PHASE1",
+          "series": "Nivolumab only",
+          "trial_count": 268,
+          "exactness": "exact",
+          "citation_count": 268,
+          "citations": [
+            {
+              "nct_id": "NCT00441337",
+              "title": "A Study of MDX-1106 in Patients With Selected Refractory or Relapsed Malignancies",
+              "url": "https://clinicaltrials.gov/study/NCT00441337",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of MDX-1106 in Patients With Selected Refractory or Relapsed Malignancies"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT00703469",
+              "title": "A Study of MDX-1106 to Treat Patients With Hepatitis C Infection",
+              "url": "https://clinicaltrials.gov/study/NCT00703469",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of MDX-1106 to Treat Patients With Hepatitis C Infection"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 1/Phase 2",
+          "phase_code": "PHASE1|PHASE2",
+          "series": "Nivolumab only",
+          "trial_count": 224,
+          "exactness": "exact",
+          "citation_count": 224,
+          "citations": [
+            {
+              "nct_id": "NCT01968109",
+              "title": "An Investigational Immuno-therapy Study to Assess the Safety, Tolerability and Effectiveness of Anti-LAG-3 With and Without Anti-PD-1 in the Treatment of Solid Tumors",
+              "url": "https://clinicaltrials.gov/study/NCT01968109",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "An Investigational Immuno-therapy Study to Assess the Safety, Tolerability and Effectiveness of Anti-LAG-3 With and Without Anti-PD-1 in the Treatment of Solid Tumors"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\",\"PHASE2\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT02061761",
+              "title": "A Study to Evaluate the Safety, Tolerability, and Efficacy of Relatlimab in Relapsed or Refractory B-Cell Malignancies",
+              "url": "https://clinicaltrials.gov/study/NCT02061761",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate the Safety, Tolerability, and Efficacy of Relatlimab in Relapsed or Refractory B-Cell Malignancies"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\",\"PHASE2\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 2",
+          "phase_code": "PHASE2",
+          "series": "Nivolumab only",
+          "trial_count": 540,
+          "exactness": "exact",
+          "citation_count": 540,
+          "citations": [
+            {
+              "nct_id": "NCT01354431",
+              "title": "BMS-936558 (MDX-1106) In Subjects With Advanced/Metastatic Clear-Cell Renal Cell Carcinoma (RCC)",
+              "url": "https://clinicaltrials.gov/study/NCT01354431",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "BMS-936558 (MDX-1106) In Subjects With Advanced/Metastatic Clear-Cell Renal Cell Carcinoma (RCC)"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT01703949",
+              "title": "Brentuximab Vedotin With or Without Nivolumab in Treating Patients With Relapsed or Refractory CD30+ Lymphoma",
+              "url": "https://clinicaltrials.gov/study/NCT01703949",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Brentuximab Vedotin With or Without Nivolumab in Treating Patients With Relapsed or Refractory CD30+ Lymphoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 2/Phase 3",
+          "phase_code": "PHASE2|PHASE3",
+          "series": "Nivolumab only",
+          "trial_count": 18,
+          "exactness": "exact",
+          "citation_count": 18,
+          "citations": [
+            {
+              "nct_id": "NCT02746796",
+              "title": "Study of ONO-4538 in Gastric Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT02746796",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Study of ONO-4538 in Gastric Cancer"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\",\"PHASE3\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT03092674",
+              "title": "Azacitidine With or Without Nivolumab or Midostaurin, or Decitabine and Cytarabine Alone in Treating Older Patients With Newly Diagnosed Acute Myeloid Leukemia or High-Risk Myelodysplastic Syndrome",
+              "url": "https://clinicaltrials.gov/study/NCT03092674",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Azacitidine With or Without Nivolumab or Midostaurin, or Decitabine and Cytarabine Alone in Treating Older Patients With Newly Diagnosed Acute Myeloid Leukemia or High-Risk Myelodysplastic Syndrome"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\",\"PHASE3\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 3",
+          "phase_code": "PHASE3",
+          "series": "Nivolumab only",
+          "trial_count": 104,
+          "exactness": "exact",
+          "citation_count": 104,
+          "citations": [
+            {
+              "nct_id": "NCT01642004",
+              "title": "Study of BMS-936558 (Nivolumab) Compared to Docetaxel in Previously Treated Advanced or Metastatic Squamous Cell Non-small Cell Lung Cancer (NSCLC) (CheckMate 017)",
+              "url": "https://clinicaltrials.gov/study/NCT01642004",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Study of BMS-936558 (Nivolumab) Compared to Docetaxel in Previously Treated Advanced or Metastatic Squamous Cell Non-small Cell Lung Cancer (NSCLC) (CheckMate 017)"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE3\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT01668784",
+              "title": "Study of Nivolumab (BMS-936558) vs. Everolimus in Pre-Treated Advanced or Metastatic Clear-cell Renal Cell Carcinoma (CheckMate 025)",
+              "url": "https://clinicaltrials.gov/study/NCT01668784",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Study of Nivolumab (BMS-936558) vs. Everolimus in Pre-Treated Advanced or Metastatic Clear-cell Renal Cell Carcinoma (CheckMate 025)"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE3\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 4",
+          "phase_code": "PHASE4",
+          "series": "Nivolumab only",
+          "trial_count": 12,
+          "exactness": "exact",
+          "citation_count": 12,
+          "citations": [
+            {
+              "nct_id": "NCT02596035",
+              "title": "An Investigational Immuno-therapy Safety Trial of Nivolumab in Patients With Advanced or Metastatic Renal Cell Carcinoma",
+              "url": "https://clinicaltrials.gov/study/NCT02596035",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "An Investigational Immuno-therapy Safety Trial of Nivolumab in Patients With Advanced or Metastatic Renal Cell Carcinoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE4\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT02626065",
+              "title": "Immune Modulation Study in Patients With Metastatic Melanoma Treated With Anti-PD1 Monoclonal Antibodies",
+              "url": "https://clinicaltrials.gov/study/NCT02626065",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Immune Modulation Study in Patients With Metastatic Melanoma Treated With Anti-PD1 Monoclonal Antibodies"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE4\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Not Applicable",
+          "phase_code": "NA",
+          "series": "Nivolumab only",
+          "trial_count": 27,
+          "exactness": "exact",
+          "citation_count": 27,
+          "citations": [
+            {
+              "nct_id": "NCT02194738",
+              "title": "Genetic Testing in Screening Patients With Stage IB-IIIA Non-small Cell Lung Cancer That Has Been or Will Be Removed by Surgery (The ALCHEMIST Screening Trial)",
+              "url": "https://clinicaltrials.gov/study/NCT02194738",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Genetic Testing in Screening Patients With Stage IB-IIIA Non-small Cell Lung Cancer That Has Been or Will Be Removed by Surgery (The ALCHEMIST Screening Trial)"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"NA\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT02951091",
+              "title": "Biomarker-Integrated Umbrella, Advanced Gastric Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT02951091",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Biomarker-Integrated Umbrella, Advanced Gastric Cancer"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"NA\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Early Phase 1",
+          "phase_code": "EARLY_PHASE1",
+          "series": "Ipilimumab only",
+          "trial_count": 4,
+          "exactness": "exact",
+          "citation_count": 4,
+          "citations": [
+            {
+              "nct_id": "NCT00972933",
+              "title": "Immunogenicity and Biomarker Analysis of Neoadjuvant Ipilimumab for Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT00972933",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Immunogenicity and Biomarker Analysis of Neoadjuvant Ipilimumab for Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"EARLY_PHASE1\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT01730157",
+              "title": "Radioembolization and Ipilimumab in Treating Patients With Uveal Melanoma With Liver Metastases",
+              "url": "https://clinicaltrials.gov/study/NCT01730157",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Radioembolization and Ipilimumab in Treating Patients With Uveal Melanoma With Liver Metastases"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"EARLY_PHASE1\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 1",
+          "phase_code": "PHASE1",
+          "series": "Ipilimumab only",
+          "trial_count": 107,
+          "exactness": "exact",
+          "citation_count": 107,
+          "citations": [
+            {
+              "nct_id": "NCT00025181",
+              "title": "Monoclonal Antibody and Vaccine Therapy in Treating Patients With Stage III or Stage IV Melanoma That Has Been Removed During Surgery",
+              "url": "https://clinicaltrials.gov/study/NCT00025181",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Monoclonal Antibody and Vaccine Therapy in Treating Patients With Stage III or Stage IV Melanoma That Has Been Removed During Surgery"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT00028431",
+              "title": "Novel Adjuvants for Peptide-Based Melanoma Vaccines",
+              "url": "https://clinicaltrials.gov/study/NCT00028431",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Novel Adjuvants for Peptide-Based Melanoma Vaccines"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 1/Phase 2",
+          "phase_code": "PHASE1|PHASE2",
+          "series": "Ipilimumab only",
+          "trial_count": 36,
+          "exactness": "exact",
+          "citation_count": 36,
+          "citations": [
+            {
+              "nct_id": "NCT00058279",
+              "title": "Monoclonal Antibody Therapy and Interleukin-2 in Treating Patients With Metastatic Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT00058279",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Monoclonal Antibody Therapy and Interleukin-2 in Treating Patients With Metastatic Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\",\"PHASE2\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT00089076",
+              "title": "MDX-010 in Treating Patients With Recurrent or Refractory Lymphoma",
+              "url": "https://clinicaltrials.gov/study/NCT00089076",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "MDX-010 in Treating Patients With Recurrent or Refractory Lymphoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\",\"PHASE2\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 2",
+          "phase_code": "PHASE2",
+          "series": "Ipilimumab only",
+          "trial_count": 121,
+          "exactness": "exact",
+          "citation_count": 121,
+          "citations": [
+            {
+              "nct_id": "NCT00032045",
+              "title": "Vaccine Therapy and Monoclonal Antibody Therapy in Treating Patients With Stage IV Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT00032045",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Vaccine Therapy and Monoclonal Antibody Therapy in Treating Patients With Stage IV Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT00050102",
+              "title": "Comparison Study of MDX-010 (CTLA-4) Alone and Combined With DTIC in the Treatment of Metastatic Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT00050102",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Comparison Study of MDX-010 (CTLA-4) Alone and Combined With DTIC in the Treatment of Metastatic Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 2/Phase 3",
+          "phase_code": "PHASE2|PHASE3",
+          "series": "Ipilimumab only",
+          "trial_count": 4,
+          "exactness": "exact",
+          "citation_count": 4,
+          "citations": [
+            {
+              "nct_id": "NCT03755739",
+              "title": "Trans-Artery/Intra-Tumor Infusion of Checkpoint Inhibitors Plus Chemodrug for Immunotherapy of Advanced Solid Tumors",
+              "url": "https://clinicaltrials.gov/study/NCT03755739",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Trans-Artery/Intra-Tumor Infusion of Checkpoint Inhibitors Plus Chemodrug for Immunotherapy of Advanced Solid Tumors"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\",\"PHASE3\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT05141721",
+              "title": "A Study of a Patient-Specific Neoantigen Vaccine in Combination With Immune Checkpoint Blockade for Patients With Metastatic Colorectal Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT05141721",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of a Patient-Specific Neoantigen Vaccine in Combination With Immune Checkpoint Blockade for Patients With Metastatic Colorectal Cancer"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\",\"PHASE3\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 3",
+          "phase_code": "PHASE3",
+          "series": "Ipilimumab only",
+          "trial_count": 18,
+          "exactness": "exact",
+          "citation_count": 18,
+          "citations": [
+            {
+              "nct_id": "NCT00094653",
+              "title": "MDX-010 Antibody, MDX-1379 Melanoma Vaccine, or MDX-010/MDX-1379 Combination Treatment for Patients With Unresectable or Metastatic Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT00094653",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "MDX-010 Antibody, MDX-1379 Melanoma Vaccine, or MDX-010/MDX-1379 Combination Treatment for Patients With Unresectable or Metastatic Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE3\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT00324155",
+              "title": "Dacarbazine and Ipilimumab vs. Dacarbazine With Placebo in Untreated Unresectable Stage III or IV Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT00324155",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Dacarbazine and Ipilimumab vs. Dacarbazine With Placebo in Untreated Unresectable Stage III or IV Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE3\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 4",
+          "phase_code": "PHASE4",
+          "series": "Ipilimumab only",
+          "trial_count": 2,
+          "exactness": "exact",
+          "citation_count": 2,
+          "citations": [
+            {
+              "nct_id": "NCT01856023",
+              "title": "HD IL-2 + Ipilimumab in Patients With Metastatic Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT01856023",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "HD IL-2 + Ipilimumab in Patients With Metastatic Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE4\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT02068196",
+              "title": "A National Phase IV Study With Ipilimumab for Patients With Advanced Malignant Melanoma.",
+              "url": "https://clinicaltrials.gov/study/NCT02068196",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A National Phase IV Study With Ipilimumab for Patients With Advanced Malignant Melanoma."
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE4\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Not Applicable",
+          "phase_code": "NA",
+          "series": "Ipilimumab only",
+          "trial_count": 4,
+          "exactness": "exact",
+          "citation_count": 4,
+          "citations": [
+            {
+              "nct_id": "NCT00685750",
+              "title": "Expression Analysis of Specific Markers in Non-small Cell Lung Cancer or Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT00685750",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Expression Analysis of Specific Markers in Non-small Cell Lung Cancer or Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"NA\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT01701674",
+              "title": "Ipilimumab With Lymphodepletion Plus Adoptive Cell Transfer and High Dose IL-2 in Melanoma Mets Pts",
+              "url": "https://clinicaltrials.gov/study/NCT01701674",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Ipilimumab With Lymphodepletion Plus Adoptive Cell Transfer and High Dose IL-2 in Melanoma Mets Pts"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"NA\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Early Phase 1",
+          "phase_code": "EARLY_PHASE1",
+          "series": "Both",
+          "trial_count": 9,
+          "exactness": "exact",
+          "citation_count": 9,
+          "citations": [
+            {
+              "nct_id": "NCT02210117",
+              "title": "Nivolumab With or Without Bevacizumab or Ipilimumab Before Surgery in Treating Patients With Metastatic Kidney Cancer That Can Be Removed by Surgery",
+              "url": "https://clinicaltrials.gov/study/NCT02210117",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Nivolumab With or Without Bevacizumab or Ipilimumab Before Surgery in Treating Patients With Metastatic Kidney Cancer That Can Be Removed by Surgery"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"EARLY_PHASE1\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT03162731",
+              "title": "Nivolumab, Ipilimumab, and Radiation Therapy in Treating Patients With Stage III-IVB Head and Neck Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT03162731",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Nivolumab, Ipilimumab, and Radiation Therapy in Treating Patients With Stage III-IVB Head and Neck Cancer"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"EARLY_PHASE1\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 1",
+          "phase_code": "PHASE1",
+          "series": "Both",
+          "trial_count": 123,
+          "exactness": "exact",
+          "citation_count": 123,
+          "citations": [
+            {
+              "nct_id": "NCT01024231",
+              "title": "Dose-escalation Study of Combination BMS-936558 (MDX-1106) and Ipilimumab in Subjects With Unresectable Stage III or Stage IV Malignant Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT01024231",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Dose-escalation Study of Combination BMS-936558 (MDX-1106) and Ipilimumab in Subjects With Unresectable Stage III or Stage IV Malignant Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT01176474",
+              "title": "Vaccine Combining Multiple Class I Peptides and Montanide ISA 51VG With Escalating Doses of Anti-PD-1 Antibody Nivolumab or Ipilimumab With Nivolumab For Patients With Resected Stages IIIC/ IV Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT01176474",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Vaccine Combining Multiple Class I Peptides and Montanide ISA 51VG With Escalating Doses of Anti-PD-1 Antibody Nivolumab or Ipilimumab With Nivolumab For Patients With Resected Stages IIIC/ IV Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 1/Phase 2",
+          "phase_code": "PHASE1|PHASE2",
+          "series": "Both",
+          "trial_count": 99,
+          "exactness": "exact",
+          "citation_count": 99,
+          "citations": [
+            {
+              "nct_id": "NCT01592370",
+              "title": "An Investigational Immuno-Therapy Study to Determine the Safety and Effectiveness of Nivolumab and Daratumumab in Patients With Multiple Myeloma",
+              "url": "https://clinicaltrials.gov/study/NCT01592370",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "An Investigational Immuno-Therapy Study to Determine the Safety and Effectiveness of Nivolumab and Daratumumab in Patients With Multiple Myeloma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\",\"PHASE2\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT01658878",
+              "title": "An Immuno-therapy Study to Evaluate the Effectiveness, Safety and Tolerability of Nivolumab or Nivolumab in Combination With Other Agents in Patients With Advanced Liver Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT01658878",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "An Immuno-therapy Study to Evaluate the Effectiveness, Safety and Tolerability of Nivolumab or Nivolumab in Combination With Other Agents in Patients With Advanced Liver Cancer"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE1\",\"PHASE2\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 2",
+          "phase_code": "PHASE2",
+          "series": "Both",
+          "trial_count": 274,
+          "exactness": "exact",
+          "citation_count": 274,
+          "citations": [
+            {
+              "nct_id": "NCT01585194",
+              "title": "Nivolumab and Ipilimumab in Treating Patients With Metastatic Uveal Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT01585194",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Nivolumab and Ipilimumab in Treating Patients With Metastatic Uveal Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT01783938",
+              "title": "Study of Nivolumab Given Sequentially With Ipilimumab in Subjects With Advanced or Metastatic Melanoma (CheckMate 064)",
+              "url": "https://clinicaltrials.gov/study/NCT01783938",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Study of Nivolumab Given Sequentially With Ipilimumab in Subjects With Advanced or Metastatic Melanoma (CheckMate 064)"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 2/Phase 3",
+          "phase_code": "PHASE2|PHASE3",
+          "series": "Both",
+          "trial_count": 9,
+          "exactness": "exact",
+          "citation_count": 9,
+          "citations": [
+            {
+              "nct_id": "NCT02339571",
+              "title": "A Phase II/III Trial of Nivolumab, Ipilimumab, and GM-CSF in Patients With Advanced Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT02339571",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Phase II/III Trial of Nivolumab, Ipilimumab, and GM-CSF in Patients With Advanced Melanoma"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\",\"PHASE3\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT03604991",
+              "title": "Nivolumab and Ipilimumab in Treating Patients With Esophageal and Gastroesophageal Junction Adenocarcinoma Undergoing Surgery",
+              "url": "https://clinicaltrials.gov/study/NCT03604991",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Nivolumab and Ipilimumab in Treating Patients With Esophageal and Gastroesophageal Junction Adenocarcinoma Undergoing Surgery"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE2\",\"PHASE3\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 3",
+          "phase_code": "PHASE3",
+          "series": "Both",
+          "trial_count": 55,
+          "exactness": "exact",
+          "citation_count": 55,
+          "citations": [
+            {
+              "nct_id": "NCT01844505",
+              "title": "Phase 3 Study of Nivolumab or Nivolumab Plus Ipilimumab Versus Ipilimumab Alone in Previously Untreated Advanced Melanoma (CheckMate 067)",
+              "url": "https://clinicaltrials.gov/study/NCT01844505",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Phase 3 Study of Nivolumab or Nivolumab Plus Ipilimumab Versus Ipilimumab Alone in Previously Untreated Advanced Melanoma (CheckMate 067)"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE3\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT02017717",
+              "title": "A Study of the Effectiveness and Safety of Nivolumab Compared to Bevacizumab and of Nivolumab With or Without Ipilimumab in Glioblastoma Patients",
+              "url": "https://clinicaltrials.gov/study/NCT02017717",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of the Effectiveness and Safety of Nivolumab Compared to Bevacizumab and of Nivolumab With or Without Ipilimumab in Glioblastoma Patients"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE3\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Phase 4",
+          "phase_code": "PHASE4",
+          "series": "Both",
+          "trial_count": 5,
+          "exactness": "exact",
+          "citation_count": 5,
+          "citations": [
+            {
+              "nct_id": "NCT02869789",
+              "title": "An Investigational Immuno-therapy Study for Safety of Nivolumab in Combination With Ipilimumab to Treat Advanced Cancers",
+              "url": "https://clinicaltrials.gov/study/NCT02869789",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "An Investigational Immuno-therapy Study for Safety of Nivolumab in Combination With Ipilimumab to Treat Advanced Cancers"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE4\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT02982954",
+              "title": "A Study to Evaluate the Safety of Nivolumab and Ipilimumab in Subjects With Previously Untreated Advanced or Metastatic Renal Cell Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT02982954",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate the Safety of Nivolumab and Ipilimumab in Subjects With Previously Untreated Advanced or Metastatic Renal Cell Cancer"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"PHASE4\"]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "phase": "Not Applicable",
+          "phase_code": "NA",
+          "series": "Both",
+          "trial_count": 23,
+          "exactness": "exact",
+          "citation_count": 23,
+          "citations": [
+            {
+              "nct_id": "NCT02700971",
+              "title": "RATIO: Rational Approach To Immuno-Oncology",
+              "url": "https://clinicaltrials.gov/study/NCT02700971",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "RATIO: Rational Approach To Immuno-Oncology"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"NA\"]"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT02833233",
+              "title": "A Study of Pre-Operative Treatment With Cryoablation and Immune Therapy in Early Stage Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT02833233",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of Pre-Operative Treatment With Cryoablation and Immune Therapy in Early Stage Breast Cancer"
+                },
+                {
+                  "field": "protocolSection.designModule.phases",
+                  "value": "[\"NA\"]"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "grouped_bar_chart"
+    },
+    "meta": {
+      "query": "Compare phases for trials involving nivolumab vs ipilimumab.",
+      "interpretation": "Compare the distribution of trial phases for trials involving nivolumab versus trials involving ipilimumab.",
+      "assumptions": [
+        "Restricted to interventional studies because observational studies do not have a phase.",
+        "Series 'Nivolumab': all 1,816 matching trials were fetched; values are exact.",
+        "Series 'Nivolumab': 136 of 1,816 fetched trials matched 'nivolumab' without listing it as an intervention by name, other name, or MeSH term (the registry's intervention search also matches descriptions); they are included. Set drug_match=strict to exclude them.",
+        "Series 'Ipilimumab': all 893 matching trials were fetched; values are exact.",
+        "Series 'Ipilimumab': 75 of 893 fetched trials matched 'ipilimumab' without listing it as an intervention by name, other name, or MeSH term (the registry's intervention search also matches descriptions); they are included. Set drug_match=strict to exclude them.",
+        "comparison_mode=partition: trials were regrouped into 'Nivolumab only' (1,219), 'Ipilimumab only' (296), 'Both' (597) so each trial is counted once."
+      ],
+      "warnings": [],
+      "plan": {
+        "analysis": "comparison",
+        "viz_type": "grouped_bar_chart",
+        "filter": {
+          "drugs": [],
+          "conditions": [],
+          "sponsors": [],
+          "countries": [],
+          "terms": [],
+          "phases": [],
+          "statuses": [],
+          "study_types": [
+            "INTERVENTIONAL"
+          ],
+          "start_year": null,
+          "end_year": null
+        },
+        "series": [
+          {
+            "label": "Nivolumab",
+            "filter": {
+              "drugs": [
+                "nivolumab"
+              ],
+              "conditions": [],
+              "sponsors": [],
+              "countries": [],
+              "terms": [],
+              "phases": [],
+              "statuses": [],
+              "study_types": [],
+              "start_year": null,
+              "end_year": null
+            }
+          },
+          {
+            "label": "Ipilimumab",
+            "filter": {
+              "drugs": [
+                "ipilimumab"
+              ],
+              "conditions": [],
+              "sponsors": [],
+              "countries": [],
+              "terms": [],
+              "phases": [],
+              "statuses": [],
+              "study_types": [],
+              "start_year": null,
+              "end_year": null
+            }
+          }
+        ],
+        "dimension": "phase",
+        "split_by": null,
+        "measure": "trial_count",
+        "network": null,
+        "numeric_x": null,
+        "numeric_y": null,
+        "time_granularity": "year",
+        "top_n": null,
+        "interpretation": "Compare the distribution of trial phases for trials involving nivolumab versus trials involving ipilimumab.",
+        "assumptions": [
+          "Restricted to interventional studies because observational studies do not have a phase."
+        ],
+        "planner_mode": "llm"
+      },
+      "filters": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [
+          "INTERVENTIONAL"
+        ],
+        "start_year": null,
+        "end_year": null
+      },
+      "retrieval": [
+        {
+          "label": "Nivolumab",
+          "filter": {
+            "drugs": [
+              "nivolumab"
+            ],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [
+              "INTERVENTIONAL"
+            ],
+            "start_year": null,
+            "end_year": null
+          },
+          "total_matching": 1816,
+          "fetched": 1816,
+          "truncated": false,
+          "coverage": 1.0,
+          "fetch_policy": "complete",
+          "sample_order": "StartDate:desc",
+          "count_method": "sampled",
+          "drug_match": {
+            "mode": "any",
+            "listed_as_intervention": 1680,
+            "mention_only": 136
+          }
+        },
+        {
+          "label": "Ipilimumab",
+          "filter": {
+            "drugs": [
+              "ipilimumab"
+            ],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [
+              "INTERVENTIONAL"
+            ],
+            "start_year": null,
+            "end_year": null
+          },
+          "total_matching": 893,
+          "fetched": 893,
+          "truncated": false,
+          "coverage": 1.0,
+          "fetch_policy": "complete",
+          "sample_order": "StartDate:desc",
+          "count_method": "sampled",
+          "drug_match": {
+            "mode": "any",
+            "listed_as_intervention": 818,
+            "mention_only": 75
+          }
+        }
+      ],
+      "series_overlap": [
+        {
+          "series": [
+            "Nivolumab",
+            "Ipilimumab"
+          ],
+          "trials_in_all": 597,
+          "exact": true
+        }
+      ],
+      "verification": {
+        "method": "Every row, node, and edge was re-derived from the fetched trial records by a second pass that shares only the field definitions with the aggregation code; every citation was checked for membership in its datum and every cited field value against the record. Registry counts cannot be re-derived locally and are checked for internal consistency instead.",
+        "checks": [
+          {
+            "name": "structure",
+            "status": "passed",
+            "detail": "24 rows match the documented columns"
+          },
+          {
+            "name": "citations_match_records",
+            "status": "passed",
+            "detail": "48 citations point at fetched records and quote values present in them"
+          },
+          {
+            "name": "values_recounted",
+            "status": "passed",
+            "detail": "24 rows re-derived from 2112 records"
+          },
+          {
+            "name": "partition_sum",
+            "status": "passed",
+            "detail": "2112 in rows + 0 unclassified + 0 hidden = 2112 fetched"
+          }
+        ]
+      },
+      "source": {
+        "name": "ClinicalTrials.gov",
+        "api_base": "https://clinicaltrials.gov/api/v2",
+        "retrieved_at": "2026-10-16T04:01:46+00:00"
+      },
+      "api_calls": [
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=nivolumab&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
+          "status": 200,
+          "elapsed_ms": 0,
+          "cached": true,
+          "studies_returned": 1000,
+          "total_count": 1816
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=nivolumab&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true&pageToken=ZVNj7o2Elu8o3lpzBdv-p-numpOQJJxuYPSh2_ISnD6SuP08FCfCFfbU99BK2SI",
+          "status": 200,
+          "elapsed_ms": 0,
+          "cached": true,
+          "studies_returned": 816,
+          "total_count": null
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.intr=ipilimumab&filter.advanced=AREA%5BStudyType%5DINTERVENTIONAL&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
+          "status": 200,
+          "elapsed_ms": 0,
+          "cached": true,
+          "studies_returned": 893,
+          "total_count": 893
+        }
+      ],
+      "planner": {
+        "mode": "llm",
+        "model": "claude-sonnet-5-5",
+        "attempts": 1,
+        "fallback_reason": null
+      },
+      "timing": {
+        "interpret_ms": 2191,
+        "retrieve_ms": 81,
+        "aggregate_ms": 81,
+        "total_ms": 2353
+      }
+    }
+  }
+}

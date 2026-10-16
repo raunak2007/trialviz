@@ -94,19 +94,33 @@ def test_intervention_dimension_uses_folded_names(studies):
     assert "MK-3475" not in by_label and "Keytruda" not in by_label
 
 
-def test_drug_drug_network_counts_cooccurrence_and_skips_placebo(studies):
+def test_drug_drug_network_links_same_arm_only_and_skips_placebo(studies):
     trials = trials_of(studies)
     net = build_network(trials, NetworkKind.DRUG_DRUG, citations_per_datum=2)
     edges = {(e.source, e.target): e for e in net.edges}
     assert ("drug:dabrafenib", "drug:trametinib") in edges
     assert ("drug:ipilimumab", "drug:nivolumab") in edges
+    assert ("drug:docetaxel", "drug:pembrolizumab") not in edges  # NCT05000009 compares them in separate arms
     assert not any("placebo" in k[0] or "placebo" in k[1] for k in edges)
     assert net.node_kinds == ["drug"]
     pembro = next(n for n in net.nodes if n.id == "drug:pembrolizumab")
-    assert pembro.trial_count == 3  # with lenvatinib, docetaxel, and carboplatin/pemetrexed; not with placebo or radiation
+    assert pembro.trial_count == 2  # with lenvatinib and with carboplatin/pemetrexed; not with docetaxel, placebo, or radiation
     edge = edges[("drug:dabrafenib", "drug:trametinib")]
     assert edge.citations[0].nct_id == "NCT05000005"
-    assert {ev.field.split(".")[-1] for ev in edge.citations[0].evidence} >= {"name"}
+    assert any(ev.field.endswith("interventionNames") for ev in edge.citations[0].evidence)
+    assert net.trials_without_arm_data == 2 and net.trials_considered == len(trials) - 2
+    assert "same arm" in net.edge_semantics
+
+
+def test_drug_drug_same_trial_network_includes_comparators(studies):
+    trials = trials_of(studies)
+    net = build_network(trials, NetworkKind.DRUG_DRUG_SAME_TRIAL)
+    edges = {(e.source, e.target) for e in net.edges}
+    assert ("drug:docetaxel", "drug:pembrolizumab") in edges
+    pembro = next(n for n in net.nodes if n.id == "drug:pembrolizumab")
+    assert pembro.trial_count == 3
+    assert net.trials_without_arm_data == 0 and net.trials_considered == len(trials)
+    assert all(n.exactness == "exact" for n in net.nodes)
 
 
 def test_sponsor_drug_network_prunes_to_heaviest_edges(studies):

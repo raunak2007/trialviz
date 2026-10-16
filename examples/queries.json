@@ -13,9 +13,26 @@
     }
   },
   {
+    "name": "distribution_pembrolizumab_sponsor_class_strict",
+    "request": {
+      "query": "Sponsor class breakdown for trials of this drug",
+      "drug_name": "pembrolizumab",
+      "drug_match": "strict",
+      "citations_per_datum": 2
+    }
+  },
+  {
     "name": "comparison_nivolumab_vs_ipilimumab",
     "request": {
       "query": "Compare phases for trials involving nivolumab vs ipilimumab."
+    }
+  },
+  {
+    "name": "comparison_nivolumab_vs_ipilimumab_partition",
+    "request": {
+      "query": "Compare phases for trials involving nivolumab vs ipilimumab.",
+      "comparison_mode": "partition",
+      "citations_per_datum": 2
     }
   },
   {

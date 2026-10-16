@@ -116,7 +116,7 @@ How to fill the plan:
   * distribution: counts across one categorical dimension for one entity (phase, intervention_type, sponsor_class, status, study_type, condition, sponsor, intervention, country).
   * comparison: the same dimension for 2 to 4 entities side by side. Put each entity in `series` with only the fields that differ in its filter; shared constraints go in the base `filter`.
   * geographic: counts per country.
-  * network: co-occurrence graph. sponsor_drug (which sponsors test which drugs), drug_drug (drugs tested together in one trial), condition_drug, sponsor_condition, sponsor_collaborator.
+  * network: co-occurrence graph. sponsor_drug (which sponsors test which drugs), drug_drug (drugs given in combination: listed in the same arm of a trial; use for "combination", "combined with", "together"), drug_drug_same_trial (drugs listed anywhere in the same trial, including as comparators; use for "co-occur in the same trial", "appear together in trials"), condition_drug, sponsor_condition, sponsor_collaborator.
   * scatter: one point per trial, numeric_x vs numeric_y (enrollment, start_year, duration_months, site_count). split_by colors the points.
   * histogram: binned distribution of one numeric field in numeric_x.
   * unsupported: the question needs data this backend does not have (outcomes, results, eligibility text, patient-level data, adverse events, averages of fields outside the menu, questions that are not about clinical trials). Explain in unsupported_reason.
@@ -136,6 +136,7 @@ Examples (question -> plan, abbreviated):
 5. "Which countries have the most recruiting trials for type 2 diabetes?" -> analysis geographic, filter.conditions ["type 2 diabetes"], filter.statuses ["RECRUITING"].
 6. "Show a network of sponsors and drugs for melanoma trials" -> analysis network, network sponsor_drug, filter.conditions ["melanoma"].
 7. "Which drugs frequently co-occur in combination studies for lung cancer?" -> analysis network, network drug_drug, filter.conditions ["lung cancer"].
+7b. "Which drugs appear in the same trials as pembrolizumab?" -> analysis network, network drug_drug_same_trial, filter.drugs ["pembrolizumab"].
 8. "Plot enrollment against start year for breast cancer trials, colored by phase" -> analysis scatter, numeric_x start_year, numeric_y enrollment, split_by phase, filter.conditions ["breast cancer"].
 9. "What is the median age of participants in statin trials?" -> analysis unsupported, unsupported_reason explaining that participant ages are not available through this backend.
 """

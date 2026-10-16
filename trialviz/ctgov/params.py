@@ -32,6 +32,7 @@ STUDY_FIELDS = (
     "InterventionType",
     "InterventionName",
     "InterventionOtherName",
+    "ArmGroupInterventionName",
     "LocationCountry",
     "InterventionMeshTerm",
     "ConditionMeshTerm",

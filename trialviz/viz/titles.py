@@ -67,7 +67,8 @@ GRANULARITY_WORD = {TimeGranularity.YEAR: "year", TimeGranularity.QUARTER: "quar
 
 NETWORK_TITLES: dict[NetworkKind, str] = {
     NetworkKind.SPONSOR_DRUG: "Sponsor to drug network for {entity}",
-    NetworkKind.DRUG_DRUG: "Drugs tested together in {entity}",
+    NetworkKind.DRUG_DRUG: "Drugs given in combination (same arm) in {entity}",
+    NetworkKind.DRUG_DRUG_SAME_TRIAL: "Drugs listed in the same trial among {entity}",
     NetworkKind.CONDITION_DRUG: "Condition to drug network for {entity}",
     NetworkKind.SPONSOR_CONDITION: "Sponsor to condition network for {entity}",
     NetworkKind.SPONSOR_COLLABORATOR: "Lead sponsor to collaborator network for {entity}",

@@ -40,6 +40,11 @@
           "description": "Number of trials"
         },
         {
+          "name": "exactness",
+          "type": "string",
+          "description": "'exact' or 'sampled' (see schema)"
+        },
+        {
           "name": "citation_count",
           "type": "integer",
           "description": "Distinct trials supporting this row"
@@ -54,12 +59,18 @@
         "sort": "value_desc",
         "stacked": false,
         "value_format": "integer",
-        "y_zero_based": true
+        "y_zero_based": true,
+        "groupby_semantics": "overlapping",
+        "bucket_sum": 1053,
+        "distinct_trials": 731,
+        "unclassified_count": 0,
+        "hidden_count": 137
       },
       "data": [
         {
           "country": "United States",
           "trial_count": 314,
+          "exactness": "exact",
           "citation_count": 314,
           "citations": [
             {
@@ -112,6 +123,7 @@
         {
           "country": "China",
           "trial_count": 119,
+          "exactness": "exact",
           "citation_count": 119,
           "citations": [
             {
@@ -164,6 +176,7 @@
         {
           "country": "Canada",
           "trial_count": 69,
+          "exactness": "exact",
           "citation_count": 69,
           "citations": [
             {
@@ -216,6 +229,7 @@
         {
           "country": "South Korea",
           "trial_count": 52,
+          "exactness": "exact",
           "citation_count": 52,
           "citations": [
             {
@@ -268,6 +282,7 @@
         {
           "country": "United Kingdom",
           "trial_count": 49,
+          "exactness": "exact",
           "citation_count": 49,
           "citations": [
             {
@@ -320,6 +335,7 @@
         {
           "country": "Germany",
           "trial_count": 45,
+          "exactness": "exact",
           "citation_count": 45,
           "citations": [
             {
@@ -372,6 +388,7 @@
         {
           "country": "Italy",
           "trial_count": 39,
+          "exactness": "exact",
           "citation_count": 39,
           "citations": [
             {
@@ -424,6 +441,7 @@
         {
           "country": "Spain",
           "trial_count": 39,
+          "exactness": "exact",
           "citation_count": 39,
           "citations": [
             {
@@ -476,6 +494,7 @@
         {
           "country": "Denmark",
           "trial_count": 36,
+          "exactness": "exact",
           "citation_count": 36,
           "citations": [
             {
@@ -528,6 +547,7 @@
         {
           "country": "France",
           "trial_count": 36,
+          "exactness": "exact",
           "citation_count": 36,
           "citations": [
             {
@@ -580,6 +600,7 @@
         {
           "country": "Turkey (T\u00fcrkiye)",
           "trial_count": 33,
+          "exactness": "exact",
           "citation_count": 33,
           "citations": [
             {
@@ -632,6 +653,7 @@
         {
           "country": "Brazil",
           "trial_count": 31,
+          "exactness": "exact",
           "citation_count": 31,
           "citations": [
             {
@@ -684,6 +706,7 @@
         {
           "country": "Australia",
           "trial_count": 30,
+          "exactness": "exact",
           "citation_count": 30,
           "citations": [
             {
@@ -736,6 +759,7 @@
         {
           "country": "India",
           "trial_count": 26,
+          "exactness": "exact",
           "citation_count": 26,
           "citations": [
             {
@@ -788,6 +812,7 @@
         {
           "country": "Poland",
           "trial_count": 26,
+          "exactness": "exact",
           "citation_count": 26,
           "citations": [
             {
@@ -840,6 +865,7 @@
         {
           "country": "Japan",
           "trial_count": 25,
+          "exactness": "exact",
           "citation_count": 25,
           "citations": [
             {
@@ -892,6 +918,7 @@
         {
           "country": "Taiwan",
           "trial_count": 24,
+          "exactness": "exact",
           "citation_count": 24,
           "citations": [
             {
@@ -944,6 +971,7 @@
         {
           "country": "Sweden",
           "trial_count": 22,
+          "exactness": "exact",
           "citation_count": 22,
           "citations": [
             {
@@ -996,6 +1024,7 @@
         {
           "country": "Argentina",
           "trial_count": 19,
+          "exactness": "exact",
           "citation_count": 19,
           "citations": [
             {
@@ -1048,6 +1077,7 @@
         {
           "country": "Czechia",
           "trial_count": 19,
+          "exactness": "exact",
           "citation_count": 19,
           "citations": [
             {
@@ -1102,8 +1132,10 @@
     },
     "meta": {
       "query": "Which countries have the most recruiting trials for type 2 diabetes?",
-      "interpretation": "Count recruiting trials for type 2 diabetes by country to see which countries have the most.",
-      "assumptions": [],
+      "interpretation": "Count recruiting trials for type 2 diabetes per country, showing which countries have the most.",
+      "assumptions": [
+        "all 868 matching trials were fetched; values are exact."
+      ],
       "warnings": [
         "Showing the 20 largest of 83 country values."
       ],
@@ -1151,7 +1183,7 @@
         "numeric_y": null,
         "time_granularity": "year",
         "top_n": 20,
-        "interpretation": "Count recruiting trials for type 2 diabetes by country to see which countries have the most.",
+        "interpretation": "Count recruiting trials for type 2 diabetes per country, showing which countries have the most.",
         "assumptions": [],
         "planner_mode": "llm"
       },
@@ -1193,20 +1225,49 @@
           "total_matching": 868,
           "fetched": 868,
           "truncated": false,
+          "coverage": 1.0,
+          "fetch_policy": "complete",
           "sample_order": "StartDate:desc",
-          "count_method": "sampled"
+          "count_method": "sampled",
+          "drug_match": null
         }
       ],
+      "series_overlap": [],
+      "verification": {
+        "method": "Every row, node, and edge was re-derived from the fetched trial records by a second pass that shares only the field definitions with the aggregation code; every citation was checked for membership in its datum and every cited field value against the record. Registry counts cannot be re-derived locally and are checked for internal consistency instead.",
+        "checks": [
+          {
+            "name": "structure",
+            "status": "passed",
+            "detail": "20 rows match the documented columns"
+          },
+          {
+            "name": "citations_match_records",
+            "status": "passed",
+            "detail": "60 citations point at fetched records and quote values present in them"
+          },
+          {
+            "name": "values_recounted",
+            "status": "passed",
+            "detail": "20 rows re-derived from 868 records"
+          },
+          {
+            "name": "partition_sum",
+            "status": "skipped",
+            "detail": "rows overlap (a trial can sit in several rows), so values are not summed"
+          }
+        ]
+      },
       "source": {
         "name": "ClinicalTrials.gov",
         "api_base": "https://clinicaltrials.gov/api/v2",
-        "retrieved_at": "2026-10-16T02:25:21+00:00"
+        "retrieved_at": "2026-10-16T04:01:49+00:00"
       },
       "api_calls": [
         {
-          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.cond=type+2+diabetes&filter.overallStatus=RECRUITING&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.cond=type+2+diabetes&filter.overallStatus=RECRUITING&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CArmGroupInterventionName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
           "status": 200,
-          "elapsed_ms": 537,
+          "elapsed_ms": 678,
           "cached": false,
           "studies_returned": 868,
           "total_count": 868
@@ -1219,10 +1280,10 @@
         "fallback_reason": null
       },
       "timing": {
-        "interpret_ms": 1879,
-        "retrieve_ms": 566,
-        "aggregate_ms": 4,
-        "total_ms": 2449
+        "interpret_ms": 1892,
+        "retrieve_ms": 715,
+        "aggregate_ms": 48,
+        "total_ms": 2656
       }
     }
   }

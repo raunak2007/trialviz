@@ -2,11 +2,16 @@
 
 Each analysis type has one builder. Builders only reshape aggregation output
 into rows, encodings, and column docs; they never compute new numbers beyond
-what `trialviz.analysis` produced.
+what `trialviz.analysis` produced. Besides the rows, every chart carries the
+bookkeeping a reader needs to interpret the numbers: whether a trial can sit
+in more than one row (`groupby_semantics`), how many distinct trials are
+behind the rows, how many fetched trials landed nowhere, and per row whether
+the value is exact or computed from a sample.
 """
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from typing import Literal
 
@@ -25,6 +30,9 @@ from trialviz.schemas.response import (
     ChartEncoding,
     Citation,
     Column,
+    DrugMatch,
+    Exactness,
+    GroupbySemantics,
     GroupedBarChartSpec,
     HistogramSpec,
     NetworkData,
@@ -37,6 +45,7 @@ from trialviz.schemas.response import (
 from trialviz.viz.titles import subtitle_for, title_for
 
 CountMethod = Literal["sampled", "exact_server_counts"]
+FetchPolicy = Literal["sample", "complete"]
 
 
 @dataclass
@@ -50,6 +59,18 @@ class SeriesData:
     truncated: bool
     count_method: CountMethod = "sampled"
     exact_counts: dict[str, int] | None = None  # category label -> exact API count (primary dimension only)
+    fetch_policy: FetchPolicy = "sample"
+    drug_match: DrugMatch | None = None
+    excluded_mention_only: int = 0  # trials dropped by drug_match=strict
+
+    @property
+    def exactness(self) -> Exactness:
+        """Values computed from this series' records are exact only when every matching record was fetched."""
+        return "sampled" if self.truncated else "exact"
+
+    @property
+    def trial_ids(self) -> set[str]:
+        return {t.nct_id for t in self.trials}
 
 
 @dataclass
@@ -57,22 +78,25 @@ class BuildResult:
     spec: VisualizationSpec
     warnings: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
-    # Independent expectation for sum(values), set when every fetched trial lands in exactly one
-    # untrimmed, sampled bucket. `viz.validate` checks the chart against it.
-    expected_sum: int | None = None
 
 
 def build_visualization(
-    plan: QueryPlan, series: list[SeriesData], *, include_citations: bool, citations_per_datum: int
+    plan: QueryPlan,
+    series: list[SeriesData],
+    *,
+    include_citations: bool,
+    citations_per_datum: int,
+    series_disjoint: bool = False,
 ) -> BuildResult:
+    """`series_disjoint` says the series were regrouped so that no trial belongs to more than one of them."""
     limit = citations_per_datum if include_citations else 0
     a = plan.analysis
     if a in (AnalysisType.DISTRIBUTION, AnalysisType.COMPARISON, AnalysisType.GEOGRAPHIC):
         if plan.dimension == Dimension.START_YEAR:
-            return _build_time_series(plan, series, limit)
-        return _build_bars(plan, series, limit)
+            return _build_time_series(plan, series, limit, series_disjoint)
+        return _build_bars(plan, series, limit, series_disjoint)
     if a == AnalysisType.TIME_TREND:
-        return _build_time_series(plan, series, limit)
+        return _build_time_series(plan, series, limit, series_disjoint)
     if a == AnalysisType.NETWORK:
         return _build_network(plan, series, limit)
     if a == AnalysisType.SCATTER:
@@ -92,9 +116,9 @@ def _measure_title(measure: Measure) -> str:
 def _sample_notes(series: list[SeriesData]) -> list[str]:
     notes: list[str] = []
     for s in series:
+        prefix = f"Series '{s.label}': " if len(series) > 1 else ""
         if not s.truncated or s.total_matching is None:
             continue
-        prefix = f"Series '{s.label}': " if len(series) > 1 else ""
         if s.count_method == "exact_server_counts":
             notes.append(
                 f"{prefix}{s.total_matching:,} trials match; values are exact ClinicalTrials.gov counts per category, "
@@ -108,10 +132,16 @@ def _sample_notes(series: list[SeriesData]) -> list[str]:
     return notes
 
 
-def _row(values: dict, bucket: Bucket | None, limit: int, citation_count: int | None = None) -> Row:
+def _row(values: dict, bucket: Bucket | None, limit: int, exactness: Exactness, citation_count: int | None = None) -> Row:
     citations: list[Citation] = bucket.citations(limit) if bucket is not None and limit else []
     count = citation_count if citation_count is not None else (bucket.trial_count if bucket else 0)
-    return Row(**values, citations=citations, citation_count=count)
+    return Row(**values, exactness=exactness, citations=citations, citation_count=count)
+
+
+def _bucket_exactness(bucket: Bucket | None, s: SeriesData) -> Exactness:
+    if bucket is not None and bucket.exact:
+        return "exact"
+    return s.exactness
 
 
 def _dimension_columns(spec: DimensionSpec, measure: Measure, with_series: bool, with_code: bool) -> list[Column]:
@@ -129,6 +159,7 @@ def _dimension_columns(spec: DimensionSpec, measure: Measure, with_series: bool,
 
 def _citation_columns() -> list[Column]:
     return [
+        Column(name="exactness", type="string", description="'exact' or 'sampled' (see schema)"),
         Column(name="citation_count", type="integer", description="Distinct trials supporting this row"),
         Column(
             name="citations",
@@ -146,7 +177,9 @@ def _apply_exact(buckets: list[Bucket], spec: DimensionSpec, exact: dict[str, in
     for label, count in exact.items():
         bucket = by_label.get(label)
         if bucket is None:
-            if count == 0:
+            # Zero-count categories are left out of bar charts; periods are kept so the series has
+            # one exact point per period.
+            if count == 0 and spec.dimension != Dimension.START_YEAR:
                 continue
             bucket = Bucket(label=label)
             if spec.dimension == Dimension.START_YEAR:
@@ -164,10 +197,67 @@ def _apply_exact(buckets: list[Bucket], spec: DimensionSpec, exact: dict[str, in
     return buckets
 
 
+def _semantics(
+    spec: DimensionSpec, split_spec: DimensionSpec | None, multi_series: bool, series_disjoint: bool
+) -> GroupbySemantics:
+    if spec.multi_valued or (split_spec is not None and split_spec.multi_valued):
+        return "overlapping"
+    if multi_series and not series_disjoint:
+        return "overlapping"
+    return "partition"
+
+
+def _config(
+    *,
+    sort: Literal["natural", "value_desc", "value_asc"],
+    semantics: GroupbySemantics,
+    rows: list[Row],
+    measure_key: str,
+    series: list[SeriesData],
+    shown_buckets: Iterable[Bucket],
+    unclassified_ids: set[str],
+    value_format: Literal["integer", "number"] = "integer",
+    y_zero_based: bool = True,
+) -> ChartConfig:
+    """Chart-level bookkeeping: what the values add up to and how many trials are behind them."""
+    bucket_sum = sum(int(r.model_dump()[measure_key]) for r in rows)
+    exact_series = [s for s in series if s.exact_counts]
+    if exact_series:
+        # Registry counts: the distinct total is only known when the dimension partitions a single series.
+        if semantics == "partition" and len(series) == 1:
+            total = series[0].total_matching
+            distinct: int | None = bucket_sum
+            unclassified: int | None = max(total - bucket_sum, 0) if total is not None else None
+            hidden: int | None = 0
+        else:
+            distinct = unclassified = hidden = None
+    else:
+        shown_ids: set[str] = set()
+        for b in shown_buckets:
+            shown_ids |= b.trial_ids
+        all_ids: set[str] = set()
+        for s in series:
+            all_ids |= s.trial_ids
+        distinct = len(shown_ids)
+        unclassified = len(unclassified_ids - shown_ids)
+        hidden = len(all_ids - shown_ids - unclassified_ids)
+    return ChartConfig(
+        sort=sort,
+        stacked=False,
+        value_format=value_format,
+        y_zero_based=y_zero_based,
+        groupby_semantics=semantics,
+        bucket_sum=bucket_sum,
+        distinct_trials=distinct,
+        unclassified_count=unclassified,
+        hidden_count=hidden,
+    )
+
+
 # ---------------------------------------------------------------- bars
 
 
-def _build_bars(plan: QueryPlan, series: list[SeriesData], limit: int) -> BuildResult:
+def _build_bars(plan: QueryPlan, series: list[SeriesData], limit: int, series_disjoint: bool) -> BuildResult:
     assert plan.dimension is not None
     spec = spec_for(plan.dimension)
     measure = plan.measure
@@ -176,9 +266,10 @@ def _build_bars(plan: QueryPlan, series: list[SeriesData], limit: int) -> BuildR
     split_spec = spec_for(plan.split_by) if plan.split_by else None
     with_code = spec.dimension not in (Dimension.COUNTRY, Dimension.SPONSOR, Dimension.CONDITION, Dimension.INTERVENTION)
     rows: list[Row] = []
+    shown: list[Bucket] = []
+    unclassified_ids: set[str] = set()
     categories_shown = 0
     categories_total = 0
-    expected_sum: int | None = None
 
     if split_spec is not None:
         # Primary dimension on x, split dimension as color. Comparisons with a split are rejected by
@@ -196,10 +287,18 @@ def _build_bars(plan: QueryPlan, series: list[SeriesData], limit: int) -> BuildR
                     values[spec.code_key] = codes.get(p_label)
                 values["series"] = s_label
                 values[measure.value] = bucket.value if bucket else 0
-                rows.append(_row(values, bucket, limit))
+                rows.append(_row(values, bucket, limit, s.exactness))
+                if bucket is not None:
+                    shown.append(bucket)
+        paired_ids: set[str] = set()
+        for b in pairs.values():
+            paired_ids |= b.trial_ids
+        unclassified_ids = s.trial_ids - paired_ids
         color = Channel(field="series", type="nominal", title=split_spec.title)
         categories_total, categories_shown = len({k[0] for k in pairs}), len(primary)
         warnings += _trim_warning(categories_total, categories_shown, spec)
+        if unclassified_ids:
+            warnings.append(_uncategorized_warning(len(unclassified_ids), spec, ""))
     else:
         category_order: list[str] = []
         codes: dict[str, str | None] = {}
@@ -208,14 +307,7 @@ def _build_bars(plan: QueryPlan, series: list[SeriesData], limit: int) -> BuildR
             result = group_by(s.trials, spec, measure, granularity=plan.time_granularity)
             buckets = _apply_exact(result.buckets, spec, s.exact_counts)
             ordered, before = order_buckets(buckets, spec, plan.top_n)
-            if (
-                len(series) == 1
-                and not spec.multi_valued
-                and not s.exact_counts
-                and before == len(ordered)
-                and measure == Measure.TRIAL_COUNT
-            ):
-                expected_sum = len(s.trials) - result.uncategorized
+            unclassified_ids |= result.unclassified_ids
             categories_total = max(categories_total, before)
             warnings += _trim_warning(before, len(ordered), spec, s.label if multi_series else "")
             if result.uncategorized:
@@ -241,7 +333,9 @@ def _build_bars(plan: QueryPlan, series: list[SeriesData], limit: int) -> BuildR
                     values["series"] = s.label
                 values[measure.value] = bucket.value if bucket else 0
                 exact_count = bucket.value if (bucket and bucket.exact and measure == Measure.TRIAL_COUNT) else None
-                rows.append(_row(values, bucket, limit, citation_count=exact_count))
+                rows.append(_row(values, bucket, limit, _bucket_exactness(bucket, s), citation_count=exact_count))
+                if bucket is not None:
+                    shown.append(bucket)
         color = Channel(field="series", type="nominal", title="Series") if multi_series else None
 
     sort: Literal["natural", "value_desc"] = "natural" if spec.natural_order is not None else "value_desc"
@@ -258,13 +352,21 @@ def _build_bars(plan: QueryPlan, series: list[SeriesData], limit: int) -> BuildR
         if categories_total > categories_shown
         else []
     )
+    config = _config(
+        sort=sort,
+        semantics=_semantics(spec, split_spec, multi_series, series_disjoint),
+        rows=rows,
+        measure_key=measure.value,
+        series=series,
+        shown_buckets=shown,
+        unclassified_ids=unclassified_ids,
+    )
     common = dict(title=title_for(plan), subtitle=subtitle_for(plan, extra_sub), encoding=encoding, columns=columns, data=rows)
-    config = ChartConfig(sort=sort, stacked=False, value_format="integer")
     if color is not None:
         spec_out: VisualizationSpec = GroupedBarChartSpec(type="grouped_bar_chart", config=config, **common)
     else:
         spec_out = BarChartSpec(type="bar_chart", config=config, **common)
-    return BuildResult(spec=spec_out, warnings=warnings, notes=notes, expected_sum=expected_sum)
+    return BuildResult(spec=spec_out, warnings=warnings, notes=notes)
 
 
 def _primary_order(pairs: dict[tuple[str, str], Bucket], spec: DimensionSpec, top_n: int | None) -> list[str]:
@@ -296,16 +398,17 @@ def _uncategorized_warning(n: int, spec: DimensionSpec, series_label: str = "") 
 # ---------------------------------------------------------------- time series
 
 
-def _build_time_series(plan: QueryPlan, series: list[SeriesData], limit: int) -> BuildResult:
+def _build_time_series(plan: QueryPlan, series: list[SeriesData], limit: int, series_disjoint: bool) -> BuildResult:
     spec = spec_for(Dimension.START_YEAR)
     measure = plan.measure
     gran = plan.time_granularity
     warnings: list[str] = []
     rows: list[Row] = []
+    shown: list[Bucket] = []
+    unclassified_ids: set[str] = set()
     multi_series = len(series) > 1
     split_spec = spec_for(plan.split_by) if plan.split_by else None
     lo, hi = plan.filter.start_year, plan.filter.end_year
-    expected_sum: int | None = None
 
     if split_spec is not None:
         s = series[0]
@@ -315,25 +418,31 @@ def _build_time_series(plan: QueryPlan, series: list[SeriesData], limit: int) ->
             buckets = [b for (p, sl), b in pairs.items() if sl == s_label]
             buckets.sort(key=lambda b: b.period_start or b.label)
             for b in fill_period_gaps(buckets, lo, hi, gran):
-                rows.append(
-                    _row({"period": b.label, "period_start": b.period_start, "series": s_label, measure.value: b.value}, b, limit)
-                )
+                values = {"period": b.label, "period_start": b.period_start, "series": s_label, measure.value: b.value}
+                rows.append(_row(values, b, limit, s.exactness))
+                shown.append(b)
+        paired_ids: set[str] = set()
+        for b in pairs.values():
+            paired_ids |= b.trial_ids
+        unclassified_ids = s.trial_ids - paired_ids
+        if unclassified_ids:
+            warnings.append(_uncategorized_warning(len(unclassified_ids), spec, ""))
         color = Channel(field="series", type="nominal", title=split_spec.title)
     else:
         for s in series:
             result = group_by(s.trials, spec, measure, granularity=gran)
             buckets = _apply_exact(result.buckets, spec, s.exact_counts)
             ordered, _ = order_buckets(buckets, spec, None)
+            unclassified_ids |= result.unclassified_ids
             if result.uncategorized:
                 warnings.append(_uncategorized_warning(result.uncategorized, spec, s.label if multi_series else ""))
-            if not multi_series and not s.exact_counts and measure == Measure.TRIAL_COUNT:
-                expected_sum = len(s.trials) - result.uncategorized
             for b in fill_period_gaps(ordered, lo, hi, gran):
                 values = {"period": b.label, "period_start": b.period_start, measure.value: b.value}
                 if multi_series:
                     values["series"] = s.label
                 exact_count = b.value if (b.exact and measure == Measure.TRIAL_COUNT) else None
-                rows.append(_row(values, b, limit, citation_count=exact_count))
+                rows.append(_row(values, b, limit, _bucket_exactness(b, s), citation_count=exact_count))
+                shown.append(b)
         color = Channel(field="series", type="nominal", title="Series") if multi_series else None
 
     encoding = ChartEncoding(
@@ -353,16 +462,25 @@ def _build_time_series(plan: QueryPlan, series: list[SeriesData], limit: int) ->
         Column(name=measure.value, type="integer", description=f"{_measure_title(measure)} started in the period"),
         *_citation_columns(),
     ]
+    config = _config(
+        sort="natural",
+        semantics=_semantics(spec, split_spec, multi_series, series_disjoint),
+        rows=rows,
+        measure_key=measure.value,
+        series=series,
+        shown_buckets=shown,
+        unclassified_ids=unclassified_ids,
+    )
     spec_out = TimeSeriesSpec(
         type="time_series",
         title=title_for(plan),
         subtitle=subtitle_for(plan, []),
         encoding=encoding,
         columns=columns,
-        config=ChartConfig(sort="natural"),
+        config=config,
         data=rows,
     )
-    return BuildResult(spec=spec_out, warnings=warnings, notes=_sample_notes(series), expected_sum=expected_sum)
+    return BuildResult(spec=spec_out, warnings=warnings, notes=_sample_notes(series))
 
 
 # ---------------------------------------------------------------- network
@@ -371,14 +489,20 @@ def _build_time_series(plan: QueryPlan, series: list[SeriesData], limit: int) ->
 def _build_network(plan: QueryPlan, series: list[SeriesData], limit: int) -> BuildResult:
     assert plan.network is not None
     s = series[0]
-    result = build_network(s.trials, plan.network, max_edges=plan.top_n, citations_per_datum=limit)
+    result = build_network(s.trials, plan.network, max_edges=plan.top_n, citations_per_datum=limit, exactness=s.exactness)
     warnings: list[str] = []
     if result.edges_before_trim > len(result.edges):
         warnings.append(f"Showing the {len(result.edges)} heaviest of {result.edges_before_trim} edges.")
     if not result.edges:
-        warnings.append("No co-occurring pairs were found in the fetched trials.")
+        warnings.append("No linked pairs were found in the fetched trials.")
+    if result.trials_without_arm_data:
+        warnings.append(
+            f"{result.trials_without_arm_data:,} fetched trials list no arm groups, so their drugs cannot be placed in "
+            "the same arm and they do not contribute edges."
+        )
     notes = _sample_notes(series) + [
-        f"{result.trials_with_pairs:,} of {len(s.trials):,} fetched trials contained at least one linked pair."
+        f"{result.trials_with_pairs:,} of {len(s.trials):,} fetched trials contained at least one linked pair.",
+        f"Edge meaning: {result.edge_semantics}.",
     ]
     extra = [f"{len(result.nodes)} nodes, {len(result.edges)} edges, weight = trials in common"]
     spec_out = NetworkGraphSpec(
@@ -386,6 +510,9 @@ def _build_network(plan: QueryPlan, series: list[SeriesData], limit: int) -> Bui
         title=title_for(plan),
         subtitle=subtitle_for(plan, extra),
         node_kinds=result.node_kinds,
+        edge_semantics=result.edge_semantics,
+        trials_considered=result.trials_considered,
+        trials_skipped=result.trials_without_arm_data,
         data=NetworkData(nodes=result.nodes, edges=result.edges),
     )
     return BuildResult(spec=spec_out, warnings=warnings, notes=notes)
@@ -424,7 +551,7 @@ def _build_scatter(plan: QueryPlan, series: list[SeriesData], limit: int) -> Bui
                 evidence=[p.trial.evidence_title(), *p.evidence],
             )
         ]
-        rows.append(Row(**values, citations=citation if limit else [], citation_count=1))
+        rows.append(Row(**values, exactness="exact", citations=citation if limit else [], citation_count=1))
     warnings = [f"{skipped} fetched trials lack one of the two values and are not plotted."] if skipped else []
     x_type: Literal["quantitative", "temporal"] = "quantitative"
     encoding = ChartEncoding(
@@ -441,13 +568,23 @@ def _build_scatter(plan: QueryPlan, series: list[SeriesData], limit: int) -> Bui
         *([Column(name="group", type="string", description=group_spec.title)] if group_spec else []),
         *_citation_columns(),
     ]
+    config = ChartConfig(
+        sort="natural",
+        value_format="number",
+        y_zero_based=False,
+        groupby_semantics="partition",
+        bucket_sum=None,
+        distinct_trials=len(rows),
+        unclassified_count=skipped,
+        hidden_count=0,
+    )
     spec_out = ScatterPlotSpec(
         type="scatter_plot",
         title=title_for(plan),
         subtitle=subtitle_for(plan, [f"{len(rows):,} trials plotted"]),
         encoding=encoding,
         columns=columns,
-        config=ChartConfig(sort="natural", value_format="number", y_zero_based=False),
+        config=config,
         data=rows,
     )
     return BuildResult(spec=spec_out, warnings=warnings, notes=_sample_notes(series))
@@ -464,7 +601,7 @@ def _build_histogram(plan: QueryPlan, series: list[SeriesData], limit: int) -> B
     for i, b in enumerate(result.buckets):
         lo = result.edges[i]
         hi = result.edges[i + 1] if i + 1 < len(result.edges) else None
-        rows.append(_row({"bin": b.label, "bin_start": lo, "bin_end": hi, "trial_count": b.value}, b, limit))
+        rows.append(_row({"bin": b.label, "bin_start": lo, "bin_end": hi, "trial_count": b.value}, b, limit, s.exactness))
     warnings = (
         [f"{result.missing} fetched trials have no {NUMERIC_TITLES[plan.numeric_x].lower()} and are not binned."]
         if result.missing
@@ -482,13 +619,25 @@ def _build_histogram(plan: QueryPlan, series: list[SeriesData], limit: int) -> B
         Column(name="trial_count", type="integer", description="Trials whose value falls in the bin"),
         *_citation_columns(),
     ]
+    binned: set[str] = set()
+    for b in result.buckets:
+        binned |= b.trial_ids
+    config = _config(
+        sort="natural",
+        semantics="partition",
+        rows=rows,
+        measure_key="trial_count",
+        series=series,
+        shown_buckets=result.buckets,
+        unclassified_ids=s.trial_ids - binned,
+    )
     spec_out = HistogramSpec(
         type="histogram",
         title=title_for(plan),
         subtitle=subtitle_for(plan, [f"{sum(b.value for b in result.buckets):,} trials binned"]),
         encoding=encoding,
         columns=columns,
-        config=ChartConfig(sort="natural"),
+        config=config,
         bins=BinSpec(field=plan.numeric_x.value, edges=result.edges, unit=_unit(plan)),
         data=rows,
     )

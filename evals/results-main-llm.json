@@ -1,0 +1,2684 @@
+[
+  {
+    "id": "tt-01",
+    "query": "How has the number of trials for pembrolizumab changed per year since 2015?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "time_trend",
+      "viz_type": "time_series",
+      "filter": {
+        "drugs": [
+          "pembrolizumab"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": 2015,
+        "end_year": 2026
+      },
+      "series": [
+        {
+          "label": "pembrolizumab trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "tt-02",
+    "query": "Show the yearly trend of trials studying semaglutide",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "time_trend",
+      "viz_type": "time_series",
+      "filter": {
+        "drugs": [
+          "semaglutide"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": 2016,
+        "end_year": 2026
+      },
+      "series": [
+        {
+          "label": "semaglutide trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "tt-03",
+    "query": "Number of melanoma trials started each quarter between 2018 and 2022",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "time_trend",
+      "viz_type": "time_series",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "melanoma"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": 2018,
+        "end_year": 2022
+      },
+      "series": [
+        {
+          "label": "melanoma trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "quarter",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "tt-04",
+    "query": "Trend of recruiting trials for type 2 diabetes over the last 5 years",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "time_trend",
+      "viz_type": "time_series",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "type 2 diabetes"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [
+          "RECRUITING"
+        ],
+        "study_types": [],
+        "start_year": 2021,
+        "end_year": 2026
+      },
+      "series": [
+        {
+          "label": "type 2 diabetes trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "tt-05",
+    "query": "Monthly count of trials for atopic dermatitis started in 2021",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "time_trend",
+      "viz_type": "time_series",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "atopic dermatitis"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": 2021,
+        "end_year": 2021
+      },
+      "series": [
+        {
+          "label": "atopic dermatitis trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "month",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "tt-06",
+    "query": "Plot how many phase 3 trials Novartis started per year since 2010",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "time_trend",
+      "viz_type": "time_series",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [
+          "Novartis"
+        ],
+        "countries": [],
+        "terms": [],
+        "phases": [
+          "PHASE3"
+        ],
+        "statuses": [],
+        "study_types": [],
+        "start_year": 2010,
+        "end_year": 2026
+      },
+      "series": [
+        {
+          "label": "trials sponsored by Novartis",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "tt-07",
+    "query": "How has the number of nivolumab trials per year changed, broken down by phase?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "time_trend",
+      "viz_type": "time_series",
+      "filter": {
+        "drugs": [
+          "nivolumab"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [
+          "INTERVENTIONAL"
+        ],
+        "start_year": 2016,
+        "end_year": 2026
+      },
+      "series": [
+        {
+          "label": "nivolumab trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": "phase",
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "tt-08",
+    "query": "How has the number of trials for this drug changed per year since 2015?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "time_trend",
+      "viz_type": "time_series",
+      "filter": {
+        "drugs": [
+          "Pembrolizumab"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": 2015,
+        "end_year": 2026
+      },
+      "series": [
+        {
+          "label": "Pembrolizumab trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-01",
+    "query": "How are melanoma trials distributed across phases?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "melanoma"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [
+          "INTERVENTIONAL"
+        ],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "melanoma trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "phase",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-02",
+    "query": "What phases are the trials of aspirin in?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [
+          "aspirin"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [
+          "INTERVENTIONAL"
+        ],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "aspirin trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "phase",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-03",
+    "query": "Breakdown of lung cancer trials by intervention type",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "lung cancer"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "lung cancer trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "intervention_type",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-04",
+    "query": "Who sponsors the most trials for Alzheimer's disease?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "Alzheimer's disease"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "Alzheimer's disease trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "sponsor",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-05",
+    "query": "What is the recruitment status of trials for ulcerative colitis?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "ulcerative colitis"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "ulcerative colitis trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "status",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-06",
+    "query": "Which conditions are studied most in trials of metformin?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [
+          "metformin"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "metformin trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "condition",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-07",
+    "query": "Which drugs are most commonly tested in psoriasis trials?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "psoriasis"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "psoriasis trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "intervention",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-08",
+    "query": "Sponsor class breakdown for heart failure trials",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "heart failure"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "heart failure trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "sponsor_class",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-09",
+    "query": "Are schizophrenia trials mostly interventional or observational?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "schizophrenia"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "schizophrenia trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "study_type",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-10",
+    "query": "Top 10 sponsors of completed phase 2 trials in rheumatoid arthritis",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "rheumatoid arthritis"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [
+          "PHASE2"
+        ],
+        "statuses": [
+          "COMPLETED"
+        ],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "rheumatoid arthritis trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "sponsor",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": 10,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-11",
+    "query": "Total enrollment in Pfizer-sponsored trials by phase",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [
+          "Pfizer"
+        ],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [
+          "INTERVENTIONAL"
+        ],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "trials sponsored by Pfizer",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "phase",
+      "split_by": null,
+      "measure": "total_enrollment",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-12",
+    "query": "How many participants are enrolled in asthma trials in each phase?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "asthma"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [
+          "INTERVENTIONAL"
+        ],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "asthma trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "phase",
+      "split_by": null,
+      "measure": "total_enrollment",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "di-13",
+    "query": "Distribution across phases",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "distribution",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "melanoma"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [
+          "INTERVENTIONAL"
+        ],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "melanoma trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "phase",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "cp-01",
+    "query": "Compare phases for trials involving nivolumab vs ipilimumab",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "comparison",
+      "viz_type": "grouped_bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [
+          "INTERVENTIONAL"
+        ],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "Nivolumab",
+          "filter": {
+            "drugs": [
+              "nivolumab"
+            ],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        },
+        {
+          "label": "Ipilimumab",
+          "filter": {
+            "drugs": [
+              "ipilimumab"
+            ],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "phase",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "cp-02",
+    "query": "Compare sponsor categories across asthma and COPD trials",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "comparison",
+      "viz_type": "grouped_bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "Asthma",
+          "filter": {
+            "drugs": [],
+            "conditions": [
+              "asthma"
+            ],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        },
+        {
+          "label": "COPD",
+          "filter": {
+            "drugs": [],
+            "conditions": [
+              "COPD"
+            ],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "sponsor_class",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "cp-03",
+    "query": "Trials per year for Pfizer versus Moderna since 2018",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "comparison",
+      "viz_type": "time_series",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": 2018,
+        "end_year": 2026
+      },
+      "series": [
+        {
+          "label": "Pfizer",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [
+              "Pfizer"
+            ],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        },
+        {
+          "label": "Moderna",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [
+              "Moderna"
+            ],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "start_year",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "cp-04",
+    "query": "Compare the status of trials for pembrolizumab, nivolumab, and atezolizumab",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "comparison",
+      "viz_type": "grouped_bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "Pembrolizumab",
+          "filter": {
+            "drugs": [
+              "pembrolizumab"
+            ],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        },
+        {
+          "label": "Nivolumab",
+          "filter": {
+            "drugs": [
+              "nivolumab"
+            ],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        },
+        {
+          "label": "Atezolizumab",
+          "filter": {
+            "drugs": [
+              "atezolizumab"
+            ],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "status",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "cp-05",
+    "query": "Compare recruiting trials by country for dengue and malaria",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "comparison",
+      "viz_type": "grouped_bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [
+          "RECRUITING"
+        ],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "Dengue",
+          "filter": {
+            "drugs": [],
+            "conditions": [
+              "dengue"
+            ],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        },
+        {
+          "label": "Malaria",
+          "filter": {
+            "drugs": [],
+            "conditions": [
+              "malaria"
+            ],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "country",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "ge-01",
+    "query": "Which countries have the most recruiting trials for type 2 diabetes?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "geographic",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "type 2 diabetes"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [
+          "RECRUITING"
+        ],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "type 2 diabetes trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "country",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": 20,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "ge-02",
+    "query": "Where in the world are hepatitis B trials being conducted?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "geographic",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "hepatitis B"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "hepatitis B trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "country",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": 20,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "ge-03",
+    "query": "Geographic distribution of trials sponsored by AstraZeneca",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "geographic",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [
+          "AstraZeneca"
+        ],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "trials sponsored by AstraZeneca",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "country",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": 20,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "ge-04",
+    "query": "Map the countries running phase 1 trials of lecanemab",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "geographic",
+      "viz_type": "bar_chart",
+      "filter": {
+        "drugs": [
+          "lecanemab"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [
+          "PHASE1"
+        ],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "lecanemab trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": "country",
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": 20,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "nw-01",
+    "query": "Show a network of sponsors and drugs for melanoma trials",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "network",
+      "viz_type": "network_graph",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "melanoma"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "melanoma trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": "sponsor_drug",
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "nw-02",
+    "query": "Which drugs frequently co-occur in combination studies for lung cancer?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "network",
+      "viz_type": "network_graph",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "lung cancer"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "lung cancer trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": "drug_drug",
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "nw-03",
+    "query": "Which drugs are given together with pembrolizumab in combination trials?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "network",
+      "viz_type": "network_graph",
+      "filter": {
+        "drugs": [
+          "pembrolizumab"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "pembrolizumab trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": "drug_drug",
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "nw-04",
+    "query": "Which drugs appear in the same trials as docetaxel, including as comparators?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "network",
+      "viz_type": "network_graph",
+      "filter": {
+        "drugs": [
+          "docetaxel"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "docetaxel trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": "drug_drug_same_trial",
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "nw-05",
+    "query": "Graph of conditions linked to drugs in trials run by Roche",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "network",
+      "viz_type": "network_graph",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [
+          "Roche"
+        ],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "trials sponsored by Roche",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": "condition_drug",
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "nw-06",
+    "query": "Who collaborates with the National Cancer Institute on its trials?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "network",
+      "viz_type": "network_graph",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [
+          "National Cancer Institute"
+        ],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "trials sponsored by National Cancer Institute",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": "sponsor_collaborator",
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "nw-07",
+    "query": "Network of sponsors and the conditions they study in breast cancer",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "network",
+      "viz_type": "network_graph",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "breast cancer"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "breast cancer trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": "sponsor_condition",
+      "numeric_x": null,
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "sc-01",
+    "query": "Plot enrollment against start year for breast cancer trials, colored by phase",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "scatter",
+      "viz_type": "scatter_plot",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "breast cancer"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [
+          "INTERVENTIONAL"
+        ],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "breast cancer trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": "phase",
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": "start_year",
+      "numeric_y": "enrollment",
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "sc-02",
+    "query": "Is there a relationship between the number of sites and enrollment in multiple sclerosis trials?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "scatter",
+      "viz_type": "scatter_plot",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "multiple sclerosis"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "multiple sclerosis trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": "site_count",
+      "numeric_y": "enrollment",
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "sc-03",
+    "query": "Scatter of trial duration versus enrollment for completed hypertension trials",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "scatter",
+      "viz_type": "scatter_plot",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "hypertension"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [
+          "COMPLETED"
+        ],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "hypertension trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": "duration_months",
+      "numeric_y": "enrollment",
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "hi-01",
+    "query": "Histogram of enrollment for melanoma trials",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "histogram",
+      "viz_type": "histogram",
+      "filter": {
+        "drugs": [],
+        "conditions": [
+          "melanoma"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "melanoma trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": "enrollment",
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "hi-02",
+    "query": "How big are the trials of adalimumab, in terms of participants?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "histogram",
+      "viz_type": "histogram",
+      "filter": {
+        "drugs": [
+          "adalimumab"
+        ],
+        "conditions": [],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "adalimumab trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": "enrollment",
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "hi-03",
+    "query": "Distribution of trial durations for phase 3 studies sponsored by Merck",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": {
+      "mode": "llm",
+      "model": "claude-sonnet-5-5",
+      "attempts": 1,
+      "fallback_reason": null
+    },
+    "plan": {
+      "analysis": "histogram",
+      "viz_type": "histogram",
+      "filter": {
+        "drugs": [],
+        "conditions": [],
+        "sponsors": [
+          "Merck"
+        ],
+        "countries": [],
+        "terms": [],
+        "phases": [
+          "PHASE3"
+        ],
+        "statuses": [],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "series": [
+        {
+          "label": "trials sponsored by Merck",
+          "filter": {
+            "drugs": [],
+            "conditions": [],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          }
+        }
+      ],
+      "dimension": null,
+      "split_by": null,
+      "measure": "trial_count",
+      "network": null,
+      "numeric_x": "duration_months",
+      "numeric_y": null,
+      "time_granularity": "year",
+      "top_n": null,
+      "planner_mode": "llm"
+    },
+    "error": null
+  },
+  {
+    "id": "un-01",
+    "query": "What is the median age of participants in statin trials?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": null,
+    "plan": null,
+    "error": {
+      "code": "unsupported_query",
+      "message": "Participant ages are not available through this backend, which only supports trial-level fields such as phase, status, sponsor, enrollment, start year, duration, and site count."
+    }
+  },
+  {
+    "id": "un-02",
+    "query": "Did pembrolizumab improve overall survival in melanoma?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": null,
+    "plan": null,
+    "error": {
+      "code": "unsupported_query",
+      "message": "Overall survival outcomes and efficacy results are not available through this backend, which only has trial-level registry metadata such as phase, status, sponsor, enrollment, and dates. It can show how many pembrolizumab melanoma trials exist, but not whether the drug improved survival."
+    }
+  },
+  {
+    "id": "un-03",
+    "query": "What were the most common adverse events in trials of ibuprofen?",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": null,
+    "plan": null,
+    "error": {
+      "code": "unsupported_query",
+      "message": "Adverse event data is trial results information, which this backend does not have. It only covers registry fields such as phase, sponsor, status, conditions, interventions, enrollment and dates."
+    }
+  },
+  {
+    "id": "un-04",
+    "query": "Write me a poem about clinical trials",
+    "plan_match": true,
+    "intent_match": true,
+    "mismatches": [],
+    "planner": null,
+    "plan": null,
+    "error": {
+      "code": "unsupported_query",
+      "message": "This backend only computes counts and statistics from ClinicalTrials.gov registry data; it cannot write poems or other creative text."
+    }
+  }
+]

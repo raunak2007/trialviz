@@ -6,6 +6,13 @@ the edge weight is the number of distinct trials in which the pair co-occurs.
 Drug names are folded with `DrugCanonicalizer`; conditions prefer the MeSH
 term from `conditionBrowseModule` over free text when one is available.
 
+Two drug-to-drug kinds exist because "co-occur in a trial" and "given in
+combination" are different claims. A trial comparing pembrolizumab against
+docetaxel lists both drugs, but in different arms. `drug_drug` links drugs
+only when they are listed in the same arm group (a combination); trials
+without arm data cannot contribute and are counted. `drug_drug_same_trial`
+links any two drugs listed anywhere in the same trial.
+
 Graphs are pruned to the heaviest edges so they stay readable: the goal is a
 picture of the main relationships, with citations to the trials behind each
 edge, not an exhaustive dump.
@@ -17,8 +24,9 @@ from collections.abc import Sequence
 from dataclasses import dataclass, field
 from itertools import combinations, product
 
-from trialviz.analysis.drugs import DrugCanonicalizer
+from trialviz.analysis.drugs import DrugCanonicalizer, normalize_name
 from trialviz.ctgov.records import (
+    P_ARM_GROUPS,
     P_COLLABORATORS,
     P_CONDITION_MESH,
     P_CONDITIONS,
@@ -27,7 +35,7 @@ from trialviz.ctgov.records import (
     Trial,
 )
 from trialviz.schemas.enums import NetworkKind
-from trialviz.schemas.response import Citation, Edge, Evidence, Node
+from trialviz.schemas.response import Citation, Edge, Evidence, Exactness, Node
 
 DEFAULT_MAX_EDGES = 50
 
@@ -62,16 +70,29 @@ class NetworkResult:
     nodes: list[Node]
     edges: list[Edge]
     node_kinds: list[str]
+    edge_semantics: str
+    trials_considered: int  # trials that had the data needed to contribute
     trials_with_pairs: int  # trials that contributed at least one edge
+    trials_without_arm_data: int  # drug_drug only: trials skipped because they list no arm groups
     edges_before_trim: int
 
 
 ROLES: dict[NetworkKind, tuple[str, str]] = {
     NetworkKind.SPONSOR_DRUG: ("sponsor", "drug"),
     NetworkKind.DRUG_DRUG: ("drug", "drug"),
+    NetworkKind.DRUG_DRUG_SAME_TRIAL: ("drug", "drug"),
     NetworkKind.CONDITION_DRUG: ("condition", "drug"),
     NetworkKind.SPONSOR_CONDITION: ("sponsor", "condition"),
     NetworkKind.SPONSOR_COLLABORATOR: ("sponsor", "collaborator"),
+}
+
+EDGE_SEMANTICS: dict[NetworkKind, str] = {
+    NetworkKind.SPONSOR_DRUG: "the lead sponsor ran a trial that lists the drug as an intervention",
+    NetworkKind.DRUG_DRUG: "both drugs are listed in the same arm group of a trial (given in combination)",
+    NetworkKind.DRUG_DRUG_SAME_TRIAL: "both drugs are listed anywhere in the same trial, including as comparators",
+    NetworkKind.CONDITION_DRUG: "a trial for the condition lists the drug as an intervention",
+    NetworkKind.SPONSOR_CONDITION: "the lead sponsor ran a trial for the condition",
+    NetworkKind.SPONSOR_COLLABORATOR: "the organization is listed as a collaborator on the lead sponsor's trial",
 }
 
 
@@ -131,26 +152,63 @@ def entities_for(trial: Trial, role: str, canon: DrugCanonicalizer) -> list[Enti
     raise ValueError(f"unknown role {role}")
 
 
+def same_arm_pairs(trial: Trial, canon: DrugCanonicalizer) -> list[tuple[Entity, Entity]]:
+    """Drug pairs listed together in at least one arm group of the trial.
+
+    Arm entries name interventions by their listed name ("Drug: Pembrolizumab"); they are matched
+    to the trial's drug interventions by normalized name, then folded to canonical entities.
+    """
+    drugs = {normalize_name(i.name): i for i in trial.drug_interventions()}
+    entities = {e.key: e for e in _drugs(trial, canon)}
+    pairs: dict[tuple[str, str], tuple[Entity, Entity]] = {}
+    for arm_index, arm in enumerate(trial.arm_interventions):
+        in_arm: dict[str, Entity] = {}
+        for name in arm:
+            intervention = drugs.get(normalize_name(name))
+            if intervention is None:
+                continue
+            key = canon.canonical(intervention.name).casefold()
+            entity = entities.get(key)
+            if entity is not None and key not in in_arm:
+                in_arm[key] = Entity(
+                    entity.kind,
+                    entity.key,
+                    entity.label,
+                    Evidence(field=f"{P_ARM_GROUPS}[{arm_index}].interventionNames", value=name),
+                )
+        for a, b in combinations(sorted(in_arm.values(), key=lambda e: e.key), 2):
+            pairs.setdefault((a.key, b.key), (a, b))
+    return list(pairs.values())
+
+
 def build_network(
     trials: Sequence[Trial],
     kind: NetworkKind,
     *,
     max_edges: int | None = None,
     citations_per_datum: int = 5,
+    exactness: Exactness = "exact",
 ) -> NetworkResult:
     role_a, role_b = ROLES[kind]
     canon = DrugCanonicalizer(trials)
     nodes: dict[str, _NodeAcc] = {}
     edges: dict[tuple[str, str], _EdgeAcc] = {}
     trials_with_pairs = 0
+    trials_considered = 0
+    without_arm_data = 0
 
     for trial in trials:
-        ents_a = entities_for(trial, role_a, canon)
         pairs: list[tuple[Entity, Entity]]
-        if role_a == role_b:
-            pairs = list(combinations(sorted(ents_a, key=lambda e: e.key), 2))
+        if kind == NetworkKind.DRUG_DRUG:
+            if not trial.has_arm_data:
+                without_arm_data += 1
+                continue
+            pairs = same_arm_pairs(trial, canon)
+        elif role_a == role_b:
+            pairs = list(combinations(sorted(entities_for(trial, role_a, canon), key=lambda e: e.key), 2))
         else:
-            pairs = list(product(ents_a, entities_for(trial, role_b, canon)))
+            pairs = list(product(entities_for(trial, role_a, canon), entities_for(trial, role_b, canon)))
+        trials_considered += 1
         if not pairs:
             continue
         trials_with_pairs += 1
@@ -177,6 +235,7 @@ def build_network(
             label=acc.entity.label,
             kind=acc.entity.kind,
             trial_count=len(acc.trials),
+            exactness=exactness,
             citations=_citations_nodes(acc, citations_per_datum),
             citation_count=len(acc.trials),
         )
@@ -189,6 +248,7 @@ def build_network(
             source=e.a.node_id,
             target=e.b.node_id,
             trial_count=len(e.trials),
+            exactness=exactness,
             citations=_citations_edges(e, citations_per_datum),
             citation_count=len(e.trials),
         )
@@ -196,7 +256,14 @@ def build_network(
     ]
     kinds = [role_a] if role_a == role_b else [role_a, role_b]
     return NetworkResult(
-        nodes=out_nodes, edges=out_edges, node_kinds=kinds, trials_with_pairs=trials_with_pairs, edges_before_trim=edges_before
+        nodes=out_nodes,
+        edges=out_edges,
+        node_kinds=kinds,
+        edge_semantics=EDGE_SEMANTICS[kind],
+        trials_considered=trials_considered,
+        trials_with_pairs=trials_with_pairs,
+        trials_without_arm_data=without_arm_data,
+        edges_before_trim=edges_before,
     )
 
 

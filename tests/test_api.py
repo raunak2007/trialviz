@@ -19,7 +19,9 @@ def test_query_endpoint_returns_visualization(pipeline):
         assert body["meta"]["source"]["name"] == "ClinicalTrials.gov"
         assert body["meta"]["planner"]["mode"] == "rules"
         first = body["visualization"]["data"][0]
-        assert set(first) == {"phase", "phase_code", "trial_count", "citation_count", "citations"}
+        assert set(first) == {"phase", "phase_code", "trial_count", "exactness", "citation_count", "citations"}
+        assert body["meta"]["verification"]["checks"][0]["status"] == "passed"
+        assert body["visualization"]["config"]["groupby_semantics"] == "partition"
 
 
 def test_structured_fields_and_options(pipeline):

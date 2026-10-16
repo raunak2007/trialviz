@@ -1,0 +1,17 @@
+{"id": "ho-01", "query": "Yearly number of new trials of dupilumab from 2017 onwards", "expect": {"analysis": "time_trend", "filter": {"drugs": ["dupilumab"], "start_year": 2017}}}
+{"id": "ho-02", "query": "How did the count of Parkinson's disease trials evolve each quarter since 2020?", "expect": {"analysis": "time_trend", "time_granularity": "quarter", "filter": {"conditions": ["Parkinson's disease"], "start_year": 2020}}}
+{"id": "ho-03", "query": "Phase breakdown of trials run by Gilead", "expect": {"analysis": "distribution", "dimension": "phase", "filter": {"sponsors": ["Gilead"]}}}
+{"id": "ho-04", "query": "Which organizations lead the most trials on sickle cell disease?", "expect": {"analysis": "distribution", "dimension": "sponsor", "filter": {"conditions": ["sickle cell disease"]}}}
+{"id": "ho-05", "query": "What kinds of interventions are being tested for insomnia?", "expect": {"analysis": "distribution", "dimension": "intervention_type", "filter": {"conditions": ["insomnia"]}}}
+{"id": "ho-06", "query": "Enrollment totals by sponsor class for trials of ozempic", "expect": {"analysis": "distribution", "dimension": "sponsor_class", "measure": "total_enrollment", "filter": {"drugs": ["ozempic"]}}}
+{"id": "ho-07", "query": "Compare the phase distribution of trials for adalimumab, etanercept and infliximab", "expect": {"analysis": "comparison", "dimension": "phase", "series": [{"drugs": ["adalimumab"]}, {"drugs": ["etanercept"]}, {"drugs": ["infliximab"]}]}}
+{"id": "ho-08", "query": "Crohn's disease versus ulcerative colitis: trials started per year since 2015", "expect": {"analysis": "comparison", "dimension": "start_year", "filter": {"start_year": 2015}, "series": [{"conditions": ["Crohn's disease"]}, {"conditions": ["ulcerative colitis"]}]}}
+{"id": "ho-09", "query": "In which countries are recruiting trials of tirzepatide taking place?", "expect": {"analysis": "geographic", "filter": {"drugs": ["tirzepatide"], "statuses": ["RECRUITING"]}}}
+{"id": "ho-10", "query": "Country map of terminated trials for glioblastoma", "expect": {"analysis": "geographic", "filter": {"conditions": ["glioblastoma"], "statuses": ["TERMINATED"]}}}
+{"id": "ho-11", "query": "Draw the sponsor-drug network for trials in rheumatoid arthritis", "expect": {"analysis": "network", "network": "sponsor_drug", "filter": {"conditions": ["rheumatoid arthritis"]}}}
+{"id": "ho-12", "query": "Which drugs are combined with nivolumab in the same arm of a trial?", "expect": {"analysis": "network", "network": "drug_drug", "filter": {"drugs": ["nivolumab"]}}}
+{"id": "ho-13", "query": "Which conditions and drugs are connected in trials sponsored by Bayer?", "expect": {"analysis": "network", "network": "condition_drug", "filter": {"sponsors": ["Bayer"]}}}
+{"id": "ho-14", "query": "Do longer ovarian cancer trials enroll more participants? Plot duration against enrollment", "expect": {"analysis": "scatter", "numeric": ["duration_months", "enrollment"], "filter": {"conditions": ["ovarian cancer"]}}}
+{"id": "ho-15", "query": "Show the distribution of site counts across phase 2 trials for cystic fibrosis", "expect": {"analysis": "histogram", "numeric_x": "site_count", "filter": {"conditions": ["cystic fibrosis"], "phases": ["PHASE2"]}}}
+{"id": "ho-16", "query": "Which trial had the best response rate for pembrolizumab in melanoma?", "expect": {"analysis": "unsupported"}}
+{"id": "ho-17", "query": "List the inclusion criteria for recent lupus trials", "expect": {"analysis": "unsupported"}}

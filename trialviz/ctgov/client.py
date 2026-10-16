@@ -172,18 +172,26 @@ class CTGovClient:
 
     # --------------------------------------------------------------- studies
 
-    async def fetch_studies(self, f: EntityFilter, *, max_records: int, log: CallLog | None = None) -> FetchResult:
+    async def fetch_studies(
+        self, f: EntityFilter, *, max_records: int, complete_up_to: int | None = None, log: CallLog | None = None
+    ) -> FetchResult:
         """Page through /studies for a filter until `max_records` records or the end.
 
         Records come back sorted by StartDate descending, so a truncated
         result is 'the N most recently started matching trials', which is a
         sample a reader can reason about.
+
+        With `complete_up_to`, the first page's `totalCount` decides the cap:
+        when the filter matches at most that many trials, every record is
+        fetched regardless of `max_records`. No extra request is needed for the
+        decision because the count rides along with the first page.
         """
         page_size = min(MAX_PAGE_SIZE, max(1, max_records))
         params = build_search_params(f, page_size=page_size)
         studies: list[dict[str, Any]] = []
         total_count: int | None = None
         page_token: str | None = None
+        cap = max_records
 
         while True:
             page_params = dict(params)
@@ -192,16 +200,18 @@ class CTGovClient:
             body = await self.get_json("/studies", page_params, log)
             if total_count is None and isinstance(body.get("totalCount"), int):
                 total_count = body["totalCount"]
+                if complete_up_to is not None and total_count <= complete_up_to:
+                    cap = max(cap, total_count)
             page = body.get("studies") or []
             if not isinstance(page, list):
                 raise CTGovError("`studies` is not a list in the API response")
             studies.extend(page)
             page_token = body.get("nextPageToken")
-            if not page_token or len(studies) >= max_records or not page:
+            if not page_token or len(studies) >= cap or not page:
                 break
 
-        if len(studies) > max_records:
-            studies = studies[:max_records]
+        if len(studies) > cap:
+            studies = studies[:cap]
         truncated = total_count is not None and len(studies) < total_count
         if total_count is None and page_token:
             truncated = True

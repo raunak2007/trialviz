@@ -14,15 +14,28 @@ from __future__ import annotations
 import re
 from datetime import date
 
-from trialviz.schemas.enums import AnalysisType, Dimension, NetworkKind, NumericField, OverallStatus, Phase, TimeGranularity
+from trialviz.schemas.enums import (
+    AnalysisType,
+    Dimension,
+    Measure,
+    NetworkKind,
+    NumericField,
+    OverallStatus,
+    Phase,
+    TimeGranularity,
+)
 from trialviz.schemas.plan import EntityFilter, PlanDraft, Series
 
 _RE = {
     "network": re.compile(
-        r"\bnetwork\b|co-?occur|\bgraph\b|tested together|\bcombination (?:studies|trials)\b|\brelationships?\b", re.I
+        r"\bnetwork\b|co-?occur|\bgraph\b|tested together|given together|appear together|\bcollaborat"
+        r"|in the same (?:trials?|stud(?:y|ies))\b|\bcombination (?:studies|trials)\b|\brelationships?\b(?! between)",
+        re.I,
     ),
     "comparison": re.compile(r"\bcompare\b|\bcomparison\b|\bvs\.?\b|\bversus\b", re.I),
-    "geographic": re.compile(r"\bcountr(?:y|ies)\b|\bgeograph|\bnations?\b|\bregions?\b|\bworldwide\b", re.I),
+    "geographic": re.compile(
+        r"\bcountr(?:y|ies)\b|\bgeograph|\bnations?\b|\bregions?\b|\bworldwide\b|\bwhere\b(?! .*\bvs\b)", re.I
+    ),
     "time": re.compile(
         r"over time|over the years|per (?:year|quarter|month)|each (?:year|quarter|month)|by (?:year|quarter|month)|annual|yearly|quarterly|monthly"
         r"|\btrend|\bchanged\b|\bchange\b|\bgrowth\b|\bevolv|\btimeline\b|\bhistory\b",
@@ -30,9 +43,16 @@ _RE = {
     ),
     "range": re.compile(r"\bsince \d{4}\b|\b(?:between|from) \d{4}\b|\b(?:last|past) \d{1,2} years?\b|\bin \d{4}\b", re.I),
     "histogram": re.compile(
-        r"\bhistogram\b|distribution of (?:enrollment|enrolment|trial sizes?|durations?|sites?)|how (?:big|large)\b|\bsizes? of\b",
+        r"\bhistogram\b|distribution of (?:trial )?(?:enrollment|enrolment|sizes?|durations?|sites?)|how (?:big|large)\b"
+        r"|\bsizes? of\b",
         re.I,
     ),
+    "enrollment_measure": re.compile(
+        r"total enrol+ment|how many (?:participants|patients|people)|number of participants|participants (?:are |were )?enrolled"
+        r"|enrol+ment totals?|\bparticipants in each\b",
+        re.I,
+    ),
+    "top_n": re.compile(r"\btop\s+(\d{1,3})\b|\b(\d{1,3}) (?:largest|biggest|most common|most active)\b", re.I),
     "scatter": re.compile(r"\bscatter\b|\bagainst\b|\bcorrelat|relationship between", re.I),
     "quarter": re.compile(r"\bquarter|\bquarterly", re.I),
     "month": re.compile(r"\bmonth|\bmonthly", re.I),
@@ -41,9 +61,17 @@ _RE = {
 _DIMENSION_RE: list[tuple[Dimension, re.Pattern[str]]] = [
     (Dimension.INTERVENTION_TYPE, re.compile(r"intervention types?", re.I)),
     (Dimension.SPONSOR_CLASS, re.compile(r"sponsor (?:class|classes|categor(?:y|ies)|types?)|funder types?|industry vs", re.I)),
-    (Dimension.STUDY_TYPE, re.compile(r"study types?|interventional vs observational", re.I)),
+    (Dimension.STUDY_TYPE, re.compile(r"study types?|interventional (?:vs\.?|versus|or) observational", re.I)),
     (Dimension.STATUS, re.compile(r"\bstatus(?:es)?\b|recruitment status", re.I)),
-    (Dimension.SPONSOR, re.compile(r"\b(?:which|top|most common|leading|biggest|most active) sponsors?\b|\bby sponsor\b", re.I)),
+    (Dimension.COUNTRY, re.compile(r"\bby countr(?:y|ies)\b|\bper country\b|\bacross countries\b", re.I)),
+    (
+        Dimension.SPONSOR,
+        re.compile(
+            r"\b(?:which|top(?: \d+)?|most common|leading|biggest|most active|largest) sponsors?\b|\bby sponsor\b"
+            r"|\bwho sponsors\b|\bwhich (?:companies|organi[sz]ations)\b",
+            re.I,
+        ),
+    ),
     (Dimension.CONDITION, re.compile(r"\b(?:which|top|most common) conditions?\b|\bby condition\b|\bindications\b", re.I)),
     (
         Dimension.INTERVENTION,
@@ -87,8 +115,21 @@ _STOP = (
     r"distributed|grouped|compared|during|within|in \d{4}|last|past"
 )
 _ENT = r"(?P<ent>[A-Za-z][A-Za-z0-9\-'/ ]*?)"
+_SPONSOR_CUE = r"(?:sponsored|run|conducted|led|funded|registered) by"
 # Ordered: the most specific anchors first. Each captures the entity text of a question.
 _ENTITY_RES = [
+    # "sponsored by X", "run by X", "collaborates with X"
+    re.compile(rf"\b(?:{_SPONSOR_CUE}|collaborat\w*\s+with)\s+{_ENT}(?=\s*[?.!,;:]|\s+(?:{_STOP}|on|in)\b|$)", re.I),
+    # "together with X", "combined with X", "in combination with X"
+    re.compile(
+        rf"\b(?:together with|combined with|in combination with|alongside)\s+{_ENT}(?=\s*[?.!,;:]|\s+(?:{_STOP}|in|for)\b|$)",
+        re.I,
+    ),
+    # "trials Novartis started", "studies Pfizer ran": an organization name, capitalized, not a preposition
+    re.compile(
+        r"\b(?:trials?|studies)\s+(?P<ent>(?!(?:for|in|of|on|with|about|involving|studying|being|that|which)\b)"
+        r"[A-Z][A-Za-z0-9&\-'./ ]*?)\s+(?:started|ran|runs?|sponsors|sponsored|conducted|conducts)\b"
+    ),
     # "trials for X", "studies involving X" ... up to the end of the clause
     re.compile(rf"\b(?:trials?|studies)\s+{_PREP}\s+{_ENT}(?=\s*[?.!,;:]|\s+(?:{_STOP})\b|$)", re.I),
     # "... for X trials": the last preposition before "trials" wins
@@ -96,8 +137,33 @@ _ENTITY_RES = [
     # "How are X trials ...", "how many X trials"
     re.compile(rf"\b(?:are|many|of|the|all|do)\s+{_ENT}\s+(?:trials?|studies)\b", re.I),
     # trailing "for X" at the end of the question
-    re.compile(rf"\b{_PREP}\s+{_ENT}(?=\s*[?.!,;:]|\s+(?:{_STOP})\b|$)", re.I),
+    re.compile(rf"\b(?:{_PREP}|as)\s+{_ENT}(?=\s*[?.!,;:]|\s+(?:{_STOP})\b|$)", re.I),
 ]
+# Cleaned entity text that is a grouping word or filler rather than a thing to search for.
+_NOT_ENTITY = {
+    "phase",
+    "phases",
+    "year",
+    "years",
+    "quarter",
+    "month",
+    "country",
+    "countries",
+    "sponsor",
+    "sponsors",
+    "status",
+    "statuses",
+    "condition",
+    "conditions",
+    "intervention",
+    "interventions",
+    "enrollment",
+    "participants",
+    "same",
+    "time",
+    "world",
+    "terms",
+}
 _VS_RE = re.compile(
     rf"(?P<a>[A-Za-z][A-Za-z0-9\-'/ :]*?)\s+(?:vs\.?|versus)\s+(?P<b>[A-Za-z][A-Za-z0-9\-'/ ]*?)(?=\s*[?.!,;]|\s+(?:{_STOP})\b|$)",
     re.I,
@@ -137,12 +203,53 @@ _LEADING_FILLER = {
     "with",
     "called",
     "named",
+    "for",
+    "of",
+    "in",
+    "on",
+    "involving",
+    "about",
 }
-_TRAILING_FILLER = {"trials", "studies", "trial", "study", "patients"}
+_TRAILING_FILLER = {
+    "trials",
+    "studies",
+    "trial",
+    "study",
+    "patients",
+    "in",
+    "on",
+    "for",
+    "of",
+    "with",
+    "by",
+    "at",
+    "its",
+    "their",
+}
 _DISEASE_WORD = re.compile(
     r"\b(?:cancer|carcinoma|tumou?r|lymphoma|leukemia|sarcoma|melanoma|diabetes|disease|disorder|syndrome|infection|"
-    r"failure|hypertension|asthma|copd|obesity|depression|schizophrenia|arthritis|sclerosis|stroke|covid|hiv|hepatitis)\b"
-    r"|\w+(?:oma|itis|emia|pathy|osis)\b",
+    r"failure|hypertension|asthma|copd|obesity|depression|schizophrenia|arthritis|sclerosis|stroke|covid|hiv|hepatitis|"
+    r"malaria|dengue|influenza|pneumonia|sepsis|migraine|epilepsy|autism|dementia|alzheimer|parkinson|lupus|gout|"
+    r"ebola|cholera|measles|polio|zika|anxiety|insomnia|pain|injury|fracture)\b"
+    r"|\w+(?:oma|itis|emia|pathy|osis|iasis|algia|plegia)\b",
+    re.I,
+)
+# Generic-name suffixes (INN stems) that mark a word as a drug, plus a few common names without one.
+_DRUG_WORD = re.compile(
+    r"\b\w+(?:mab|nib|tide|ciclib|parib|statin|pril|sartan|olol|azole|cillin|mycin|vir|gliptin|flozin|prazole|dipine|"
+    r"oxetine|triptan|lukast|afil|caine|oxacin|cycline|zepam|zolam|semide|thiazide|formin|profen|lamide|trexate|platin|"
+    r"taxel|rubicin|mustine|fenib|rafenib|tinib|lisib|degib|sertib|zomib|relix|parin|irin|lukast|mide|dronate|"
+    r"vastatin|cept|kinra|leukin|feron)\b"
+    r"|\b(?:aspirin|insulin|metformin|ibuprofen|paracetamol|acetaminophen|morphine|lithium|ketamine|psilocybin|"
+    r"semaglutide|tirzepatide|dexamethasone|hydroxychloroquine|remdesivir|placebo)\b",
+    re.I,
+)
+# Organizations a question is likely to name as a sponsor.
+_SPONSOR_WORD = re.compile(
+    r"\b(?:pfizer|moderna|novartis|roche|genentech|merck|msd|astrazeneca|sanofi|gsk|glaxosmithkline|bayer|abbvie|amgen|"
+    r"gilead|lilly|bristol|bms|squibb|johnson|janssen|takeda|boehringer|regeneron|biogen|novo nordisk|astellas|daiichi|"
+    r"eisai|vertex|biontech|national cancer institute|nci|nih|national institutes? of health|mayo clinic|md anderson|"
+    r"university|hospital|institute|foundation|ministry|pharma\w*|therapeutics|biosciences|inc\.?|ltd\.?|llc|gmbh|ag)\b",
     re.I,
 )
 
@@ -205,22 +312,36 @@ def _after_last_preposition(text: str) -> str:
 
 def _entity_text(text: str) -> str:
     for pattern in _ENTITY_RES:
-        m = pattern.search(text)
-        if m:
+        pos = 0
+        while (m := pattern.search(text, pos)) is not None:
+            pos = m.start() + 1  # allow overlapping candidates: "in the same trials as X" then "as X"
             cleaned = _clean_entity(m.group("ent"))
-            if cleaned:
+            if cleaned and cleaned.lower() not in _NOT_ENTITY and cleaned.split()[0].lower() not in _NOT_ENTITY:
                 return cleaned
     return ""
 
 
+_AND_LIST_RE = re.compile(
+    rf"\b(?:across|between|among|for|of|in)\s+(?P<list>[A-Za-z][A-Za-z0-9\-'/ ]*?(?:,\s*[A-Za-z][A-Za-z0-9\-'/ ]*?)*,?\s+and\s+"
+    rf"[A-Za-z][A-Za-z0-9\-'/ ]*?)(?=\s+(?:trials?|studies)\b|\s*[?.!;:]|\s+(?:{_STOP})\b|$)",
+    re.I,
+)
+
+
 def _comparison_sides(text: str) -> list[str]:
-    """Entity names on each side of 'vs' / 'versus', cleaned of leading clause words."""
+    """Entity names on each side of 'vs' / 'versus', or the items of an 'A, B, and C' list."""
     m = _VS_RE.search(text)
+    if m:
+        left = _clean_entity(_after_last_preposition(m.group("a")))
+        right = _clean_entity(m.group("b"))
+        return [s for s in (left, right) if s]
+    m = _AND_LIST_RE.search(text)
     if not m:
         return []
-    left = _clean_entity(_after_last_preposition(m.group("a")))
-    right = _clean_entity(m.group("b"))
-    return [s for s in (left, right) if s]
+    raw = re.split(r"\s*,\s*(?:and\s+)?|\s+and\s+", m.group("list"))
+    raw[0] = _after_last_preposition(raw[0])
+    parts = [_clean_entity(p) for p in raw]
+    return [p for p in parts if p and p.lower() not in _NOT_ENTITY]
 
 
 def _entity_filter(entity: str, text: str) -> EntityFilter:
@@ -231,15 +352,28 @@ def _entity_filter(entity: str, text: str) -> EntityFilter:
     """
     if not entity:
         return EntityFilter()
+    if entity.lower().endswith("-sponsored"):
+        return EntityFilter(sponsors=[entity[: -len("-sponsored")]])
     ent = re.escape(entity)
+    if re.search(rf"\b(?:{_SPONSOR_CUE}|collaborat\w*\s+with)\s+(?:the\s+)?{ent}\b", text, re.I):
+        return EntityFilter(sponsors=[entity])
     if re.search(
-        rf"\b(?:drugs?|medications?|treatments?|compounds?|interventions?)\s+(?:called\s+|named\s+)?{ent}\b", text, re.I
+        rf"\b(?:drugs?|medications?|treatments?|compounds?|interventions?|together with|combined with|in combination with)"
+        rf"\s+(?:called\s+|named\s+)?{ent}\b",
+        text,
+        re.I,
     ):
         return EntityFilter(drugs=[entity])
     if re.search(
         rf"\b(?:conditions?|diseases?|patients with|indications?)\s+(?:called\s+|named\s+)?{ent}\b", text, re.I
     ) or _DISEASE_WORD.search(entity):
         return EntityFilter(conditions=[entity])
+    if _DRUG_WORD.search(entity):
+        return EntityFilter(drugs=[entity])
+    if re.search(rf"\b{ent}\s+(?:started|ran|runs?|sponsors|sponsored|conducted|conducts)\b", text, re.I):
+        return EntityFilter(sponsors=[entity])
+    if _SPONSOR_WORD.search(entity):
+        return EntityFilter(sponsors=[entity])
     return EntityFilter(terms=[entity])
 
 
@@ -263,6 +397,9 @@ def rule_plan(query: str, structured: EntityFilter, *, today: date | None = None
     )
     dimension = _match_dimension(text)
     numeric = _numeric_fields(text)
+    measure = Measure.TOTAL_ENROLLMENT if _RE["enrollment_measure"].search(text) else Measure.TRIAL_COUNT
+    top_match = _RE["top_n"].search(text)
+    top_n = int(top_match.group(1) or top_match.group(2)) if top_match else None
 
     if _RE["network"].search(text):
         kind = _network_kind(text)
@@ -270,7 +407,7 @@ def rule_plan(query: str, structured: EntityFilter, *, today: date | None = None
             analysis=AnalysisType.NETWORK,
             network=kind,
             filter=base.merged_over(_entity_filter(entity, text)),
-            interpretation=f"Build a {kind.value.replace('_', ' to ')} network.",
+            interpretation=f"Build a {_NETWORK_WORDS[kind]} network.",
             assumptions=assumptions,
         )
         return draft
@@ -296,6 +433,8 @@ def rule_plan(query: str, structured: EntityFilter, *, today: date | None = None
             else (Dimension.START_YEAR if _RE["time"].search(text) else Dimension.PHASE),
             series=series,
             filter=base,
+            measure=measure,
+            top_n=top_n,
             time_granularity=granularity,
             interpretation=f"Compare {' vs '.join(parts) if parts else 'the requested entities'} by {(dimension or Dimension.PHASE).value}.",
             assumptions=assumptions,
@@ -314,6 +453,7 @@ def rule_plan(query: str, structured: EntityFilter, *, today: date | None = None
         return PlanDraft(
             analysis=AnalysisType.GEOGRAPHIC,
             filter=base.merged_over(_entity_filter(entity, text)),
+            top_n=top_n,
             interpretation="Count trials per country.",
             assumptions=assumptions,
         )
@@ -324,6 +464,7 @@ def rule_plan(query: str, structured: EntityFilter, *, today: date | None = None
         return PlanDraft(
             analysis=AnalysisType.TIME_TREND,
             split_by=dimension if dimension != Dimension.START_YEAR else None,
+            measure=measure,
             time_granularity=granularity,
             filter=base.merged_over(_entity_filter(entity, text)),
             interpretation=f"Count trials started per {granularity.value}.",
@@ -334,6 +475,8 @@ def rule_plan(query: str, structured: EntityFilter, *, today: date | None = None
         return PlanDraft(
             analysis=AnalysisType.DISTRIBUTION,
             dimension=dimension,
+            measure=measure,
+            top_n=top_n,
             filter=base.merged_over(_entity_filter(entity, text)),
             interpretation=f"Count trials by {dimension.value}.",
             assumptions=assumptions,
@@ -348,12 +491,22 @@ def rule_plan(query: str, structured: EntityFilter, *, today: date | None = None
     )
 
 
+_NETWORK_WORDS = {
+    NetworkKind.SPONSOR_DRUG: "sponsor to drug",
+    NetworkKind.DRUG_DRUG: "drug combination (same arm)",
+    NetworkKind.DRUG_DRUG_SAME_TRIAL: "drug to drug (same trial)",
+    NetworkKind.CONDITION_DRUG: "condition to drug",
+    NetworkKind.SPONSOR_CONDITION: "sponsor to condition",
+    NetworkKind.SPONSOR_COLLABORATOR: "sponsor to collaborator",
+}
+
+
 def _network_kind(text: str) -> NetworkKind:
     sponsor = re.search(r"\bsponsors?\b", text, re.I)
     drug = re.search(r"\bdrugs?\b|\binterventions?\b|\btreatments?\b", text, re.I)
     condition = re.search(r"\bconditions?\b|\bdiseases?\b", text, re.I)
     collab = re.search(r"\bcollaborat", text, re.I)
-    if sponsor and collab:
+    if collab:
         return NetworkKind.SPONSOR_COLLABORATOR
     if sponsor and drug:
         return NetworkKind.SPONSOR_DRUG
@@ -361,6 +514,8 @@ def _network_kind(text: str) -> NetworkKind:
         return NetworkKind.SPONSOR_CONDITION
     if condition and drug:
         return NetworkKind.CONDITION_DRUG
-    if re.search(r"co-?occur|combination|together|drug\s*(?:to|-|↔|and)\s*drug", text, re.I):
+    if re.search(r"\bcombination|\bcombined\b|\btogether\b|\bco-?administer", text, re.I):
         return NetworkKind.DRUG_DRUG
+    if re.search(r"co-?occur|same (?:trial|study|studies|trials)|drug\s*(?:to|-|↔|and)\s*drug", text, re.I):
+        return NetworkKind.DRUG_DRUG_SAME_TRIAL
     return NetworkKind.SPONSOR_DRUG

@@ -39,6 +39,25 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Pembrolizumab + Lenvatinib",
+              "type": "EXPERIMENTAL",
+              "description": "Combination arm",
+              "interventionNames": [
+                "Biological: Pembrolizumab",
+                "Drug: Lenvatinib"
+              ]
+            },
+            {
+              "label": "Pembrolizumab",
+              "type": "ACTIVE_COMPARATOR",
+              "description": "Monotherapy arm",
+              "interventionNames": [
+                "Biological: Pembrolizumab"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "BIOLOGICAL",
@@ -140,6 +159,24 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "MK-3475",
+              "type": "EXPERIMENTAL",
+              "description": "200 mg every 3 weeks",
+              "interventionNames": [
+                "Biological: MK-3475"
+              ]
+            },
+            {
+              "label": "Placebo",
+              "type": "PLACEBO_COMPARATOR",
+              "description": "Saline every 3 weeks",
+              "interventionNames": [
+                "Drug: Placebo"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "BIOLOGICAL",
@@ -225,6 +262,17 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Nivolumab + Ipilimumab",
+              "type": "EXPERIMENTAL",
+              "description": "Both drugs",
+              "interventionNames": [
+                "Biological: Nivolumab",
+                "Biological: Ipilimumab"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "BIOLOGICAL",
@@ -322,6 +370,24 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Nivolumab",
+              "type": "EXPERIMENTAL",
+              "description": "Adjuvant nivolumab",
+              "interventionNames": [
+                "Biological: Nivolumab"
+              ]
+            },
+            {
+              "label": "Observation",
+              "type": "NO_INTERVENTION",
+              "description": "Observation only",
+              "interventionNames": [
+                "Other: Observation"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "BIOLOGICAL",
@@ -408,6 +474,17 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Dabrafenib + Trametinib",
+              "type": "EXPERIMENTAL",
+              "description": "Doublet",
+              "interventionNames": [
+                "Drug: Dabrafenib 150 mg",
+                "Drug: Trametinib 2 mg"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "DRUG",
@@ -568,6 +645,17 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Pembrolizumab + SRS",
+              "type": "EXPERIMENTAL",
+              "description": "Radiosurgery within 7 days of the first dose",
+              "interventionNames": [
+                "Biological: Pembrolizumab 200 mg IV",
+                "Radiation: Stereotactic radiosurgery"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "BIOLOGICAL",
@@ -649,6 +737,16 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Ipilimumab",
+              "type": "EXPERIMENTAL",
+              "description": "Re-induction",
+              "interventionNames": [
+                "Biological: Ipilimumab"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "BIOLOGICAL",
@@ -722,6 +820,24 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Pembrolizumab",
+              "type": "EXPERIMENTAL",
+              "description": "200 mg every 3 weeks",
+              "interventionNames": [
+                "Biological: Pembrolizumab"
+              ]
+            },
+            {
+              "label": "Docetaxel",
+              "type": "ACTIVE_COMPARATOR",
+              "description": "75 mg/m2 every 3 weeks",
+              "interventionNames": [
+                "Drug: Docetaxel"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "BIOLOGICAL",
@@ -815,6 +931,18 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Pembrolizumab + chemotherapy",
+              "type": "EXPERIMENTAL",
+              "description": "Triplet",
+              "interventionNames": [
+                "Biological: Pembrolizumab",
+                "Drug: Carboplatin",
+                "Drug: Pemetrexed"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "BIOLOGICAL",
@@ -907,6 +1035,16 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Decision support",
+              "type": "EXPERIMENTAL",
+              "description": "Dermoscopy with AI",
+              "interventionNames": [
+                "Device: AI dermoscopy decision support"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "DEVICE",
@@ -972,6 +1110,25 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Nivolumab + Relatlimab",
+              "type": "EXPERIMENTAL",
+              "description": "Fixed dose",
+              "interventionNames": [
+                "Biological: Nivolumab",
+                "Biological: Relatlimab (BMS-986016)"
+              ]
+            },
+            {
+              "label": "Nivolumab",
+              "type": "ACTIVE_COMPARATOR",
+              "description": "Monotherapy",
+              "interventionNames": [
+                "Biological: Nivolumab"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "BIOLOGICAL",
@@ -1108,6 +1265,16 @@
           }
         },
         "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Keytruda",
+              "type": "EXPERIMENTAL",
+              "description": "Single arm",
+              "interventionNames": [
+                "Biological: Keytruda"
+              ]
+            }
+          ],
           "interventions": [
             {
               "type": "BIOLOGICAL",
@@ -1141,7 +1308,90 @@
           ]
         }
       }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000015",
+          "briefTitle": "Nivolumab in Advanced Renal Cell Carcinoma After Progression on Pembrolizumab"
+        },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": {
+            "date": "2018-09-01",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2022-03-01",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Dana-Farber Cancer Institute",
+            "class": "OTHER"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Renal Cell Carcinoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE2"
+          ],
+          "enrollmentInfo": {
+            "count": 45,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Nivolumab",
+              "type": "EXPERIMENTAL",
+              "description": "Nivolumab 240 mg every two weeks for patients whose disease progressed on prior pembrolizumab",
+              "interventionNames": [
+                "Biological: Nivolumab"
+              ]
+            }
+          ],
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "Nivolumab"
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "Canada"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Nivolumab"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Carcinoma, Renal Cell"
+            }
+          ]
+        }
+      }
     }
   ],
-  "totalCount": 14
+  "totalCount": 15
 }
