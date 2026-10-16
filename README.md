@@ -18,6 +18,24 @@ fixed menu. Every number in a chart is counted from registry records or returned
 by the registry's own count endpoint, and every bar, point, node, and edge
 carries citations to the NCT records that produced it.
 
+## What it looks like
+
+![Melanoma trials by phase. Every bar is exact (all records fetched) and the panel on the left shows the registry records behind the Phase 3 bar, with the field values that put them there.](docs/screenshots/phase-distribution.png)
+
+*Melanoma trials by phase. Every bar is exact (all records fetched) and the panel on the left shows the registry records behind the Phase 3 bar, with the field values that put them there.*
+
+![Drugs given in combination in lung cancer trials. An edge means both drugs are listed in the same arm group; the heaviest edge is selected and its supporting trials quote the arm entries.](docs/screenshots/combination-network.png)
+
+*Drugs given in combination in lung cancer trials. An edge means both drugs are listed in the same arm group; the heaviest edge is selected and its supporting trials quote the arm entries.*
+
+![Nivolumab versus ipilimumab by phase with comparison_mode=partition: each trial is counted once, in 'nivolumab only', 'ipilimumab only', or 'Both'.](docs/screenshots/partition-comparison.png)
+
+*Nivolumab versus ipilimumab by phase with comparison_mode=partition: each trial is counted once, in 'nivolumab only', 'ipilimumab only', or 'Both'.*
+
+![The meta panel for the first chart: how the question was read, what the numbers mean, retrieval coverage, and the verification report that re-derived every value from the records.](docs/screenshots/verification.png)
+
+*The meta panel for the first chart: how the question was read, what the numbers mean, retrieval coverage, and the verification report that re-derived every value from the records.*
+
 ## Contents
 
 1. [Running it](#1-running-it)
