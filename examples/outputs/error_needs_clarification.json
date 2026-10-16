@@ -1,0 +1,21 @@
+{
+  "request": {
+    "query": "What is the median age of participants in statin trials?"
+  },
+  "http_status": 422,
+  "response": {
+    "error": {
+      "code": "unsupported_query",
+      "message": "Participant ages are not available through this backend, which only provides trial-level fields such as phase, status, sponsor, enrollment, start year, duration, and site count.",
+      "suggestions": [
+        "How has the number of trials for pembrolizumab changed per year since 2015?",
+        "How are melanoma trials distributed across phases?",
+        "Compare phases for trials involving nivolumab vs ipilimumab.",
+        "Which countries have the most recruiting trials for type 2 diabetes?",
+        "Show a network of sponsors and drugs for melanoma trials.",
+        "Which drugs frequently co-occur in combination studies for lung cancer?",
+        "Plot enrollment against start year for breast cancer trials."
+      ]
+    }
+  }
+}

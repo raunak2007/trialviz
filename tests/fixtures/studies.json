@@ -1,0 +1,1147 @@
+{
+  "studies": [
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000001",
+          "briefTitle": "Pembrolizumab Plus Lenvatinib Versus Pembrolizumab Alone in Advanced Melanoma"
+        },
+        "statusModule": {
+          "overallStatus": "RECRUITING",
+          "startDateStruct": {
+            "date": "2021-03-15",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2025-06-30",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Merck Sharp & Dohme LLC",
+            "class": "INDUSTRY"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE3"
+          ],
+          "enrollmentInfo": {
+            "count": 530,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "Pembrolizumab",
+              "otherNames": [
+                "MK-3475",
+                "KEYTRUDA"
+              ]
+            },
+            {
+              "type": "DRUG",
+              "name": "Lenvatinib",
+              "otherNames": [
+                "E7080"
+              ]
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "United States"
+            },
+            {
+              "country": "United States"
+            },
+            {
+              "country": "France"
+            },
+            {
+              "country": "Germany"
+            },
+            {
+              "country": "Japan"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Pembrolizumab"
+            },
+            {
+              "id": "D000001",
+              "term": "Lenvatinib"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000002",
+          "briefTitle": "MK-3475 Versus Placebo as Adjuvant Therapy in Resected Stage III Melanoma"
+        },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": {
+            "date": "2018-06",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2022-01",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Merck Sharp & Dohme LLC",
+            "class": "INDUSTRY"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Melanoma",
+            "Stage III Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE2"
+          ],
+          "enrollmentInfo": {
+            "count": 120,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "MK-3475",
+              "otherNames": [
+                "Pembrolizumab",
+                "Keytruda"
+              ]
+            },
+            {
+              "type": "DRUG",
+              "name": "Placebo"
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "United States"
+            },
+            {
+              "country": "Canada"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Pembrolizumab"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000003",
+          "briefTitle": "Nivolumab Combined With Ipilimumab in Treatment-Naive Metastatic Melanoma"
+        },
+        "statusModule": {
+          "overallStatus": "ACTIVE_NOT_RECRUITING",
+          "startDateStruct": {
+            "date": "2019-11-01",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2024-12-31",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Bristol-Myers Squibb",
+            "class": "INDUSTRY"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Metastatic Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE1",
+            "PHASE2"
+          ],
+          "enrollmentInfo": {
+            "count": 85,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "Nivolumab",
+              "otherNames": [
+                "BMS-936558",
+                "Opdivo"
+              ]
+            },
+            {
+              "type": "BIOLOGICAL",
+              "name": "Ipilimumab",
+              "otherNames": [
+                "Yervoy"
+              ]
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "United States"
+            },
+            {
+              "country": "Australia"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Nivolumab"
+            },
+            {
+              "id": "D000001",
+              "term": "Ipilimumab"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000004",
+          "briefTitle": "Nivolumab Versus Observation After Complete Resection of Stage IIIB/C Melanoma"
+        },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": {
+            "date": "2015-04-20",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2020-03-01",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "National Cancer Institute (NCI)",
+            "class": "NIH"
+          },
+          "collaborators": [
+            {
+              "name": "Bristol-Myers Squibb",
+              "class": "INDUSTRY"
+            }
+          ]
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE3"
+          ],
+          "enrollmentInfo": {
+            "count": 1200,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "Nivolumab"
+            },
+            {
+              "type": "OTHER",
+              "name": "Observation"
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "United States"
+            },
+            {
+              "country": "United States"
+            },
+            {
+              "country": "United States"
+            },
+            {
+              "country": "Canada"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Nivolumab"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000005",
+          "briefTitle": "Dabrafenib and Trametinib in BRAF V600 Mutant Unresectable Melanoma"
+        },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": {
+            "date": "2013-01",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2018-05",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Novartis Pharmaceuticals",
+            "class": "INDUSTRY"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE3"
+          ],
+          "enrollmentInfo": {
+            "count": 870,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "DRUG",
+              "name": "Dabrafenib 150 mg",
+              "otherNames": [
+                "GSK2118436"
+              ]
+            },
+            {
+              "type": "DRUG",
+              "name": "Trametinib 2 mg",
+              "otherNames": [
+                "GSK1120212"
+              ]
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "United States"
+            },
+            {
+              "country": "United Kingdom"
+            },
+            {
+              "country": "Germany"
+            },
+            {
+              "country": "Italy"
+            },
+            {
+              "country": "Spain"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Dabrafenib"
+            },
+            {
+              "id": "D000001",
+              "term": "Trametinib"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000006",
+          "briefTitle": "Prospective Registry of Patients With Cutaneous Melanoma"
+        },
+        "statusModule": {
+          "overallStatus": "RECRUITING",
+          "startDateStruct": {
+            "date": "2022-09-01",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2030-12-31",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "University Hospital, Basel, Switzerland",
+            "class": "OTHER"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Cutaneous Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "OBSERVATIONAL",
+          "enrollmentInfo": {
+            "count": 300,
+            "type": "ESTIMATED"
+          }
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "Switzerland"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000007",
+          "briefTitle": "Pembrolizumab With Stereotactic Radiosurgery for Melanoma Brain Metastases"
+        },
+        "statusModule": {
+          "overallStatus": "RECRUITING",
+          "startDateStruct": {
+            "date": "2020-02-10",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2026-02-10",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "M.D. Anderson Cancer Center",
+            "class": "OTHER"
+          },
+          "collaborators": [
+            {
+              "name": "Merck Sharp & Dohme LLC",
+              "class": "INDUSTRY"
+            }
+          ]
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Melanoma",
+            "Brain Metastases"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE2"
+          ],
+          "enrollmentInfo": {
+            "count": 60,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "Pembrolizumab 200 mg IV"
+            },
+            {
+              "type": "RADIATION",
+              "name": "Stereotactic radiosurgery"
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "United States"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Pembrolizumab"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            },
+            {
+              "id": "C000001",
+              "term": "Brain Neoplasms"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000008",
+          "briefTitle": "Ipilimumab Re-induction in Melanoma Patients Who Progressed"
+        },
+        "statusModule": {
+          "overallStatus": "TERMINATED",
+          "startDateStruct": {
+            "date": "2016-08",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2017-12",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Bristol-Myers Squibb",
+            "class": "INDUSTRY"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE2"
+          ],
+          "enrollmentInfo": {
+            "count": 40,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "Ipilimumab"
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "France"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Ipilimumab"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000009",
+          "briefTitle": "Pembrolizumab Versus Chemotherapy in PD-L1 Positive Non-Small Cell Lung Cancer"
+        },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": {
+            "date": "2017-05-01",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2021-11-30",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Merck Sharp & Dohme LLC",
+            "class": "INDUSTRY"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Non-Small Cell Lung Cancer"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE3"
+          ],
+          "enrollmentInfo": {
+            "count": 1000,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "Pembrolizumab",
+              "otherNames": [
+                "MK-3475"
+              ]
+            },
+            {
+              "type": "DRUG",
+              "name": "Docetaxel"
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "United States"
+            },
+            {
+              "country": "China"
+            },
+            {
+              "country": "Japan"
+            },
+            {
+              "country": "Korea, Republic of"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Pembrolizumab"
+            },
+            {
+              "id": "D000001",
+              "term": "Docetaxel"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Carcinoma, Non-Small-Cell Lung"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000010",
+          "briefTitle": "Pembrolizumab Plus Carboplatin and Pemetrexed in Nonsquamous NSCLC"
+        },
+        "statusModule": {
+          "overallStatus": "ACTIVE_NOT_RECRUITING",
+          "startDateStruct": {
+            "date": "2019-01-15",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2023-12-31",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Merck Sharp & Dohme LLC",
+            "class": "INDUSTRY"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Non-Small Cell Lung Cancer"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE3"
+          ],
+          "enrollmentInfo": {
+            "count": 600,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "Pembrolizumab"
+            },
+            {
+              "type": "DRUG",
+              "name": "Carboplatin"
+            },
+            {
+              "type": "DRUG",
+              "name": "Pemetrexed"
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "United States"
+            },
+            {
+              "country": "Germany"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Pembrolizumab"
+            },
+            {
+              "id": "D000001",
+              "term": "Carboplatin"
+            },
+            {
+              "id": "D000002",
+              "term": "Pemetrexed"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Carcinoma, Non-Small-Cell Lung"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000011",
+          "briefTitle": "AI-Assisted Dermoscopy for Early Melanoma Detection"
+        },
+        "statusModule": {
+          "overallStatus": "NOT_YET_RECRUITING",
+          "startDateStruct": {
+            "date": "2024-05",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2026-05",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Stanford University",
+            "class": "OTHER"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "NA"
+          ],
+          "enrollmentInfo": {
+            "count": 500,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "DEVICE",
+              "name": "AI dermoscopy decision support"
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "United States"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000012",
+          "briefTitle": "Nivolumab Plus Relatlimab Versus Nivolumab in Previously Untreated Melanoma"
+        },
+        "statusModule": {
+          "overallStatus": "RECRUITING",
+          "startDateStruct": {
+            "date": "2021-07-01",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2027-01-31",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Bristol-Myers Squibb",
+            "class": "INDUSTRY"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE3"
+          ],
+          "enrollmentInfo": {
+            "count": 700,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "Nivolumab"
+            },
+            {
+              "type": "BIOLOGICAL",
+              "name": "Relatlimab (BMS-986016)"
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "United States"
+            },
+            {
+              "country": "France"
+            },
+            {
+              "country": "Germany"
+            },
+            {
+              "country": "Brazil"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Nivolumab"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000013",
+          "briefTitle": "First-in-Human Study of PF-07284890 in Advanced Melanoma"
+        },
+        "statusModule": {
+          "overallStatus": "WITHDRAWN"
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Pfizer",
+            "class": "INDUSTRY"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE1"
+          ],
+          "enrollmentInfo": {
+            "count": 0,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "DRUG",
+              "name": "PF-07284890"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05000014",
+          "briefTitle": "Keytruda in Mucosal Melanoma: A Single-Arm Study"
+        },
+        "statusModule": {
+          "overallStatus": "COMPLETED",
+          "startDateStruct": {
+            "date": "2016-02-01",
+            "type": "ACTUAL"
+          },
+          "completionDateStruct": {
+            "date": "2019-08-01",
+            "type": "ESTIMATED"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "leadSponsor": {
+            "name": "Gustave Roussy, Cancer Campus, Grand Paris",
+            "class": "OTHER"
+          }
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Mucosal Melanoma"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE2"
+          ],
+          "enrollmentInfo": {
+            "count": 50,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "interventions": [
+            {
+              "type": "BIOLOGICAL",
+              "name": "Keytruda"
+            }
+          ]
+        },
+        "contactsLocationsModule": {
+          "locations": [
+            {
+              "country": "France"
+            }
+          ]
+        }
+      },
+      "derivedSection": {
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D000000",
+              "term": "Pembrolizumab"
+            }
+          ]
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "C000000",
+              "term": "Melanoma"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "totalCount": 14
+}

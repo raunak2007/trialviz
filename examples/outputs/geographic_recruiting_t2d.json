@@ -1,0 +1,1229 @@
+{
+  "request": {
+    "query": "Which countries have the most recruiting trials for type 2 diabetes?",
+    "citations_per_datum": 3
+  },
+  "http_status": 200,
+  "response": {
+    "visualization": {
+      "title": "Countries with the most recruiting type 2 diabetes trials",
+      "subtitle": "Recruiting \u00b7 Top 20 of 83 country values",
+      "encoding": {
+        "x": {
+          "field": "country",
+          "type": "nominal",
+          "title": "Country",
+          "granularity": null
+        },
+        "y": {
+          "field": "trial_count",
+          "type": "quantitative",
+          "title": "Number of trials",
+          "granularity": null
+        },
+        "color": null,
+        "tooltip": [
+          "country",
+          "trial_count",
+          "citation_count"
+        ]
+      },
+      "columns": [
+        {
+          "name": "country",
+          "type": "string",
+          "description": "Country (display label)"
+        },
+        {
+          "name": "trial_count",
+          "type": "integer",
+          "description": "Number of trials"
+        },
+        {
+          "name": "citation_count",
+          "type": "integer",
+          "description": "Distinct trials supporting this row"
+        },
+        {
+          "name": "citations",
+          "type": "string",
+          "description": "Array of Citation objects (see schema), truncated to citations_per_datum"
+        }
+      ],
+      "config": {
+        "sort": "value_desc",
+        "stacked": false,
+        "value_format": "integer",
+        "y_zero_based": true
+      },
+      "data": [
+        {
+          "country": "United States",
+          "trial_count": 314,
+          "citation_count": 314,
+          "citations": [
+            {
+              "nct_id": "NCT07409714",
+              "title": "SMART 2D: Study of Montelukast's Effects on Renal and Cardiovascular Health in Adolescents and Young Adults With Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07409714",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "SMART 2D: Study of Montelukast's Effects on Renal and Cardiovascular Health in Adolescents and Young Adults With Type 2 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "United States"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07633171",
+              "title": "Multimodal Glucose Prediction in Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07633171",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Multimodal Glucose Prediction in Type 2 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "United States"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07864168",
+              "title": "Evaluation of MiniMed Next Generation Extended Wear Sensors and Algorithm in Patients With Type 1 and Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07864168",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Evaluation of MiniMed Next Generation Extended Wear Sensors and Algorithm in Patients With Type 1 and Type 2 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "United States"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "China",
+          "trial_count": 119,
+          "citation_count": 119,
+          "citations": [
+            {
+              "nct_id": "NCT07743983",
+              "title": "A Study of BGM0504 in Early T2DM With Obesity",
+              "url": "https://clinicaltrials.gov/study/NCT07743983",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of BGM0504 in Early T2DM With Obesity"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "China"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07807059",
+              "title": "A Single-Dose Pharmacokinetic Study of HRS-4729 Injection in Healthy Participants and Patients With Renal Impairment",
+              "url": "https://clinicaltrials.gov/study/NCT07807059",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Single-Dose Pharmacokinetic Study of HRS-4729 Injection in Healthy Participants and Patients With Renal Impairment"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "China"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07659574",
+              "title": "Phase III Study of UBT251 Injection in Patients With Type 2 Diabetes Mellitus With Inadequate Glycemic Control on Diet and Exercise Alone\uff08UNIGUIDE-1\uff09",
+              "url": "https://clinicaltrials.gov/study/NCT07659574",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Phase III Study of UBT251 Injection in Patients With Type 2 Diabetes Mellitus With Inadequate Glycemic Control on Diet and Exercise Alone\uff08UNIGUIDE-1\uff09"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "China"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Canada",
+          "trial_count": 69,
+          "citation_count": 69,
+          "citations": [
+            {
+              "nct_id": "NCT07575438",
+              "title": "Effects of Different Fish Oil Types on Type 2 Diabetes Risk Factors in High-Risk Adults",
+              "url": "https://clinicaltrials.gov/study/NCT07575438",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Effects of Different Fish Oil Types on Type 2 Diabetes Risk Factors in High-Risk Adults"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "Canada"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07831798",
+              "title": "VV-14300 for the Treatment of Type 1 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07831798",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "VV-14300 for the Treatment of Type 1 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "Canada"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07434791",
+              "title": "Goal-Directed Therapy to Reduce Kidney and Cardiovascular Risk in Diabetic Kidney Disease (GOLD-STANDARD)",
+              "url": "https://clinicaltrials.gov/study/NCT07434791",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Goal-Directed Therapy to Reduce Kidney and Cardiovascular Risk in Diabetic Kidney Disease (GOLD-STANDARD)"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "Canada"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "South Korea",
+          "trial_count": 52,
+          "citation_count": 52,
+          "citations": [
+            {
+              "nct_id": "NCT07784270",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight",
+              "url": "https://clinicaltrials.gov/study/NCT07784270",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[190].country",
+                  "value": "South Korea"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07784725",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[196].country",
+                  "value": "South Korea"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07664553",
+              "title": "A Phase III Study to Investigate the Efficacy and Safety of Elecoglipron Compared With Placebo in Adults With Type 2 Diabetes Mellitus on Background Insulin",
+              "url": "https://clinicaltrials.gov/study/NCT07664553",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Phase III Study to Investigate the Efficacy and Safety of Elecoglipron Compared With Placebo in Adults With Type 2 Diabetes Mellitus on Background Insulin"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[118].country",
+                  "value": "South Korea"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "United Kingdom",
+          "trial_count": 49,
+          "citation_count": 49,
+          "citations": [
+            {
+              "nct_id": "NCT07743450",
+              "title": "A Study of Once-daily Oral ASC30 to Evaluate the Efficacy and Safety in Adult Participants With Obesity or Overweight With Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07743450",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of Once-daily Oral ASC30 to Evaluate the Efficacy and Safety in Adult Participants With Obesity or Overweight With Type 2 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[127].country",
+                  "value": "United Kingdom"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07797335",
+              "title": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications",
+              "url": "https://clinicaltrials.gov/study/NCT07797335",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[320].country",
+                  "value": "United Kingdom"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07776509",
+              "title": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07776509",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[91].country",
+                  "value": "United Kingdom"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Germany",
+          "trial_count": 45,
+          "citation_count": 45,
+          "citations": [
+            {
+              "nct_id": "NCT07868601",
+              "title": "LIfestyle MEtabotype Study A",
+              "url": "https://clinicaltrials.gov/study/NCT07868601",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "LIfestyle MEtabotype Study A"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "Germany"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07743450",
+              "title": "A Study of Once-daily Oral ASC30 to Evaluate the Efficacy and Safety in Adult Participants With Obesity or Overweight With Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07743450",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of Once-daily Oral ASC30 to Evaluate the Efficacy and Safety in Adult Participants With Obesity or Overweight With Type 2 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[88].country",
+                  "value": "Germany"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07797335",
+              "title": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications",
+              "url": "https://clinicaltrials.gov/study/NCT07797335",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[211].country",
+                  "value": "Germany"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Italy",
+          "trial_count": 39,
+          "citation_count": 39,
+          "citations": [
+            {
+              "nct_id": "NCT07797335",
+              "title": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications",
+              "url": "https://clinicaltrials.gov/study/NCT07797335",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[253].country",
+                  "value": "Italy"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07784725",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[165].country",
+                  "value": "Italy"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07608055",
+              "title": "Clinical, Oncologic, and Metabolic Effects of Pancreatic Mass Loss After Pancreatectomy in Non-Diabetic Patients",
+              "url": "https://clinicaltrials.gov/study/NCT07608055",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Clinical, Oncologic, and Metabolic Effects of Pancreatic Mass Loss After Pancreatectomy in Non-Diabetic Patients"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "Italy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Spain",
+          "trial_count": 39,
+          "citation_count": 39,
+          "citations": [
+            {
+              "nct_id": "NCT07476326",
+              "title": "Pharmacokinetics, Safety, and Immunogenicity Comparison of Bmab1700 and Opdivo\u00ae as Adjuvant Monotherapy in Participants With Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT07476326",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Pharmacokinetics, Safety, and Immunogenicity Comparison of Bmab1700 and Opdivo\u00ae as Adjuvant Monotherapy in Participants With Melanoma"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[34].country",
+                  "value": "Spain"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07797335",
+              "title": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications",
+              "url": "https://clinicaltrials.gov/study/NCT07797335",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[297].country",
+                  "value": "Spain"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07784270",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight",
+              "url": "https://clinicaltrials.gov/study/NCT07784270",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[200].country",
+                  "value": "Spain"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Denmark",
+          "trial_count": 36,
+          "citation_count": 36,
+          "citations": [
+            {
+              "nct_id": "NCT07776509",
+              "title": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07776509",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[54].country",
+                  "value": "Denmark"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07227805",
+              "title": "Evaluation of the Safety and Performance of the Novel Medtronic Experimental Automated Insulin Delivery System (NMX8) in People Living With Diabetes (NEXUS)",
+              "url": "https://clinicaltrials.gov/study/NCT07227805",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Evaluation of the Safety and Performance of the Novel Medtronic Experimental Automated Insulin Delivery System (NMX8) in People Living With Diabetes (NEXUS)"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[4].country",
+                  "value": "Denmark"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07662135",
+              "title": "A Phase III Study to Investigate the Efficacy and Safety of Elecoglipron Compared With Placebo in Adults With Type 2 Diabetes Mellitus and Impaired Renal Function on Background Dapagliflozin",
+              "url": "https://clinicaltrials.gov/study/NCT07662135",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Phase III Study to Investigate the Efficacy and Safety of Elecoglipron Compared With Placebo in Adults With Type 2 Diabetes Mellitus and Impaired Renal Function on Background Dapagliflozin"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[57].country",
+                  "value": "Denmark"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "France",
+          "trial_count": 36,
+          "citation_count": 36,
+          "citations": [
+            {
+              "nct_id": "NCT07784725",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[118].country",
+                  "value": "France"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07595549",
+              "title": "A Study to Learn About the Study Medicine Called Berobenatide (PF-08653944) in People With Overweight or Obesity",
+              "url": "https://clinicaltrials.gov/study/NCT07595549",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Learn About the Study Medicine Called Berobenatide (PF-08653944) in People With Overweight or Obesity"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[45].country",
+                  "value": "France"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07564414",
+              "title": "A Research Study to Look at How Two Different Doses of CagriSema and One Dose of Semaglutide Help People Living With Obesity With or Without Type 2 Diabetes Lose Weight",
+              "url": "https://clinicaltrials.gov/study/NCT07564414",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Research Study to Look at How Two Different Doses of CagriSema and One Dose of Semaglutide Help People Living With Obesity With or Without Type 2 Diabetes Lose Weight"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[180].country",
+                  "value": "France"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Turkey (T\u00fcrkiye)",
+          "trial_count": 33,
+          "citation_count": 33,
+          "citations": [
+            {
+              "nct_id": "NCT07476326",
+              "title": "Pharmacokinetics, Safety, and Immunogenicity Comparison of Bmab1700 and Opdivo\u00ae as Adjuvant Monotherapy in Participants With Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT07476326",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Pharmacokinetics, Safety, and Immunogenicity Comparison of Bmab1700 and Opdivo\u00ae as Adjuvant Monotherapy in Participants With Melanoma"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[41].country",
+                  "value": "Turkey (T\u00fcrkiye)"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07847294",
+              "title": "The Effectiveness of an Occupation-Based Lifestyle Program in Individuals With Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07847294",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "The Effectiveness of an Occupation-Based Lifestyle Program in Individuals With Type 2 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "Turkey (T\u00fcrkiye)"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07797335",
+              "title": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications",
+              "url": "https://clinicaltrials.gov/study/NCT07797335",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[305].country",
+                  "value": "Turkey (T\u00fcrkiye)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Brazil",
+          "trial_count": 31,
+          "citation_count": 31,
+          "citations": [
+            {
+              "nct_id": "NCT07476326",
+              "title": "Pharmacokinetics, Safety, and Immunogenicity Comparison of Bmab1700 and Opdivo\u00ae as Adjuvant Monotherapy in Participants With Melanoma",
+              "url": "https://clinicaltrials.gov/study/NCT07476326",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Pharmacokinetics, Safety, and Immunogenicity Comparison of Bmab1700 and Opdivo\u00ae as Adjuvant Monotherapy in Participants With Melanoma"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "Brazil"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07797335",
+              "title": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications",
+              "url": "https://clinicaltrials.gov/study/NCT07797335",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[128].country",
+                  "value": "Brazil"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07776509",
+              "title": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07776509",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[29].country",
+                  "value": "Brazil"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Australia",
+          "trial_count": 30,
+          "citation_count": 30,
+          "citations": [
+            {
+              "nct_id": "NCT07829302",
+              "title": "VV-14299 and VV-14300 for the Treatment of Type 1 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07829302",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "VV-14299 and VV-14300 for the Treatment of Type 1 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "Australia"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07754461",
+              "title": "A Study to Test Whether Survodutide Helps People With Type 2 Diabetes Control Their Blood Sugar",
+              "url": "https://clinicaltrials.gov/study/NCT07754461",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Test Whether Survodutide Helps People With Type 2 Diabetes Control Their Blood Sugar"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[88].country",
+                  "value": "Australia"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07784270",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight",
+              "url": "https://clinicaltrials.gov/study/NCT07784270",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[61].country",
+                  "value": "Australia"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "India",
+          "trial_count": 26,
+          "citation_count": 26,
+          "citations": [
+            {
+              "nct_id": "NCT07797335",
+              "title": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications",
+              "url": "https://clinicaltrials.gov/study/NCT07797335",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[232].country",
+                  "value": "India"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07754461",
+              "title": "A Study to Test Whether Survodutide Helps People With Type 2 Diabetes Control Their Blood Sugar",
+              "url": "https://clinicaltrials.gov/study/NCT07754461",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Test Whether Survodutide Helps People With Type 2 Diabetes Control Their Blood Sugar"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[102].country",
+                  "value": "India"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07784270",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight",
+              "url": "https://clinicaltrials.gov/study/NCT07784270",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[141].country",
+                  "value": "India"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Poland",
+          "trial_count": 26,
+          "citation_count": 26,
+          "citations": [
+            {
+              "nct_id": "NCT07743450",
+              "title": "A Study of Once-daily Oral ASC30 to Evaluate the Efficacy and Safety in Adult Participants With Obesity or Overweight With Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07743450",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of Once-daily Oral ASC30 to Evaluate the Efficacy and Safety in Adult Participants With Obesity or Overweight With Type 2 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[101].country",
+                  "value": "Poland"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07797335",
+              "title": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications",
+              "url": "https://clinicaltrials.gov/study/NCT07797335",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[272].country",
+                  "value": "Poland"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07784270",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight",
+              "url": "https://clinicaltrials.gov/study/NCT07784270",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[165].country",
+                  "value": "Poland"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Japan",
+          "trial_count": 25,
+          "citation_count": 25,
+          "citations": [
+            {
+              "nct_id": "NCT07783802",
+              "title": "A Study of Clazakizumab (LY5724886) in Adults With Elevated hsCRP and at Increased Risk for Cardiovascular Event",
+              "url": "https://clinicaltrials.gov/study/NCT07783802",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of Clazakizumab (LY5724886) in Adults With Elevated hsCRP and at Increased Risk for Cardiovascular Event"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[40].country",
+                  "value": "Japan"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07776509",
+              "title": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07776509",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[69].country",
+                  "value": "Japan"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07784270",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight",
+              "url": "https://clinicaltrials.gov/study/NCT07784270",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[149].country",
+                  "value": "Japan"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Taiwan",
+          "trial_count": 24,
+          "citation_count": 24,
+          "citations": [
+            {
+              "nct_id": "NCT07784270",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight",
+              "url": "https://clinicaltrials.gov/study/NCT07784270",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Type 2 Diabetes Mellitus and Obesity or Overweight"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[210].country",
+                  "value": "Taiwan"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07784725",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[204].country",
+                  "value": "Taiwan"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07282613",
+              "title": "A Research Study to See How Much CagriSema Lowers Blood Sugar and Body Weight Compared to Placebo in Children and Adolescents With Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07282613",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Research Study to See How Much CagriSema Lowers Blood Sugar and Body Weight Compared to Placebo in Children and Adolescents With Type 2 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[55].country",
+                  "value": "Taiwan"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Sweden",
+          "trial_count": 22,
+          "citation_count": 22,
+          "citations": [
+            {
+              "nct_id": "NCT07776509",
+              "title": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07776509",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[81].country",
+                  "value": "Sweden"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07688278",
+              "title": "HbA1c Screening in Dental Care and Primary Care Referral in Patients With Advanced Periodontitis",
+              "url": "https://clinicaltrials.gov/study/NCT07688278",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "HbA1c Screening in Dental Care and Primary Care Referral in Patients With Advanced Periodontitis"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "Sweden"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07659535",
+              "title": "Effect of the Digital Livsstilsverktyget in Conjunction With a Large Language Model on the Prevention of Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07659535",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "Effect of the Digital Livsstilsverktyget in Conjunction With a Large Language Model on the Prevention of Type 2 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[0].country",
+                  "value": "Sweden"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Argentina",
+          "trial_count": 19,
+          "citation_count": 19,
+          "citations": [
+            {
+              "nct_id": "NCT07783802",
+              "title": "A Study of Clazakizumab (LY5724886) in Adults With Elevated hsCRP and at Increased Risk for Cardiovascular Event",
+              "url": "https://clinicaltrials.gov/study/NCT07783802",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of Clazakizumab (LY5724886) in Adults With Elevated hsCRP and at Increased Risk for Cardiovascular Event"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[30].country",
+                  "value": "Argentina"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07797335",
+              "title": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications",
+              "url": "https://clinicaltrials.gov/study/NCT07797335",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[109].country",
+                  "value": "Argentina"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07776509",
+              "title": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07776509",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[23].country",
+                  "value": "Argentina"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "country": "Czechia",
+          "trial_count": 19,
+          "citation_count": 19,
+          "citations": [
+            {
+              "nct_id": "NCT07743450",
+              "title": "A Study of Once-daily Oral ASC30 to Evaluate the Efficacy and Safety in Adult Participants With Obesity or Overweight With Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07743450",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study of Once-daily Oral ASC30 to Evaluate the Efficacy and Safety in Adult Participants With Obesity or Overweight With Type 2 Diabetes"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[84].country",
+                  "value": "Czechia"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07797335",
+              "title": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications",
+              "url": "https://clinicaltrials.gov/study/NCT07797335",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "AMBITION 7: A Research Study Investigating How Well Zenagamtide Lowers Blood Sugar and Body Weight Compared to Insulin Glargine in People With Type 2 Diabetes and Increased Risk of Diseases That Affect the Heart and Blood Vessels Treated With 1-3 Other Diabetes Medications"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[198].country",
+                  "value": "Czechia"
+                }
+              ]
+            },
+            {
+              "nct_id": "NCT07784725",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725",
+              "evidence": [
+                {
+                  "field": "protocolSection.identificationModule.briefTitle",
+                  "value": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus"
+                },
+                {
+                  "field": "protocolSection.contactsLocationsModule.locations[105].country",
+                  "value": "Czechia"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "type": "bar_chart"
+    },
+    "meta": {
+      "query": "Which countries have the most recruiting trials for type 2 diabetes?",
+      "interpretation": "Count recruiting trials for type 2 diabetes by country to see which countries have the most.",
+      "assumptions": [],
+      "warnings": [
+        "Showing the 20 largest of 83 country values."
+      ],
+      "plan": {
+        "analysis": "geographic",
+        "viz_type": "bar_chart",
+        "filter": {
+          "drugs": [],
+          "conditions": [
+            "type 2 diabetes"
+          ],
+          "sponsors": [],
+          "countries": [],
+          "terms": [],
+          "phases": [],
+          "statuses": [
+            "RECRUITING"
+          ],
+          "study_types": [],
+          "start_year": null,
+          "end_year": null
+        },
+        "series": [
+          {
+            "label": "type 2 diabetes trials",
+            "filter": {
+              "drugs": [],
+              "conditions": [],
+              "sponsors": [],
+              "countries": [],
+              "terms": [],
+              "phases": [],
+              "statuses": [],
+              "study_types": [],
+              "start_year": null,
+              "end_year": null
+            }
+          }
+        ],
+        "dimension": "country",
+        "split_by": null,
+        "measure": "trial_count",
+        "network": null,
+        "numeric_x": null,
+        "numeric_y": null,
+        "time_granularity": "year",
+        "top_n": 20,
+        "interpretation": "Count recruiting trials for type 2 diabetes by country to see which countries have the most.",
+        "assumptions": [],
+        "planner_mode": "llm"
+      },
+      "filters": {
+        "drugs": [],
+        "conditions": [
+          "type 2 diabetes"
+        ],
+        "sponsors": [],
+        "countries": [],
+        "terms": [],
+        "phases": [],
+        "statuses": [
+          "RECRUITING"
+        ],
+        "study_types": [],
+        "start_year": null,
+        "end_year": null
+      },
+      "retrieval": [
+        {
+          "label": "type 2 diabetes trials",
+          "filter": {
+            "drugs": [],
+            "conditions": [
+              "type 2 diabetes"
+            ],
+            "sponsors": [],
+            "countries": [],
+            "terms": [],
+            "phases": [],
+            "statuses": [
+              "RECRUITING"
+            ],
+            "study_types": [],
+            "start_year": null,
+            "end_year": null
+          },
+          "total_matching": 868,
+          "fetched": 868,
+          "truncated": false,
+          "sample_order": "StartDate:desc",
+          "count_method": "sampled"
+        }
+      ],
+      "source": {
+        "name": "ClinicalTrials.gov",
+        "api_base": "https://clinicaltrials.gov/api/v2",
+        "retrieved_at": "2026-10-16T02:25:21+00:00"
+      },
+      "api_calls": [
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?format=json&pageSize=1000&query.cond=type+2+diabetes&filter.overallStatus=RECRUITING&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CPhase%2CStudyType%2CEnrollmentCount%2CLeadSponsorName%2CLeadSponsorClass%2CCollaboratorName%2CCondition%2CInterventionType%2CInterventionName%2CInterventionOtherName%2CLocationCountry%2CInterventionMeshTerm%2CConditionMeshTerm&sort=StartDate%3Adesc&countTotal=true",
+          "status": 200,
+          "elapsed_ms": 537,
+          "cached": false,
+          "studies_returned": 868,
+          "total_count": 868
+        }
+      ],
+      "planner": {
+        "mode": "llm",
+        "model": "claude-sonnet-5-5",
+        "attempts": 1,
+        "fallback_reason": null
+      },
+      "timing": {
+        "interpret_ms": 1879,
+        "retrieve_ms": 566,
+        "aggregate_ms": 4,
+        "total_ms": 2449
+      }
+    }
+  }
+}

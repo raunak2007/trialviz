@@ -1,0 +1,56 @@
+[
+  {
+    "name": "time_trend_pembrolizumab",
+    "request": {
+      "query": "How has the number of trials for this drug changed per year since 2015?",
+      "drug_name": "Pembrolizumab"
+    }
+  },
+  {
+    "name": "distribution_melanoma_phases",
+    "request": {
+      "query": "How are melanoma trials distributed across phases?"
+    }
+  },
+  {
+    "name": "comparison_nivolumab_vs_ipilimumab",
+    "request": {
+      "query": "Compare phases for trials involving nivolumab vs ipilimumab."
+    }
+  },
+  {
+    "name": "geographic_recruiting_t2d",
+    "request": {
+      "query": "Which countries have the most recruiting trials for type 2 diabetes?",
+      "citations_per_datum": 3
+    }
+  },
+  {
+    "name": "network_sponsors_drugs_melanoma",
+    "request": {
+      "query": "Show a network of sponsors and drugs for melanoma trials.",
+      "citations_per_datum": 3
+    }
+  },
+  {
+    "name": "network_drug_cooccurrence_lung_cancer",
+    "request": {
+      "query": "Which drugs frequently co-occur in combination studies for lung cancer?",
+      "citations_per_datum": 3
+    }
+  },
+  {
+    "name": "scatter_enrollment_breast_cancer",
+    "request": {
+      "query": "Plot enrollment against start year for breast cancer trials started since 2020, colored by phase",
+      "max_trials": 500,
+      "citations_per_datum": 1
+    }
+  },
+  {
+    "name": "error_needs_clarification",
+    "request": {
+      "query": "What is the median age of participants in statin trials?"
+    }
+  }
+]
